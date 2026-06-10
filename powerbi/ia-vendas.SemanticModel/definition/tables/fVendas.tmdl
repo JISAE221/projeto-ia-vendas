@@ -81,7 +81,7 @@ table fVendas
 		annotation SummarizationSetBy = Automatic
 
 	column TOTAL_ITEM
-		dataType: int64
+		dataType: decimal
 		formatString: 0
 		lineageTag: ae912b8c-e98e-4c43-9400-32b5ebbf80f3
 		summarizeBy: sum
@@ -90,7 +90,7 @@ table fVendas
 		annotation SummarizationSetBy = Automatic
 
 	column CUSTO_TOTAL
-		dataType: int64
+		dataType: decimal
 		formatString: 0
 		lineageTag: 15d66bea-214e-4293-8411-1131e4cfe42b
 		summarizeBy: sum
@@ -99,7 +99,7 @@ table fVendas
 		annotation SummarizationSetBy = Automatic
 
 	column LUCRO_TOTAL
-		dataType: int64
+		dataType: decimal
 		formatString: 0
 		lineageTag: 05f22c05-43a6-42e7-be41-d25776f0b4ba
 		summarizeBy: sum
@@ -113,11 +113,14 @@ table fVendas
 				let
 				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\fVendas.xlsx"), null, true),
 				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
-				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type date}, {"QUANTIDADE", Int64.Type}, {"TOTAL_ITEM", Int64.Type}, {"CUSTO_TOTAL", Int64.Type}, {"LUCRO_TOTAL", Int64.Type}})
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(Tabela1_Table, {{"TOTAL_ITEM", Currency.Type}}, "en-US"),
+				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade", {{"CUSTO_TOTAL", Currency.Type}}, "en-US"),
+				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"LUCRO_TOTAL", Currency.Type}}, "en-US"),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2",{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type date}, {"QUANTIDADE", Int64.Type}})
 				in
 				    #"Tipo Alterado"
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
 

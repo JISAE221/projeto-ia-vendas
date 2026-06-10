@@ -45,3 +45,23 @@ relationship AutoDetected_1e62c688-5cd2-4913-be94-6cf9c16f7ea3
 	fromColumn: fVendas.IDVENDEDOR
 	toColumn: dVendedor.IDVENDEDOR
 
+relationship 66611a17-0b46-4716-b6ce-6b6d01e4cd06
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCliente.FIM
+	toColumn: LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7.Date
+
+relationship 756b2a54-2c53-4df9-8c23-95d3235a0f72
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dFornecedor.FIM
+	toColumn: LocalDateTable_2a855a5b-b71c-4b7c-9c12-16519b896dd1.Date
+
+relationship 91970ecb-e7ee-43ee-b36f-33f32906e3c6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dProduto.FIM
+	toColumn: LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478.Date
+
+relationship 9cf3b929-1522-4ea8-973a-247f04ad503a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dVendedor.FIM
+	toColumn: LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e.Date
+

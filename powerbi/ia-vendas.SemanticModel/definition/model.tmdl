@@ -29,6 +29,10 @@ ref table dVendedor
 ref table LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9
 ref table fVendas
 ref table LocalDateTable_22cf76ba-276a-471f-b901-2769cb73983d
+ref table LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7
+ref table LocalDateTable_2a855a5b-b71c-4b7c-9c12-16519b896dd1
+ref table LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478
+ref table LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e
 
 ref cultureInfo pt-BR
 

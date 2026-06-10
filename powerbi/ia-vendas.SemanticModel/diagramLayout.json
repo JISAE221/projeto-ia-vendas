@@ -4,16 +4,17 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 0
+        "x": 742.4000244140625,
+        "y": 23.200000762939453
       },
       "nodes": [
         {
           "location": {
             "x": 0,
-            "y": 86
+            "y": 41
           },
           "nodeIndex": "dCategoria",
+          "nodeLineageTag": "e23be9d6-bc5e-41e5-8f1e-dba741ffb330",
           "size": {
             "height": 128,
             "width": 234
@@ -22,10 +23,11 @@
         },
         {
           "location": {
-            "x": 284,
-            "y": 0
+            "x": 199,
+            "y": 276
           },
           "nodeIndex": "dCliente",
+          "nodeLineageTag": "7dc16903-86b9-4af3-893f-2075df0659f4",
           "size": {
             "height": 300,
             "width": 234
@@ -34,10 +36,11 @@
         },
         {
           "location": {
-            "x": 568,
-            "y": 86
+            "x": 576,
+            "y": 312
           },
           "nodeIndex": "dForma",
+          "nodeLineageTag": "6e65829f-6040-433e-bd10-a5164c4da6e0",
           "size": {
             "height": 128,
             "width": 234
@@ -46,10 +49,11 @@
         },
         {
           "location": {
-            "x": 852,
-            "y": 62
+            "x": 483,
+            "y": 106
           },
           "nodeIndex": "dFornecedor",
+          "nodeLineageTag": "f21c4fa6-f2a6-4040-9621-5c5e5052ad1f",
           "size": {
             "height": 176,
             "width": 234
@@ -58,10 +62,11 @@
         },
         {
           "location": {
-            "x": 1136,
-            "y": 98
+            "x": 874,
+            "y": 146
           },
           "nodeIndex": "dNota",
+          "nodeLineageTag": "70992ac2-ecff-4bd0-8a36-70c51798e49b",
           "size": {
             "height": 104,
             "width": 234
@@ -82,10 +87,11 @@
         },
         {
           "location": {
-            "x": 1704,
-            "y": 0
+            "x": 2089,
+            "y": 39
           },
           "nodeIndex": "dTempo",
+          "nodeLineageTag": "2d050c69-2dd8-4411-a1ed-2bd6547c5ab8",
           "size": {
             "height": 300,
             "width": 234
@@ -94,10 +100,11 @@
         },
         {
           "location": {
-            "x": 1988,
-            "y": 38
+            "x": 1771.9999389648438,
+            "y": 264
           },
           "nodeIndex": "dVendedor",
+          "nodeLineageTag": "47e1f4ab-287c-4a96-ab35-cafe64e4a35b",
           "size": {
             "height": 224,
             "width": 234
@@ -106,10 +113,11 @@
         },
         {
           "location": {
-            "x": 2272,
-            "y": 0
+            "x": 1143,
+            "y": 226
           },
           "nodeIndex": "fVendas",
+          "nodeLineageTag": "10f6e259-63b0-4a8c-819b-2bd8c77b262d",
           "size": {
             "height": 300,
             "width": 234
