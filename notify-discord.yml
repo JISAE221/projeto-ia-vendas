@@ -1,0 +1,86 @@
+name: 🔔 Notificações Discord
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    types:
+      - closed
+
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar-merge:
+    name: Notificar merge
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+
+    steps:
+      - name: Notificar merge na develop
+        if: github.base_ref == 'develop'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_USER="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          BRANCH_FROM="${{ github.head_ref }}"
+
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"🔀 Merge na develop\",
+                \"description\": \"**$PR_TITLE**\n\n**$PR_USER** mergeou \`$BRANCH_FROM\` → \`develop\`\n\n[Ver PR]($PR_URL)\",
+                \"color\": 3447003,
+                \"footer\": { \"text\": \"projeto-ia-vendas · GitHub Actions\" }
+              }]
+            }"
+
+      - name: Notificar merge na main
+        if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          PUSHER="${{ github.event.pusher.name }}"
+          REPO_URL="https://github.com/${{ github.repository }}"
+
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"🚀 Nova versão na main!\",
+                \"description\": \"**$PUSHER** atualizou a branch \`main\`.\n\n> $COMMIT_MSG\n\n[Ver repositório]($REPO_URL)\",
+                \"color\": 15844367,
+                \"footer\": { \"text\": \"projeto-ia-vendas · GitHub Actions\" }
+              }]
+            }"
+
+  notificar-pr-fechado-sem-merge:
+    name: Notificar PR fechado sem merge
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == false && github.event.action == 'closed'
+
+    steps:
+      - name: Notificar PR recusado
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_USER="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"🚫 PR fechado sem merge\",
+                \"description\": \"**$PR_TITLE**\n\nO PR de **$PR_USER** foi fechado sem ser mergeado.\n\n[Ver PR]($PR_URL)\",
+                \"color\": 15158332,
+                \"footer\": { \"text\": \"projeto-ia-vendas · GitHub Actions\" }
+              }]
+            }"

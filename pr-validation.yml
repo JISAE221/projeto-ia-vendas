@@ -1,0 +1,87 @@
+name: ✅ Validação de PR
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  validar:
+    name: Validar arquivos do PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar se .pbip existe
+        run: |
+          if find powerbi/ -name "*.pbip" | grep -q .; then
+            echo "✅ Arquivo .pbip encontrado."
+          else
+            echo "❌ Nenhum arquivo .pbip encontrado em powerbi/"
+            exit 1
+          fi
+
+      - name: Verificar se dados existem
+        run: |
+          if find data/ -name "*.xlsx" | grep -q .; then
+            echo "✅ Arquivos de dados encontrados."
+          else
+            echo "❌ Nenhum arquivo .xlsx encontrado em data/"
+            exit 1
+          fi
+
+      - name: Verificar se documentação existe
+        run: |
+          if find docs/ -type f | grep -q .; then
+            echo "✅ Documentação encontrada."
+          else
+            echo "⚠️ Pasta docs/ está vazia — lembre de adicionar a documentação."
+          fi
+
+      - name: Verificar estrutura de pastas
+        run: |
+          PASTAS=("data" "powerbi" "docs")
+          for pasta in "${PASTAS[@]}"; do
+            if [ -d "$pasta" ]; then
+              echo "✅ Pasta $pasta/ existe."
+            else
+              echo "❌ Pasta $pasta/ não encontrada."
+              exit 1
+            fi
+          done
+
+      - name: Notificar Discord — PR aberto
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          STATUS="${{ job.status }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_USER="${{ github.event.pull_request.user.login }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          BRANCH_FROM="${{ github.head_ref }}"
+          BRANCH_TO="${{ github.base_ref }}"
+
+          if [ "$STATUS" = "success" ]; then
+            COR=3066993
+            EMOJI="✅"
+            MSG="Validação passou — pronto para revisão."
+          else
+            COR=15158332
+            EMOJI="❌"
+            MSG="Validação falhou — verifique os arquivos antes de mergear."
+          fi
+
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"$EMOJI PR aberto por $PR_USER\",
+                \"description\": \"**$PR_TITLE**\n\n$MSG\n\n[$BRANCH_FROM → $BRANCH_TO]($PR_URL)\",
+                \"color\": $COR,
+                \"footer\": { \"text\": \"projeto-ia-vendas · GitHub Actions\" }
+              }]
+            }"
