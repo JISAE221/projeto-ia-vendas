@@ -1,0 +1,83 @@
+table dProduto
+	lineageTag: 6d2b0f7b-dbc7-4d9a-868e-1a7968ca8318
+
+	column IDPRODUTO
+		dataType: int64
+		formatString: 0
+		lineageTag: 6909ab9d-0ab9-4b09-9400-3d93d2cf1f45
+		summarizeBy: sum
+		sourceColumn: IDPRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column INICIO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 90945227-8f44-442f-8c96-af24988ba3bb
+		summarizeBy: none
+		sourceColumn: INICIO
+
+		variation Variation
+			isDefault
+			relationship: 2feefd2d-2558-4ff5-ae6f-49eec90b9b4d
+			defaultHierarchy: LocalDateTable_3d9289d7-8ec9-4ce2-b741-a7ad8dac1e62.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIM
+		dataType: string
+		lineageTag: f0de505e-7d38-413b-997b-d814b9b7036b
+		summarizeBy: none
+		sourceColumn: FIM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME
+		dataType: string
+		lineageTag: d1e033a6-2c45-47a6-ade4-d3b8e4201781
+		summarizeBy: none
+		sourceColumn: NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_CATEGORIA
+		dataType: int64
+		formatString: 0
+		lineageTag: b745778c-a468-4f45-84c0-3ee6d2990b95
+		summarizeBy: none
+		sourceColumn: ID_CATEGORIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTO_MEDIO
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ec8ec59-4bcd-4c4d-b313-6486ad6b3b7c
+		summarizeBy: sum
+		sourceColumn: CUSTO_MEDIO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VALOR_UNITARIO
+		dataType: int64
+		formatString: 0
+		lineageTag: 29813d8b-def0-457b-86d2-3e8ec50c8ae0
+		summarizeBy: sum
+		sourceColumn: VALOR_UNITARIO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dProduto = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\dProduto.xlsx"), null, true),
+				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDPRODUTO", Int64.Type}, {"INICIO", type datetime}, {"FIM", type any}, {"NOME", type text}, {"ID_CATEGORIA", Int64.Type}, {"CUSTO_MEDIO", Int64.Type}, {"VALOR_UNITARIO", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

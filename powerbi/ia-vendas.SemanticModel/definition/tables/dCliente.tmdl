@@ -1,0 +1,112 @@
+table dCliente
+	lineageTag: 7dc16903-86b9-4af3-893f-2075df0659f4
+
+	column IDCLIENTE
+		dataType: int64
+		formatString: 0
+		lineageTag: c7d0444a-85ea-476d-9cd3-6b6f77144c2b
+		summarizeBy: sum
+		sourceColumn: IDCLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INICIO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5727b042-d1b2-4b98-81db-ed81bbda9408
+		summarizeBy: none
+		sourceColumn: INICIO
+
+		variation Variation
+			isDefault
+			relationship: 3d85d7b1-c655-46b4-af11-938486198c49
+			defaultHierarchy: LocalDateTable_21bd1f5d-86ed-4dc0-88db-4764fab078b1.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIM
+		dataType: string
+		lineageTag: b45d4123-12d9-418b-b772-96d67f42bb88
+		summarizeBy: none
+		sourceColumn: FIM
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME
+		dataType: string
+		lineageTag: 00abc5d3-87ce-47c3-808a-a8cb7511e291
+		summarizeBy: none
+		sourceColumn: NOME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEXO
+		dataType: string
+		lineageTag: 3b4f8efc-cc96-4559-8234-b45430298b0c
+		summarizeBy: none
+		sourceColumn: SEXO
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL
+		dataType: string
+		lineageTag: 60b7f3a2-695c-4603-a177-9e8a19b4de05
+		summarizeBy: none
+		sourceColumn: EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column NASCIMENTO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 04d87f96-cb14-459e-9f39-a27caa5f5c6b
+		summarizeBy: none
+		sourceColumn: NASCIMENTO
+
+		variation Variation
+			isDefault
+			relationship: c8b6397d-d15f-4cdd-9919-38987b5468b8
+			defaultHierarchy: LocalDateTable_7f32a190-f171-4645-9cac-6791035e5d5d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CIDADE
+		dataType: string
+		lineageTag: 48dbca4c-ec76-4063-b819-f7d994ed86b0
+		summarizeBy: none
+		sourceColumn: CIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESTADO
+		dataType: string
+		lineageTag: ec62180f-3c95-4c5c-9892-84c8450c575f
+		summarizeBy: none
+		sourceColumn: ESTADO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REGIAO
+		dataType: string
+		lineageTag: 65d6224a-ccf1-4d05-9bf0-cb1a9fd7c39f
+		summarizeBy: none
+		sourceColumn: REGIAO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCliente = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\dCliente.xlsx"), null, true),
+				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDCLIENTE", Int64.Type}, {"INICIO", type datetime}, {"FIM", type any}, {"NOME", type text}, {"SEXO", type text}, {"EMAIL", type text}, {"NASCIMENTO", type date}, {"CIDADE", type text}, {"ESTADO", type text}, {"REGIAO", type text}})
+				in
+				    #"Tipo Alterado"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

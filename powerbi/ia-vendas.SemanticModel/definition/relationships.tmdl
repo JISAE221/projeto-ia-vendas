@@ -1,0 +1,47 @@
+relationship 3d85d7b1-c655-46b4-af11-938486198c49
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCliente.INICIO
+	toColumn: LocalDateTable_21bd1f5d-86ed-4dc0-88db-4764fab078b1.Date
+
+relationship c8b6397d-d15f-4cdd-9919-38987b5468b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCliente.NASCIMENTO
+	toColumn: LocalDateTable_7f32a190-f171-4645-9cac-6791035e5d5d.Date
+
+relationship ea93105f-4ad7-4da1-a155-11a0c8640523
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dFornecedor.INICIO
+	toColumn: LocalDateTable_226403b7-c610-4525-9cd2-5d8de706ac68.Date
+
+relationship 2feefd2d-2558-4ff5-ae6f-49eec90b9b4d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dProduto.INICIO
+	toColumn: LocalDateTable_3d9289d7-8ec9-4ce2-b741-a7ad8dac1e62.Date
+
+relationship AutoDetected_a359fb25-a139-4bb6-b116-899733136ac7
+	fromColumn: dProduto.ID_CATEGORIA
+	toColumn: dCategoria.IDCATEGORIA
+
+relationship 5c2a1056-35a4-4078-97fc-1115312ff0da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dTempo.DATA
+	toColumn: LocalDateTable_ec7d9744-ada7-499f-8fa9-1d64029c3e41.Date
+
+relationship bff863b8-5c99-4335-bf75-3f572aa67dfc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dVendedor.INICIO
+	toColumn: LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9.Date
+
+relationship a339206e-0c03-4c94-9d79-e80f126f8168
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fVendas.IDTEMPO
+	toColumn: LocalDateTable_22cf76ba-276a-471f-b901-2769cb73983d.Date
+
+relationship AutoDetected_a3becdc9-26f8-434c-9aed-bfd644a35151
+	fromColumn: fVendas.IDFORMA
+	toColumn: dForma.IDFORMA
+
+relationship AutoDetected_1e62c688-5cd2-4913-be94-6cf9c16f7ea3
+	fromColumn: fVendas.IDVENDEDOR
+	toColumn: dVendedor.IDVENDEDOR
+
