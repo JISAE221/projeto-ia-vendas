@@ -5,7 +5,7 @@ table fVendas
 		dataType: int64
 		formatString: 0
 		lineageTag: cc564df1-7b76-41b6-b975-db8be74ee5ff
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDNOTA
 
 		annotation SummarizationSetBy = Automatic
@@ -14,7 +14,7 @@ table fVendas
 		dataType: int64
 		formatString: 0
 		lineageTag: 3180f897-c3e1-4493-b9ac-c79680fae8a9
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDCLIENTE
 
 		annotation SummarizationSetBy = Automatic
@@ -50,7 +50,7 @@ table fVendas
 		dataType: int64
 		formatString: 0
 		lineageTag: 324aaa32-f2d2-40b8-aac3-c2c1a033c7d8
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDFORNECEDOR
 
 		annotation SummarizationSetBy = Automatic
@@ -97,11 +97,6 @@ table fVendas
 		lineageTag: d0794c87-a343-4e7e-b972-1131a25d0d77
 		summarizeBy: none
 		sourceColumn: IDTEMPO
-
-		variation Variation
-			isDefault
-			relationship: dc588fef-6aeb-416e-b50d-74bb24fd49bd
-			defaultHierarchy: LocalDateTable_bf9b226f-4c9a-491a-bc1c-f89e8ba598e6.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 

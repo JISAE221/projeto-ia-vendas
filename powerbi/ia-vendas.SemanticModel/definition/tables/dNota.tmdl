@@ -5,7 +5,7 @@ table dNota
 		dataType: int64
 		formatString: 0
 		lineageTag: 0e334e8b-3846-4c5c-9795-831d94b6f890
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDNOTA
 
 		annotation SummarizationSetBy = Automatic

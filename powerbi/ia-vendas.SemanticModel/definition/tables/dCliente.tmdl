@@ -5,7 +5,7 @@ table dCliente
 		dataType: int64
 		formatString: 0
 		lineageTag: c7d0444a-85ea-476d-9cd3-6b6f77144c2b
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDCLIENTE
 
 		annotation SummarizationSetBy = Automatic
