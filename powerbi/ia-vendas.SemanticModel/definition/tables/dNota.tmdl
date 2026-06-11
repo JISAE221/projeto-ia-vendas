@@ -14,7 +14,7 @@ table dNota
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("..\..\..\..\data\dNota.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents(BasePath & "dNota.xlsx"), null, true),
 				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
 				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDNOTA", Int64.Type}})
 				in
@@ -23,5 +23,6 @@ table dNota
 	changedProperty = Name
 
 	annotation PBI_ResultType = Table
+
 
 
