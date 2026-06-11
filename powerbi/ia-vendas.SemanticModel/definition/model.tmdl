@@ -10,5 +10,28 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas"]
+
+ref table dCategoria
+ref table dCliente
+ref table DateTableTemplate_1084fb31-77c0-4722-b889-d247820bcbac
+ref table LocalDateTable_21bd1f5d-86ed-4dc0-88db-4764fab078b1
+ref table LocalDateTable_7f32a190-f171-4645-9cac-6791035e5d5d
+ref table dForma
+ref table dFornecedor
+ref table LocalDateTable_226403b7-c610-4525-9cd2-5d8de706ac68
+ref table dNota
+ref table dProduto
+ref table LocalDateTable_3d9289d7-8ec9-4ce2-b741-a7ad8dac1e62
+ref table dTempo
+ref table LocalDateTable_ec7d9744-ada7-499f-8fa9-1d64029c3e41
+ref table dVendedor
+ref table LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9
+ref table fVendas
+ref table LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7
+ref table LocalDateTable_2a855a5b-b71c-4b7c-9c12-16519b896dd1
+ref table LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478
+ref table LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e
+
 ref cultureInfo pt-BR
 
