@@ -1,19 +1,19 @@
 name: ✅ Validação de PR
-
 on:
   pull_request:
     branches:
       - develop
       - main
-
 jobs:
   validar:
     name: Validar arquivos do PR
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Verificar se .pbip existe
         run: |
@@ -33,7 +33,7 @@ jobs:
             exit 1
           fi
 
-      - name: Verificar se documentação existe
+      - name: Verificar documentação
         run: |
           if find docs/ -type f | grep -q .; then
             echo "✅ Documentação encontrada."
@@ -53,6 +53,28 @@ jobs:
             fi
           done
 
+      - name: 🔧 Corrigir caminhos absolutos nos .tmdl
+        run: |
+          echo "Verificando e corrigindo caminhos absolutos nos .tmdl..."
+          CORRIGIU=0
+          for arquivo in $(find powerbi/ -name "*.tmdl"); do
+            if grep -E 'File\.Contents\("[A-Za-z]:\\' "$arquivo" > /dev/null 2>&1; then
+              echo "🔧 Corrigindo: $arquivo"
+              sed -i -E 's|File\.Contents\("[A-Za-z]:\\[^"]*\\([^\\\"]+\.xlsx)"\)|File.Contents(BasePath \& "\2")|g' "$arquivo"
+              CORRIGIU=1
+            fi
+          done
+          if [ "$CORRIGIU" -eq 1 ]; then
+            echo "✅ Caminhos corrigidos automaticamente."
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add powerbi/
+            git commit -m "fix(ci): corrige caminhos absolutos nos .tmdl automaticamente"
+            git push
+          else
+            echo "✅ Nenhum caminho absoluto encontrado. Tudo certo!"
+          fi
+
       - name: Notificar Discord — PR aberto
         if: always()
         env:
@@ -64,7 +86,6 @@ jobs:
           PR_URL="${{ github.event.pull_request.html_url }}"
           BRANCH_FROM="${{ github.head_ref }}"
           BRANCH_TO="${{ github.base_ref }}"
-
           if [ "$STATUS" = "success" ]; then
             COR=3066993
             EMOJI="✅"
@@ -74,7 +95,6 @@ jobs:
             EMOJI="❌"
             MSG="Validação falhou — verifique os arquivos antes de mergear."
           fi
-
           curl -s -X POST "$DISCORD_WEBHOOK" \
             -H "Content-Type: application/json" \
             -d "{
