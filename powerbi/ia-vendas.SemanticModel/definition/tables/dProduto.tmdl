@@ -77,7 +77,7 @@ table dProduto
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\dProduto.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents("..\..\..\..\data\dProduto.xlsx"), null, true),
 				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
 				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"INICIO", type datetime}, {"FIM", type datetime}, {"NOME", type text}, {"ID_CATEGORIA", Int64.Type}}),
 				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Tipo Alterado", {{"CUSTO_MEDIO", Currency.Type}}, "en-GB"),
@@ -94,4 +94,5 @@ table dProduto
 	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navegação
+
 

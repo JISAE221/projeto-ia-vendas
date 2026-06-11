@@ -106,7 +106,7 @@ table dCliente
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\dCliente.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents("..\..\..\..\data\dCliente.xlsx"), null, true),
 				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
 				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDCLIENTE", Int64.Type}, {"INICIO", type datetime}, {"FIM", type datetime}, {"NOME", type text}, {"SEXO", type text}, {"EMAIL", type text}, {"NASCIMENTO", type date}, {"CIDADE", type text}, {"ESTADO", type text}, {"REGIAO", type text}}),
 				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado", {"IDCLIENTE"})
@@ -116,4 +116,5 @@ table dCliente
 	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navegação
+
 
