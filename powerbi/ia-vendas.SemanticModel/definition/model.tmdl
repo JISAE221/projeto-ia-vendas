@@ -6,11 +6,16 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
+/// Erros nas consultas que foram carregadas em 10/06/2026 21:42:42.
+queryGroup 'Erros na Consulta - 10/06/2026 21:42:42'
+
+	annotation PBI_QueryGroupOrder = 0
+
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas"]
+annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas","Erros em fVendas"]
 
 ref table dCategoria
 ref table dCliente
@@ -28,11 +33,11 @@ ref table LocalDateTable_ec7d9744-ada7-499f-8fa9-1d64029c3e41
 ref table dVendedor
 ref table LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9
 ref table fVendas
-ref table LocalDateTable_22cf76ba-276a-471f-b901-2769cb73983d
 ref table LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7
 ref table LocalDateTable_2a855a5b-b71c-4b7c-9c12-16519b896dd1
 ref table LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478
 ref table LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e
+ref table LocalDateTable_bf9b226f-4c9a-491a-bc1c-f89e8ba598e6
 
 ref cultureInfo pt-BR
 

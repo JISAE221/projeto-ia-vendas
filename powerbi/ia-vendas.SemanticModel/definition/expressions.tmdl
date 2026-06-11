@@ -1,0 +1,23 @@
+expression 'Erros em fVendas' =
+		let
+		Fonte = fVendas,
+		  #"Incompatibilidades de Tipo Detectadas" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Fonte, Table.ColumnsOfType(Fonte, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "O tipo do valor não corresponde ao tipo da coluna.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Fonte, pairs),
+		  #"Índice Adicionado" = Table.AddIndexColumn(#"Incompatibilidades de Tipo Detectadas", "Número da Linha" ,1),
+		  #"Erros Mantidos" = Table.SelectRowsWithErrors(#"Índice Adicionado", {"IDNOTA", "IDCLIENTE", "IDVENDEDOR", "IDFORMA", "IDPRODUTO", "IDFORNECEDOR", "IDTEMPO", "QUANTIDADE", "TOTAL_ITEM", "CUSTO_TOTAL", "LUCRO_TOTAL"}),
+		  #"Colunas Reordenadas" = Table.ReorderColumns(#"Erros Mantidos", {"Número da Linha", "IDNOTA", "IDCLIENTE", "IDVENDEDOR", "IDFORMA", "IDPRODUTO", "IDFORNECEDOR", "IDTEMPO", "QUANTIDADE", "TOTAL_ITEM", "CUSTO_TOTAL", "LUCRO_TOTAL"})
+		in
+		    #"Colunas Reordenadas"
+	lineageTag: af5b9325-52d1-4e10-a9f4-d42af8932b04
+	queryGroup: 'Erros na Consulta - 10/06/2026 21:42:42'
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

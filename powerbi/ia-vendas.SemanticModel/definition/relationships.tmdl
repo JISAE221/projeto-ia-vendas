@@ -32,11 +32,6 @@ relationship bff863b8-5c99-4335-bf75-3f572aa67dfc
 	fromColumn: dVendedor.INICIO
 	toColumn: LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9.Date
 
-relationship a339206e-0c03-4c94-9d79-e80f126f8168
-	joinOnDateBehavior: datePartOnly
-	fromColumn: fVendas.IDTEMPO
-	toColumn: LocalDateTable_22cf76ba-276a-471f-b901-2769cb73983d.Date
-
 relationship AutoDetected_a3becdc9-26f8-434c-9aed-bfd644a35151
 	fromColumn: fVendas.IDFORMA
 	toColumn: dForma.IDFORMA
@@ -64,4 +59,9 @@ relationship 9cf3b929-1522-4ea8-973a-247f04ad503a
 	joinOnDateBehavior: datePartOnly
 	fromColumn: dVendedor.FIM
 	toColumn: LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e.Date
+
+relationship dc588fef-6aeb-416e-b50d-74bb24fd49bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fVendas.IDTEMPO
+	toColumn: LocalDateTable_bf9b226f-4c9a-491a-bc1c-f89e8ba598e6.Date
 

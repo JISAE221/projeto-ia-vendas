@@ -55,22 +55,6 @@ table fVendas
 
 		annotation SummarizationSetBy = Automatic
 
-	column IDTEMPO
-		dataType: dateTime
-		formatString: Long Date
-		lineageTag: be1bf0c0-4a96-467c-9093-56a519ca4956
-		summarizeBy: none
-		sourceColumn: IDTEMPO
-
-		variation Variation
-			isDefault
-			relationship: a339206e-0c03-4c94-9d79-e80f126f8168
-			defaultHierarchy: LocalDateTable_22cf76ba-276a-471f-b901-2769cb73983d.'Hierarquia de datas'
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
 	column QUANTIDADE
 		dataType: int64
 		formatString: 0
@@ -107,6 +91,22 @@ table fVendas
 
 		annotation SummarizationSetBy = Automatic
 
+	column IDTEMPO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d0794c87-a343-4e7e-b972-1131a25d0d77
+		summarizeBy: none
+		sourceColumn: IDTEMPO
+
+		variation Variation
+			isDefault
+			relationship: dc588fef-6aeb-416e-b50d-74bb24fd49bd
+			defaultHierarchy: LocalDateTable_bf9b226f-4c9a-491a-bc1c-f89e8ba598e6.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition fVendas = m
 		mode: import
 		source =
@@ -116,9 +116,16 @@ table fVendas
 				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(Tabela1_Table, {{"TOTAL_ITEM", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade", {{"CUSTO_TOTAL", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"LUCRO_TOTAL", Currency.Type}}, "en-US"),
-				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2",{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type date}, {"QUANTIDADE", Int64.Type}})
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2",{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type text}, {"QUANTIDADE", Int64.Type}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"IDTEMPO", type date}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Tipo Alterado1",{{"IDTEMPO", Int64.Type}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado2", "TEMPOID", each [IDTEMPO] - 32872),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"TEMPOID", type date}, {"IDTEMPO", type date}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado3",{"IDTEMPO"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Removidas",{{"TEMPOID", "IDTEMPO"}}),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Colunas Renomeadas",{"IDNOTA", "IDCLIENTE", "IDVENDEDOR", "IDFORMA", "IDPRODUTO", "IDFORNECEDOR", "IDTEMPO", "QUANTIDADE", "TOTAL_ITEM", "CUSTO_TOTAL", "LUCRO_TOTAL"})
 				in
-				    #"Tipo Alterado"
+				    #"Colunas Reordenadas"
 
 	annotation PBI_ResultType = Table
 
