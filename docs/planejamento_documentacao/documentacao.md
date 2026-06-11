@@ -132,6 +132,7 @@ O modelo foi estruturado com `fVendas` no centro, conectada às 8 dimensões. A 
 | dVendedor | IDGERENTE | dVendedor | N:1 (self-join) |
 
 **MER/DER do Modelo**
+```mermaid
 erDiagram
     fVendas {
         int IDNOTA FK
@@ -218,7 +219,7 @@ erDiagram
     fVendas }o--|| dForma : "IDFORMA"
     dProduto }o--|| dCategoria : "ID_CATEGORIA"
     dVendedor }o--o| dVendedor : "IDGERENTE (self-join)"
-
+```
 ---
 
 ## 2. CONSTRUÇÃO DO DASHBOARD
