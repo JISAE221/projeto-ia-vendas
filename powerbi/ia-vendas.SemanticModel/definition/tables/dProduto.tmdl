@@ -1,15 +1,6 @@
 table dProduto
 	lineageTag: 6d2b0f7b-dbc7-4d9a-868e-1a7968ca8318
 
-	column IDPRODUTO
-		dataType: int64
-		formatString: 0
-		lineageTag: 6909ab9d-0ab9-4b09-9400-3d93d2cf1f45
-		summarizeBy: sum
-		sourceColumn: IDPRODUTO
-
-		annotation SummarizationSetBy = Automatic
-
 	column INICIO
 		dataType: dateTime
 		formatString: General Date
@@ -73,6 +64,15 @@ table dProduto
 
 		annotation SummarizationSetBy = Automatic
 
+	column IDPRODUTO
+		dataType: int64
+		formatString: 0
+		lineageTag: ce902cd3-2852-4653-9fb8-e7808b748bdb
+		summarizeBy: none
+		sourceColumn: IDPRODUTO
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dProduto = m
 		mode: import
 		source =
@@ -82,9 +82,14 @@ table dProduto
 				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"INICIO", type datetime}, {"FIM", type datetime}, {"NOME", type text}, {"ID_CATEGORIA", Int64.Type}}),
 				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Tipo Alterado", {{"CUSTO_MEDIO", Currency.Type}}, "en-GB"),
 				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade", {{"VALOR_UNITARIO", Currency.Type}}, "en-GB"),
-				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1",{{"IDPRODUTO", Int64.Type}})
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1",{{"IDPRODUTO", Int64.Type}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado1", "Personalizar", each if ([IDPRODUTO] = 58 and [NOME] = "Moto Z Play 3") then 234 else [IDPRODUTO]),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Personalização Adicionada",{"IDPRODUTO", "Personalizar", "INICIO", "FIM", "NOME", "ID_CATEGORIA", "CUSTO_MEDIO", "VALOR_UNITARIO"}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Colunas Reordenadas",{"IDPRODUTO"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Removidas",{{"Personalizar", "IDPRODUTO"}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"IDPRODUTO", Int64.Type}})
 				in
-				    #"Tipo Alterado1"
+				    #"Tipo Alterado2"
 
 	annotation PBI_ResultType = Table
 

@@ -52,9 +52,10 @@ table dFornecedor
 				let
 				    Fonte = Excel.Workbook(File.Contents("C:\Users\Usuario\Documents\fuck_it\wesley\projeto_final_la\projeto-ia-vendas\data\dFornecedor.xlsx"), null, true),
 				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
-				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDFORNECEDOR", Int64.Type}, {"INICIO", type datetime}, {"FIM", type datetime}, {"NOME", type text}})
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"IDFORNECEDOR", Int64.Type}, {"INICIO", type datetime}, {"FIM", type datetime}, {"NOME", type text}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado", {"IDFORNECEDOR"})
 				in
-				    #"Tipo Alterado"
+				    #"Duplicatas Removidas"
 
 	annotation PBI_ResultType = Table
 

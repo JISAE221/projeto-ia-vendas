@@ -41,7 +41,7 @@ table fVendas
 		dataType: int64
 		formatString: 0
 		lineageTag: 06a7fde8-7970-4d05-bdce-fd2e340f33fc
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: IDPRODUTO
 
 		annotation SummarizationSetBy = Automatic

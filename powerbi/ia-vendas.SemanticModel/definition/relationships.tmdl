@@ -65,3 +65,7 @@ relationship dc588fef-6aeb-416e-b50d-74bb24fd49bd
 	fromColumn: fVendas.IDTEMPO
 	toColumn: LocalDateTable_bf9b226f-4c9a-491a-bc1c-f89e8ba598e6.Date
 
+relationship AutoDetected_3c794655-5e13-4a61-be29-a228aef93731
+	fromColumn: fVendas.IDPRODUTO
+	toColumn: dProduto.IDPRODUTO
+

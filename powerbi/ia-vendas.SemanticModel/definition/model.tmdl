@@ -6,16 +6,11 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-/// Erros nas consultas que foram carregadas em 10/06/2026 21:42:42.
-queryGroup 'Erros na Consulta - 10/06/2026 21:42:42'
-
-	annotation PBI_QueryGroupOrder = 0
-
 annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas","Erros em fVendas"]
+annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas"]
 
 ref table dCategoria
 ref table dCliente
