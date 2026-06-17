@@ -61,5 +61,3 @@ table dFornecedor
 
 	annotation PBI_NavigationStepName = Navegação
 
-
-

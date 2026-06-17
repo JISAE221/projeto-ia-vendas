@@ -10,9 +10,8 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas"]
+annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dTempo","dVendedor","fVendas","BasePath"]
 
-ref expression BasePath
 ref table dCategoria
 ref table dCliente
 ref table DateTableTemplate_1084fb31-77c0-4722-b889-d247820bcbac
@@ -35,5 +34,4 @@ ref table LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478
 ref table LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e
 
 ref cultureInfo pt-BR
-
 
