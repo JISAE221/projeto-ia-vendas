@@ -1,0 +1,76 @@
+table _Medidas
+	lineageTag: 7a641823-7cda-46dc-ab66-b6ea2ffc0744
+
+	measure 'Lucro Bruto' = SUM(fVendas[LUCRO_TOTAL])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 1b2b9e1c-5089-4e9f-b119-83e445472653
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margem %' = DIVIDE([Lucro Bruto], [Total Receita], 0)
+		lineageTag: e4aeb396-44b2-443b-b138-b0b72cd3b86c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rank Vendedor' =
+			
+			RANKX(
+			    ALL(dVendedor[NOME]),
+			    [Total Receita],
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: a9f790b2-6c03-4da0-bfef-ae192a918a83
+
+	measure 'Receita Eletronicos' =
+			
+			CALCULATE(
+			    [Total Receita],
+			    dCategoria[NOME] IN {"CELULARES","INFORMATICA","TV E AUDIO"}
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 5946beba-49ed-4000-a947-d6d39061c901
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Receita YTD' =
+			
+			TOTALYTD(
+			    [Total Receita],
+			    dTempo[DATA]
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: bc7fc24c-b6cb-436d-a669-571ed1713b14
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Custo' = SUM(fVendas[CUSTO_TOTAL])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 100f2cb6-21b1-41b8-9f64-2592760509f7
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Receita' = SUM(fVendas[TOTAL_ITEM])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: facc93dd-f2fb-4930-997f-94697f87d656
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Coluna
+		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Coluna]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Medidas = calculated
+		mode: import
+		source = DATATABLE("Coluna", STRING, {{""}})
+
+	annotation PBI_Id = 4f2cd5e765c349be8e713f7427d53d36
+

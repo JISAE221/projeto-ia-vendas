@@ -1,29 +1,6 @@
 table dCategoria
 	lineageTag: e23be9d6-bc5e-41e5-8f1e-dba741ffb330
 
-	measure 'Total Receita' = SUM(fVendas[TOTAL_ITEM])
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: facc93dd-f2fb-4930-997f-94697f87d656
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
-	measure 'Total Custo' = SUM(fVendas[CUSTO_TOTAL])
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: 100f2cb6-21b1-41b8-9f64-2592760509f7
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
-	measure 'Margem %' = DIVIDE([Lucro Bruto], [Total Receita], 0)
-		lineageTag: e4aeb396-44b2-443b-b138-b0b72cd3b86c
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Lucro Bruto' = SUM(fVendas[LUCRO_TOTAL])
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: 1b2b9e1c-5089-4e9f-b119-83e445472653
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
 	column IDCATEGORIA
 		dataType: int64
 		formatString: 0
