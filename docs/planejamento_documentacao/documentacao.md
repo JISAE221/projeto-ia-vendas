@@ -238,7 +238,81 @@ erDiagram
 
 ### 2.3. Medidas
 
-> _[Adicionar as medidas DAX criadas durante a construção do dashboard]_
+# Atualização — 11 de junho de 2026
+
+**Responsável:** Daniel (Tech Lead)
+
+---
+
+## Modelagem Snowflake
+
+- Revisão e correção dos relacionamentos no Power BI
+- Corrigido relacionamento `fVendas (IDNOTA) → dNota (IDNOTA)` que estava com direção invertida
+- Confirmados 8 relacionamentos ativos com cardinalidade `*:1`
+- Chave primária de `dTempo` definida como `DATA` (coluna única, sem `IDTEMPO`)
+
+**Relacionamentos finalizados:**
+
+| De | Chave | Para | Cardinalidade |
+|---|---|---|---|
+| fVendas | IDCLIENTE | dCliente | *:1 |
+| fVendas | IDFORMA | dForma | *:1 |
+| fVendas | IDFORNECEDOR | dFornecedor | *:1 |
+| fVendas | IDNOTA | dNota | *:1 |
+| fVendas | IDPRODUTO | dProduto | *:1 |
+| fVendas | IDTEMPO | dTempo (DATA) | *:1 |
+| fVendas | IDVENDEDOR | dVendedor | *:1 |
+| dProduto | ID_CATEGORIA | dCategoria | *:1 |
+
+---
+
+## Medidas DAX
+
+Criação das medidas base na tabela `_Medidas`:
+
+```dax
+Total Receita = SUM(fVendas[TOTAL_ITEM])
+```
+
+```dax
+Total Custo = SUM(fVendas[CUSTO_TOTAL])
+```
+
+```dax
+Lucro Bruto = SUM(fVendas[LUCRO_TOTAL])
+```
+
+```dax
+Margem % = DIVIDE([Lucro Bruto], [Total Receita], 0)
+```
+
+```dax
+Total Quantidade = SUM(fVendas[QUANTIDADE])
+```
+
+```dax
+Receita YTD = TOTALYTD([Total Receita], dTempo[DATA])
+```
+
+```dax
+Rank Vendedor = RANKX(ALL(dVendedor[NOME]), [Total Receita], , DESC, DENSE)
+```
+
+---
+
+## Organização
+
+- Criada tabela `_Medidas` separada das dimensões
+- Todas as medidas movidas de `dCategoria` para `_Medidas`
+- Convenção: prefixo `_` garante que a tabela aparece no topo do painel de campos
+
+---
+
+## GitHub
+
+- Commit `feat: adiciona tabela _Medidas e medidas DAX base` na `main`
+- `develop` sincronizada com a `main`
+- Arquivo `_Medidas.tmdl` criado em `powerbi/ia-vendas.SemanticModel/definition/tables/`
 
 ```dax
 -- Exemplo:
