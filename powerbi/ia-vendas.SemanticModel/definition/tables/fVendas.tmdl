@@ -94,9 +94,14 @@ table fVendas
 	column IDTEMPO
 		dataType: dateTime
 		formatString: Long Date
-		lineageTag: d0794c87-a343-4e7e-b972-1131a25d0d77
+		lineageTag: 3cf5e7fe-830b-4ccd-ac75-41351549a420
 		summarizeBy: none
 		sourceColumn: IDTEMPO
+
+		variation Variation
+			isDefault
+			relationship: 5a19ef88-1f83-4f23-bf98-6464399e20b0
+			defaultHierarchy: LocalDateTable_dd4c763a-5b36-420b-a348-5341c92e4c16.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -112,15 +117,9 @@ table fVendas
 				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade", {{"CUSTO_TOTAL", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"LUCRO_TOTAL", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2",{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type text}, {"QUANTIDADE", Int64.Type}}),
-				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"IDTEMPO", type date}}),
-				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Tipo Alterado1",{{"IDTEMPO", Int64.Type}}),
-				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado2", "TEMPOID", each [IDTEMPO] - 32872),
-				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"TEMPOID", type date}, {"IDTEMPO", type date}}),
-				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado3",{"IDTEMPO"}),
-				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Removidas",{{"TEMPOID", "IDTEMPO"}}),
-				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Colunas Renomeadas",{"IDNOTA", "IDCLIENTE", "IDVENDEDOR", "IDFORMA", "IDPRODUTO", "IDFORNECEDOR", "IDTEMPO", "QUANTIDADE", "TOTAL_ITEM", "CUSTO_TOTAL", "LUCRO_TOTAL"})
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"IDTEMPO", type date}})
 				in
-				    #"Colunas Reordenadas"
+				    #"Tipo Alterado1"
 
 	annotation PBI_ResultType = Table
 
