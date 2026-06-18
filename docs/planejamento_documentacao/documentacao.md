@@ -226,7 +226,35 @@ erDiagram
 
 ### 2.1. Importação dos Dados
 
-> _[Renato — descrever o processo de importação e ETL no Power Query]_
+**Responsável:** Renato
+
+*10/06/2026*
+- Carregado os 9 arquivos .xlsx no Power BI
+    - dCategoria
+    - dCliente
+    - dForma
+    - dFornecedor
+    - dNota
+    - dTempo
+    - dProduto
+    - dVendedor
+    - fVendas
+- Ajustado as tipagens das colunas (e.g, colunas de ID que vieram como texto foram trocadas para números inteiros)
+- Verificado pelas colunas **FIM** para que não sejam incluídas as entradas com valores não-nulos
+
+*11/06/2026*
+- Alterado as datas da coluna **IDTEMPO** em fVendas
+    - As datas originalmente estavam datadas com anos de 2101 - 2104, então assumimos que houve um erro de digitação e que as datas deveriam ser dos anos 2011 - 2014
+    - Convertemos elas para seu formato numérico (inteiro que representa a diferença de dias entre a data atual e janeiro de 1900) e então subtraímos a quantia de dias para subtrair exatamente 90 anos (considerando os 21 dias adicionais provindos de anos bissextos)
+- Tratadas as duplicatas
+    - Na tabela dProduto, haviam 2 entradas diferentes com IDs iguais. Para tratá-la, apenas alteramos manualmente o ID da entrada cuja coluna **INICIO** tinha o maior valor
+    - Todas as outras duplicatas eram entradas com exatamente os mesmos valores, e portanto, foram excluídas
+- Não foram encontrados valores nulos nas tabelas (com exceção das colunas **FIM**)
+- Ajustado o relacionamento entre tabelas para seguir o modelo SnowFlake
+
+*17/06/2026*
+- Removido a tabela dTempo a pedido do professor
+- Desfeito o tratamento das datas da coluna **IDTEMPO** em fVendas a pedido do professor
 
 ---
 
