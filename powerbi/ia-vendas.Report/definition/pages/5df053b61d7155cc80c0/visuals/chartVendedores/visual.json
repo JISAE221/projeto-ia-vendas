@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "chartVendedores",
+  "position": { "x": 16, "y": 438, "z": 6, "width": 616, "height": 266, "tabOrder": 6 },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": { "SourceRef": { "Entity": "dVendedor" } },
+                  "Property": "NOME"
+                }
+              },
+              "queryRef": "dVendedor.NOME",
+              "nativeQueryRef": "NOME"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "Total Receita"
+                }
+              },
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

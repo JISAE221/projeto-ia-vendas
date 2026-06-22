@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "chartMargem",
+  "position": { "x": 648, "y": 438, "z": 7, "width": 616, "height": 266, "tabOrder": 7 },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": { "SourceRef": { "Entity": "dCategoria" } },
+                  "Property": "NOME"
+                }
+              },
+              "queryRef": "dCategoria.NOME",
+              "nativeQueryRef": "NOME"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "Margem %"
+                }
+              },
+              "queryRef": "_Medidas.Margem %",
+              "nativeQueryRef": "Margem %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

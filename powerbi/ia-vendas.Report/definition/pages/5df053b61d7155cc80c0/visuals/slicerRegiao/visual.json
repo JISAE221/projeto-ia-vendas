@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "slicerRegiao",
+  "position": { "x": 964, "y": 20, "z": 3, "width": 300, "height": 120, "tabOrder": 3 },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": { "SourceRef": { "Entity": "dCliente" } },
+                  "Property": "REGIAO"
+                }
+              },
+              "queryRef": "dCliente.REGIAO",
+              "nativeQueryRef": "REGIAO"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

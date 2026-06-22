@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "kpiReceita",
+  "position": { "x": 16, "y": 20, "z": 0, "width": 300, "height": 120, "tabOrder": 0 },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Property": "Total Receita"
+                }
+              },
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
