@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Fornecedores — Top Fornecedores por Custo Fornecido (barra horizontal). Bind: NOME = dFornecedor[NOME], Total Custo = medida [Total Custo]. Top 10 dentro do contexto de filtro do PBI (slicer de Status).",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Top Fornecedores por Custo",
+    "subtitle": "Custo fornecido acumulado",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "transform": [
+    { "window": [{ "op": "rank", "as": "rank" }], "sort": [{ "field": "Total Custo", "order": "descending" }] },
+    { "filter": "datum.rank <= 10" }
+  ],
+  "mark": { "type": "bar", "cornerRadiusEnd": 5, "height": { "band": 0.7 }, "tooltip": true },
+  "encoding": {
+    "y": { "field": "NOME", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5", "labelLimit": 180 } },
+    "x": { "field": "Total Custo", "type": "quantitative", "axis": { "title": "Custo (R$)", "format": "~s", "grid": true } },
+    "color": { "field": "Total Custo", "type": "quantitative", "legend": null, "scale": { "range": ["#7C3AED", "#8B5CF6", "#A78BFA"] } },
+    "tooltip": [
+      { "field": "NOME", "type": "nominal", "title": "Fornecedor" },
+      { "field": "Total Custo", "type": "quantitative", "title": "Custo Fornecido", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

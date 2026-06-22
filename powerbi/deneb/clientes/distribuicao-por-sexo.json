@@ -1,0 +1,52 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Clientes — Distribuição por Sexo (donut). Bind: SEXO = dCliente[SEXO], Clientes = contagem distinta de dCliente[IDCLIENTE] OU medida de contagem. Responde a slicers via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Distribuição por Sexo",
+    "subtitle": "Base de clientes ativa",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "encoding": {
+    "theta": { "field": "Clientes Únicos", "type": "quantitative", "stack": true },
+    "color": {
+      "field": "SEXO",
+      "type": "nominal",
+      "scale": { "range": ["#8B5CF6", "#3B82F6"] },
+      "legend": {
+        "title": null,
+        "orient": "right",
+        "labelColor": "#B0B0CC",
+        "labelFont": "Inter, Segoe UI"
+      }
+    },
+    "tooltip": [
+      { "field": "SEXO", "type": "nominal", "title": "Sexo" },
+      { "field": "Clientes Únicos", "type": "quantitative", "title": "Clientes", "format": ",.0f" }
+    ]
+  },
+  "layer": [
+    {
+      "mark": { "type": "arc", "innerRadius": 62, "outerRadius": 100, "cornerRadius": 3, "padAngle": 0.02, "tooltip": true }
+    },
+    {
+      "mark": { "type": "text", "radius": 130, "fontSize": 11, "fill": "#E8E8F5", "font": "Inter, Segoe UI" },
+      "encoding": {
+        "text": { "field": "SEXO", "type": "nominal" }
+      }
+    }
+  ],
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null }
+  }
+}

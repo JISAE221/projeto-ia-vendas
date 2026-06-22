@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Fornecedores — Nº de Fornecedores por Categoria (barra). Bind: NOME = dCategoria[NOME], Fornecedores = contagem distinta de dFornecedor[IDFORNECEDOR]. Responde a slicer de Status via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Fornecedores por Categoria",
+    "subtitle": "Distribuição do cadastro ativo",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "mark": { "type": "bar", "cornerRadiusEnd": 6, "tooltip": true },
+  "encoding": {
+    "x": { "field": "NOME", "type": "nominal", "sort": "-y", "axis": { "title": null, "labelAngle": -35, "labelColor": "#B0B0CC", "labelLimit": 120 } },
+    "y": { "field": "Fornecedores", "type": "quantitative", "axis": { "title": "Nº de fornecedores", "grid": true, "tickMinStep": 1 } },
+    "color": {
+      "field": "NOME",
+      "type": "nominal",
+      "legend": null,
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B", "#EC4899", "#06B6D4", "#EF4444", "#7C3AED"] }
+    },
+    "tooltip": [
+      { "field": "NOME", "type": "nominal", "title": "Categoria" },
+      { "field": "Fornecedores", "type": "quantitative", "title": "Fornecedores", "format": ",.0f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    },
+    "axisX": { "grid": false }
+  }
+}
