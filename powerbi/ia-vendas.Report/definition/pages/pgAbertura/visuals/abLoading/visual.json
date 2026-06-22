@@ -1,7 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "htmlTeste",
-  "position": { "x": 8, "y": 200, "z": 8, "width": 196, "height": 120, "tabOrder": 8 },
+  "name": "abLoading",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "width": 1280,
+    "height": 720,
+    "tabOrder": 0
+  },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
@@ -11,12 +18,16 @@
             {
               "field": {
                 "Measure": {
-                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
-                  "Property": "HTML Teste"
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "HTML Abertura"
                 }
               },
-              "queryRef": "_Medidas.HTML Teste",
-              "nativeQueryRef": "HTML Teste"
+              "queryRef": "_Medidas.HTML Abertura",
+              "nativeQueryRef": "HTML Abertura"
             }
           ]
         }
