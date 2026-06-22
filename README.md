@@ -1,4 +1,4 @@
-﻿# IA Vendas — Dashboard de Análise de Vendas
+# IA Vendas — Dashboard de Análise de Vendas
 
 > Projeto Aplicado — Análise Exploratória de Dados | Biopark Edu · Grupo 4
 
