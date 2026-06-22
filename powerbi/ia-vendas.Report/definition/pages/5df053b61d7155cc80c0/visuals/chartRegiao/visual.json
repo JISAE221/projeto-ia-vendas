@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "chartRegiao",
   "position": {
     "x": 216,
     "y": 146,
     "z": 4,
-    "width": 516,
     "height": 270,
+    "width": 516,
     "tabOrder": 4
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "dCliente.REGIAO",
-              "nativeQueryRef": "REGIAO"
+              "nativeQueryRef": "REGIAO",
+              "active": true
             }
           ]
         },

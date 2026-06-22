@@ -8,11 +8,6 @@ table dProduto
 		summarizeBy: none
 		sourceColumn: INICIO
 
-		variation Variation
-			isDefault
-			relationship: 2feefd2d-2558-4ff5-ae6f-49eec90b9b4d
-			defaultHierarchy: LocalDateTable_3d9289d7-8ec9-4ce2-b741-a7ad8dac1e62.'Hierarquia de datas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column FIM
@@ -21,11 +16,6 @@ table dProduto
 		lineageTag: f0de505e-7d38-413b-997b-d814b9b7036b
 		summarizeBy: none
 		sourceColumn: FIM
-
-		variation Variation
-			isDefault
-			relationship: 91970ecb-e7ee-43ee-b36f-33f32906e3c6
-			defaultHierarchy: LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 

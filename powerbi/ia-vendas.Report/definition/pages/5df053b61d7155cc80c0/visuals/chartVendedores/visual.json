@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "chartVendedores",
   "position": {
     "x": 216,
     "y": 432,
     "z": 6,
-    "width": 516,
     "height": 270,
+    "width": 516,
     "tabOrder": 6
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "dVendedor.NOME",
-              "nativeQueryRef": "NOME"
+              "nativeQueryRef": "NOME",
+              "active": true
             }
           ]
         },

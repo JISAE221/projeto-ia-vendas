@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "cliEstado",
   "position": {
     "x": 748,
     "y": 432,
     "z": 7,
-    "width": 516,
     "height": 270,
+    "width": 516,
     "tabOrder": 7
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "dCliente.ESTADO",
-              "nativeQueryRef": "ESTADO"
+              "nativeQueryRef": "ESTADO",
+              "active": true
             }
           ]
         },

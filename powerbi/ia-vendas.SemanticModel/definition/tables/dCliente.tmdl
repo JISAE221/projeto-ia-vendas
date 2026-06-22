@@ -17,11 +17,6 @@ table dCliente
 		summarizeBy: none
 		sourceColumn: INICIO
 
-		variation Variation
-			isDefault
-			relationship: 3d85d7b1-c655-46b4-af11-938486198c49
-			defaultHierarchy: LocalDateTable_21bd1f5d-86ed-4dc0-88db-4764fab078b1.'Hierarquia de datas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column FIM
@@ -30,11 +25,6 @@ table dCliente
 		lineageTag: b45d4123-12d9-418b-b772-96d67f42bb88
 		summarizeBy: none
 		sourceColumn: FIM
-
-		variation Variation
-			isDefault
-			relationship: 66611a17-0b46-4716-b6ce-6b6d01e4cd06
-			defaultHierarchy: LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -68,11 +58,6 @@ table dCliente
 		lineageTag: 04d87f96-cb14-459e-9f39-a27caa5f5c6b
 		summarizeBy: none
 		sourceColumn: NASCIMENTO
-
-		variation Variation
-			isDefault
-			relationship: c8b6397d-d15f-4cdd-9919-38987b5468b8
-			defaultHierarchy: LocalDateTable_7f32a190-f171-4645-9cac-6791035e5d5d.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 

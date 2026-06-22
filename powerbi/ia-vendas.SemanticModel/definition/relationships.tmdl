@@ -1,31 +1,6 @@
-relationship 3d85d7b1-c655-46b4-af11-938486198c49
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dCliente.INICIO
-	toColumn: LocalDateTable_21bd1f5d-86ed-4dc0-88db-4764fab078b1.Date
-
-relationship c8b6397d-d15f-4cdd-9919-38987b5468b8
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dCliente.NASCIMENTO
-	toColumn: LocalDateTable_7f32a190-f171-4645-9cac-6791035e5d5d.Date
-
-relationship ea93105f-4ad7-4da1-a155-11a0c8640523
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dFornecedor.INICIO
-	toColumn: LocalDateTable_226403b7-c610-4525-9cd2-5d8de706ac68.Date
-
-relationship 2feefd2d-2558-4ff5-ae6f-49eec90b9b4d
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dProduto.INICIO
-	toColumn: LocalDateTable_3d9289d7-8ec9-4ce2-b741-a7ad8dac1e62.Date
-
 relationship AutoDetected_a359fb25-a139-4bb6-b116-899733136ac7
 	fromColumn: dProduto.ID_CATEGORIA
 	toColumn: dCategoria.IDCATEGORIA
-
-relationship bff863b8-5c99-4335-bf75-3f572aa67dfc
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dVendedor.INICIO
-	toColumn: LocalDateTable_a288279d-1311-4e3d-a6ff-aabe63e59af9.Date
 
 relationship AutoDetected_a3becdc9-26f8-434c-9aed-bfd644a35151
 	fromColumn: fVendas.IDFORMA
@@ -34,26 +9,6 @@ relationship AutoDetected_a3becdc9-26f8-434c-9aed-bfd644a35151
 relationship AutoDetected_1e62c688-5cd2-4913-be94-6cf9c16f7ea3
 	fromColumn: fVendas.IDVENDEDOR
 	toColumn: dVendedor.IDVENDEDOR
-
-relationship 66611a17-0b46-4716-b6ce-6b6d01e4cd06
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dCliente.FIM
-	toColumn: LocalDateTable_9707cde0-7a08-45e8-9454-bb341553c9b7.Date
-
-relationship 756b2a54-2c53-4df9-8c23-95d3235a0f72
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dFornecedor.FIM
-	toColumn: LocalDateTable_2a855a5b-b71c-4b7c-9c12-16519b896dd1.Date
-
-relationship 91970ecb-e7ee-43ee-b36f-33f32906e3c6
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dProduto.FIM
-	toColumn: LocalDateTable_b1828bf3-e739-4872-84fe-c3d1c9f87478.Date
-
-relationship 9cf3b929-1522-4ea8-973a-247f04ad503a
-	joinOnDateBehavior: datePartOnly
-	fromColumn: dVendedor.FIM
-	toColumn: LocalDateTable_3f8a6208-60b5-4975-9260-01b0b208ba4e.Date
 
 relationship AutoDetected_3c794655-5e13-4a61-be29-a228aef93731
 	fromColumn: fVendas.IDPRODUTO
@@ -70,9 +25,4 @@ relationship 93741e1d-a32f-d28d-8947-2ad8f9392aed
 relationship 61e8a361-fd9d-4665-3fd0-646fa99b0be6
 	fromColumn: fVendas.IDCLIENTE
 	toColumn: dCliente.IDCLIENTE
-
-relationship 5a19ef88-1f83-4f23-bf98-6464399e20b0
-	joinOnDateBehavior: datePartOnly
-	fromColumn: fVendas.IDTEMPO
-	toColumn: LocalDateTable_dd4c763a-5b36-420b-a348-5341c92e4c16.Date
 

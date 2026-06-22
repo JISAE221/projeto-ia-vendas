@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "cliSlicer",
   "position": {
     "x": 1014,
     "y": 20,
     "z": 3,
-    "width": 250,
     "height": 110,
+    "width": 250,
     "tabOrder": 3
   },
   "visual": {
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "dCliente.ESTADO",
-              "nativeQueryRef": "ESTADO"
+              "nativeQueryRef": "ESTADO",
+              "active": true
             }
           ]
         }
