@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dVendedor","fVendas","BasePath"]
+annotation PBI_QueryOrder = ["dCategoria","dCliente","dForma","dFornecedor","dNota","dProduto","dVendedor","fVendas","BasePath","dTempo","Tabela2"]
 
 ref table dCategoria
 ref table dCliente
@@ -21,6 +21,8 @@ ref table dProduto
 ref table dVendedor
 ref table fVendas
 ref table _Medidas
+ref table dTempo
+ref table Tabela2
 
 ref cultureInfo pt-BR
 

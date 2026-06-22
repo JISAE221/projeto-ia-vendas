@@ -1,72 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "nav3",
-  "position": {
-    "x": 12,
-    "y": 246,
-    "z": 24,
-    "width": 176,
-    "height": 40,
-    "tabOrder": 24
-  },
   "visual": {
     "visualType": "actionButton",
     "objects": {
-      "text": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Fornecedores'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#B0B0CC'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
-                }
-              }
-            },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'left'"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
       "fill": [
         {
           "properties": {
@@ -82,7 +17,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#131328'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -91,7 +26,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             }
@@ -143,6 +78,17 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "nav3",
+  "position": {
+    "x": 4,
+    "y": 216,
+    "z": 33,
+    "width": 192,
+    "height": 40,
+    "tabOrder": 33
   }
 }

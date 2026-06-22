@@ -1,33 +1,33 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "slc",
+  "name": "sbPanel",
   "position": {
-    "x": 1008,
-    "y": 20,
-    "z": 3,
-    "width": 250,
-    "height": 104,
-    "tabOrder": 3
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "width": 200,
+    "height": 720,
+    "tabOrder": 0
   },
   "visual": {
-    "visualType": "slicer",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dCliente"
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Property": "REGIAO"
+                  "Property": "HTML Sidebar"
                 }
               },
-              "queryRef": "dCliente.REGIAO",
-              "nativeQueryRef": "REGIAO"
+              "queryRef": "_Medidas.HTML Sidebar",
+              "nativeQueryRef": "HTML Sidebar"
             }
           ]
         }

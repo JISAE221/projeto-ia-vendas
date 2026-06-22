@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "kpi2",
+  "name": "sbPanel",
   "position": {
-    "x": 744,
-    "y": 20,
-    "z": 2,
-    "width": 250,
-    "height": 104,
-    "tabOrder": 2
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "width": 200,
+    "height": 720,
+    "tabOrder": 0
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Margem %"
+                  "Property": "HTML Sidebar"
                 }
               },
-              "queryRef": "_Medidas.Margem %",
-              "nativeQueryRef": "Margem %"
+              "queryRef": "_Medidas.HTML Sidebar",
+              "nativeQueryRef": "HTML Sidebar"
             }
           ]
         }

@@ -66,8 +66,9 @@ ia-vendas/
 | `dNota.xlsx` | Dimensão | 25.400 |
 | `dForma.xlsx` | Dimensão | 26 |
 | `dCategoria.xlsx` | Dimensão | 9 |
+| `dTempo` | Dimensão | — | Calendário (chave `IDTEMPO`) com data, ano, mês, dia e estação do ano |
 
-> **Nota:** `dTempo.xlsx` foi desconsiderada do projeto a orientação do professor — o arquivo pertence a outro projeto e não integra o modelo de dados do IA Vendas.
+> **Nota:** `dTempo` foi **reincorporada ao modelo** (22/06/2026) para viabilizar a análise temporal de vendas (série histórica e sazonalidade). A dimensão havia sido removida por orientação inicial do professor, mas sua ausência inviabilizava perguntas de negócio baseadas em tempo. Os valores de `IDTEMPO` em `fVendas` (originalmente com anos 2101–2104, por erro de digitação na origem) foram corrigidos para 2011–2014 e o relacionamento `fVendas[IDTEMPO] → dTempo` foi reativado.
 
 ---
 

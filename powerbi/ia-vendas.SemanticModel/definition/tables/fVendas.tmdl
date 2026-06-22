@@ -112,9 +112,13 @@ table fVendas
 				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade", {{"CUSTO_TOTAL", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"LUCRO_TOTAL", Currency.Type}}, "en-US"),
 				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2",{{"IDNOTA", Int64.Type}, {"IDCLIENTE", Int64.Type}, {"IDVENDEDOR", Int64.Type}, {"IDFORMA", Int64.Type}, {"IDPRODUTO", Int64.Type}, {"IDFORNECEDOR", Int64.Type}, {"IDTEMPO", type text}, {"QUANTIDADE", Int64.Type}}),
-				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"IDTEMPO", type date}})
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"IDTEMPO", type date}}),
+				    #"IDTEMPO Corrigido" = Table.TransformColumns(
+				        #"Tipo Alterado1",
+				        {{"IDTEMPO", each if _ <> null and Date.Year(_) > 2100 then Date.AddYears(_, -90) else _, type date}}
+				    )
 				in
-				    #"Tipo Alterado1"
+				    #"IDTEMPO Corrigido"
 
 	annotation PBI_ResultType = Table
 

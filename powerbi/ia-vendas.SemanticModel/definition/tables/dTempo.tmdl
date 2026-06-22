@@ -1,0 +1,116 @@
+table dTempo
+	lineageTag: bf2e7faa-5576-43e4-88ed-e3ad9f5e61bf
+
+	column DATA
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0ab60e74-67dd-480b-a4ec-4a326d1f7a03
+		summarizeBy: none
+		sourceColumn: DATA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIA
+		dataType: int64
+		formatString: 0
+		lineageTag: e241650d-c6d1-4278-8de3-42d864697cd4
+		summarizeBy: none
+		sourceColumn: DIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIASEMANA
+		dataType: string
+		lineageTag: 4182ce12-853c-4671-9e45-1eefa1e4db6d
+		summarizeBy: none
+		sourceColumn: DIASEMANA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MES
+		dataType: int64
+		formatString: 0
+		lineageTag: ca51c632-6595-4d7c-8479-b68d30c6fbad
+		summarizeBy: none
+		sourceColumn: MES
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOMEMES
+		dataType: string
+		lineageTag: d7954467-2c95-4c33-b1db-622e27f6a9d7
+		summarizeBy: none
+		sourceColumn: NOMEMES
+		sortByColumn: MES
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTO
+		dataType: int64
+		formatString: 0
+		lineageTag: df4afcba-c7b8-4fd8-af4b-eb0621fd0834
+		summarizeBy: none
+		sourceColumn: QUARTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOMEQUARTO
+		dataType: string
+		lineageTag: f0e3bba9-9f15-4c87-8eb3-f47c041908d5
+		summarizeBy: none
+		sourceColumn: NOMEQUARTO
+		sortByColumn: QUARTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANO
+		dataType: int64
+		formatString: 0
+		lineageTag: 49ceb486-cb2b-4058-8b25-362793b84e71
+		summarizeBy: none
+		sourceColumn: ANO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESTACAOANO
+		dataType: string
+		lineageTag: 8e906f89-39ae-4bb9-acb4-a221594f955c
+		summarizeBy: none
+		sourceColumn: ESTACAOANO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIMSEMANA
+		dataType: string
+		lineageTag: b5fd6a28-ed7f-4f81-a628-1bcab46db97f
+		summarizeBy: none
+		sourceColumn: FIMSEMANA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATACOMPLETA
+		dataType: int64
+		formatString: 0
+		lineageTag: 1855b468-437e-44de-8c5f-34cdee61dad9
+		summarizeBy: none
+		sourceColumn: DATACOMPLETA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dTempo = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents(BasePath & "dTempo.xlsx"), null, true),
+				    Tabela2_Table = Fonte{[Item="Tabela2",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela2_Table,{
+				        {"DATA", type date}, {"DIA", Int64.Type}, {"DIASEMANA", type text},
+				        {"MES", Int64.Type}, {"NOMEMES", type text}, {"QUARTO", Int64.Type},
+				        {"NOMEQUARTO", type text}, {"ANO", Int64.Type}, {"ESTACAOANO", type text},
+				        {"FIMSEMANA", type text}, {"DATACOMPLETA", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação

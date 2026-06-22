@@ -72,8 +72,9 @@ Para garantir organização, rastreabilidade e colaboração entre os membros, o
 | `dNota.xlsx` | Dimensão | 25.400 | Notas fiscais |
 | `dForma.xlsx` | Dimensão | 26 | Formas de pagamento |
 | `dCategoria.xlsx` | Dimensão | 9 | Categorias de produtos |
+| `dTempo` | Dimensão | — | Calendário (chave `IDTEMPO`): data, ano, mês, dia, dia da semana e estação do ano |
 
-> **Nota:** `dTempo.xlsx` foi desconsiderada do projeto a orientação do professor — o arquivo pertence a outro projeto e não integra o modelo de dados do IA Vendas.
+> **Nota (22/06/2026):** `dTempo` foi **reincorporada ao modelo**. A dimensão havia sido removida por orientação inicial do professor (sob o entendimento de que pertenceria a outro projeto), mas sua ausência inviabilizava a análise temporal — central para um dashboard de vendas (série histórica de receita, sazonalidade, mapa de calor por dia). Decidiu-se restaurá-la. Ver registro detalhado na seção 2.1.
 
 **Problemas identificados:**
 - `dCliente`, `dVendedor` e `dFornecedor` possuem colunas `INICIO` e `FIM` (SCD tipo 2) — filtrar apenas registros com `FIM = null` para obter o registro atual
@@ -115,9 +116,9 @@ Total Quantidade = SUM(fVendas[QUANTIDADE])
 
 **Tipo de modelo:** Snowflake Schema
 
-O modelo foi estruturado com `fVendas` no centro, conectada às 7 dimensões. A diferença em relação ao Star Schema está na sub-dimensão: `dProduto` se liga a `dCategoria`, formando um nível adicional de granularidade. `dVendedor` possui auto-relacionamento via `IDGERENTE` para representar a hierarquia gerente → vendedor.
+O modelo foi estruturado com `fVendas` no centro, conectada às 8 dimensões. A diferença em relação ao Star Schema está na sub-dimensão: `dProduto` se liga a `dCategoria`, formando um nível adicional de granularidade. `dVendedor` possui auto-relacionamento via `IDGERENTE` para representar a hierarquia gerente → vendedor.
 
-> **Nota:** `dTempo` foi desconsiderada do modelo a orientação do professor, pois pertence a outro projeto. A coluna `IDTEMPO` permanece em `fVendas` mas não possui relacionamento ativo no modelo.
+> **Nota (22/06/2026):** `dTempo` foi **reincorporada ao modelo** com relacionamento ativo `fVendas[IDTEMPO] → dTempo[IDTEMPO]` (N:1), habilitando a análise temporal. Os valores de `IDTEMPO` (anos 2101–2104 na origem, por erro de digitação) foram corrigidos para 2011–2014. Isso reverte a remoção registrada anteriormente na seção 2.1.
 
 **Relacionamentos:**
 
@@ -129,6 +130,7 @@ O modelo foi estruturado com `fVendas` no centro, conectada às 7 dimensões. A 
 | fVendas | IDFORNECEDOR | dFornecedor | N:1 |
 | fVendas | IDNOTA | dNota | N:1 |
 | fVendas | IDFORMA | dForma | N:1 |
+| fVendas | IDTEMPO | dTempo | N:1 |
 | dProduto | ID_CATEGORIA | dCategoria | N:1 |
 | dVendedor | IDGERENTE | dVendedor | N:1 (self-join) |
 
@@ -197,12 +199,23 @@ erDiagram
         string FORMA
     }
  
+    dTempo {
+        int IDTEMPO PK
+        date DATA
+        int ANO
+        int MES
+        int DIA
+        string DIASEMANA
+        string ESTACAOANO
+    }
+ 
     fVendas }o--|| dCliente : "IDCLIENTE"
     fVendas }o--|| dVendedor : "IDVENDEDOR"
     fVendas }o--|| dProduto : "IDPRODUTO"
     fVendas }o--|| dFornecedor : "IDFORNECEDOR"
     fVendas }o--|| dNota : "IDNOTA"
     fVendas }o--|| dForma : "IDFORMA"
+    fVendas }o--|| dTempo : "IDTEMPO"
     dProduto }o--|| dCategoria : "ID_CATEGORIA"
     dVendedor }o--o| dVendedor : "IDGERENTE (self-join)"
 ```
@@ -242,6 +255,12 @@ erDiagram
 - Removida a tabela `dTempo` do modelo a orientação do professor — o arquivo `dTempo.xlsx` pertence a outro projeto e não deve ser utilizado no IA Vendas
 - Desfeito o tratamento das datas da coluna **IDTEMPO** em `fVendas`, retornando aos valores originais
 - O relacionamento `fVendas → dTempo` foi removido; a coluna `IDTEMPO` permanece em `fVendas` mas sem vínculo ativo no modelo
+
+*22/06/2026*
+- **Reincorporada a dimensão `dTempo`** ao modelo, revertendo a remoção de 17/06. Justificativa: a ausência de uma dimensão de tempo inviabilizava a análise temporal de vendas (série histórica de receita, sazonalidade, mapa de calor por dia), que é central ao objetivo do dashboard.
+- **Tratamento dos outliers de data** na coluna **IDTEMPO**: os registros com anos 2101–2104 (erro de digitação na origem) foram corrigidos para 2011–2014 aplicando `Date.AddYears(_, -90)` às datas com ano > 2100 (o `Date.AddYears` já ajusta automaticamente os anos bissextos).
+- Reativado o relacionamento `fVendas[IDTEMPO] → dTempo` (N:1).
+- Desativada a **Detecção automática de data/hora** do Power BI para eliminar as tabelas de data redundantes geradas automaticamente (que inflavam o modelo e causavam instabilidade no carregamento).
 
 ---
 

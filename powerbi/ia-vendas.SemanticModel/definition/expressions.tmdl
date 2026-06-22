@@ -1,4 +1,4 @@
-expression BasePath = "C:\Users\daniel.furtado\desktop\projeto-ia-vendas\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression BasePath = "C:\Users\daniel.furtado\desktop\projeto-ia\projeto-ia-vendas\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 7ec65936-9c72-4861-bbce-1e0473d091ea
 
 	annotation PBI_ResultType = Text

@@ -1,19 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "sbLogo",
+  "name": "kTicket",
   "position": {
-    "x": 8,
-    "y": 16,
-    "z": 20,
-    "width": 184,
-    "height": 76,
-    "tabOrder": 20
+    "x": 744,
+    "y": 104,
+    "z": 2,
+    "width": 250,
+    "height": 92,
+    "tabOrder": 2
   },
   "visual": {
-    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "content": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "HTML Logo"
+                  "Property": "Ticket Médio"
                 }
               },
-              "queryRef": "_Medidas.HTML Logo",
-              "nativeQueryRef": "HTML Logo"
+              "queryRef": "_Medidas.Ticket Médio",
+              "nativeQueryRef": "Ticket Médio"
             }
           ]
         }

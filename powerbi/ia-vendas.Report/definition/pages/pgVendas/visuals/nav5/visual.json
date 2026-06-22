@@ -1,72 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "nav5",
-  "position": {
-    "x": 12,
-    "y": 338,
-    "z": 26,
-    "width": 176,
-    "height": 40,
-    "tabOrder": 26
-  },
   "visual": {
     "visualType": "actionButton",
     "objects": {
-      "text": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Vendas'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11D"
-                }
-              }
-            },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'left'"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
       "fill": [
         {
           "properties": {
@@ -82,7 +17,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#8B5CF6'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -91,7 +26,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             }
@@ -143,6 +78,17 @@
           }
         }
       ]
-    }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "nav5",
+  "position": {
+    "x": 4,
+    "y": 296,
+    "z": 35,
+    "width": 192,
+    "height": 40,
+    "tabOrder": 35
   }
 }
