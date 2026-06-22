@@ -26,7 +26,7 @@ Com isso, é esperado que o grupo obtenha compreensão e vivência prática de A
 
 Este documento descreve os processos envolvidos na construção de um Dashboard em Power BI para o comércio IA Vendas, detalhando desde a configuração do ambiente de versionamento e exploração dos dados até a publicação e apresentação do dashboard ao público-alvo.
 
-O projeto foi desenvolvido pelo Grupo 4 da disciplina de Análise Exploratória de Dados da Biopark Edu, utilizando um conjunto de dados composto por 9 tabelas (1 tabela fato e 8 dimensões) com aproximadamente 35.762 registros de vendas.
+O projeto foi desenvolvido pelo Grupo 4 da disciplina de Análise Exploratória de Dados da Biopark Edu, utilizando um conjunto de dados composto por 8 tabelas (1 tabela fato e 7 dimensões) com aproximadamente 35.762 registros de vendas.
 
 Para garantir organização, rastreabilidade e colaboração entre os membros, o projeto adotou controle de versão com **Git e GitHub**, estratégia de branches com `main`, `develop` e `feature/*`, além de uma esteira de CI/CD com **GitHub Actions** para validação automática de PRs e notificações no Discord.
 
@@ -50,7 +50,7 @@ Para garantir organização, rastreabilidade e colaboração entre os membros, o
 **Objetivo:** Compreender a estrutura, tabelas, colunas e tipos de dados existentes nos arquivos disponíveis.
 
 **Atividades:**
-- Identificação das 9 tabelas e suas relações
+- Identificação das 8 tabelas e suas relações
 - Revisão dos dados para identificar problemas de qualidade e necessidades de limpeza
 - Mapeamento da hierarquia de vendedores (gerentes e subordinados)
 - Identificação de colunas SCD (Slowly Changing Dimensions) com campos `INICIO` e `FIM`
@@ -65,7 +65,6 @@ Para garantir organização, rastreabilidade e colaboração entre os membros, o
 | Arquivo | Tipo | Registros | Descrição |
 |---|---|---|---|
 | `fVendas.xlsx` | Fato | 35.762 | Itens de venda com receita, custo e lucro pré-calculados |
-| `dTempo.xlsx` | Dimensão | 36.525 | Calendário completo 1950–2049 |
 | `dCliente.xlsx` | Dimensão | 1.002 | Clientes com cidade, estado e região (SCD tipo 2) |
 | `dProduto.xlsx` | Dimensão | 234 | Produtos com custo médio e valor unitário |
 | `dVendedor.xlsx` | Dimensão | 24 | Vendedores com hierarquia de gerentes (self-join) |
@@ -74,9 +73,10 @@ Para garantir organização, rastreabilidade e colaboração entre os membros, o
 | `dForma.xlsx` | Dimensão | 26 | Formas de pagamento |
 | `dCategoria.xlsx` | Dimensão | 9 | Categorias de produtos |
 
+> **Nota:** `dTempo.xlsx` foi desconsiderada do projeto a orientação do professor — o arquivo pertence a outro projeto e não integra o modelo de dados do IA Vendas.
+
 **Problemas identificados:**
 - `dCliente`, `dVendedor` e `dFornecedor` possuem colunas `INICIO` e `FIM` (SCD tipo 2) — filtrar apenas registros com `FIM = null` para obter o registro atual
-- Alguns registros de `fVendas` apresentam `IDTEMPO` com ano 2102 — provável erro de importação a ser corrigido no Power Query
 - `dVendedor` possui self-join via coluna `IDGERENTE` com 3 gerentes (IDs 1, 10 e 16)
 
 ---
@@ -115,7 +115,9 @@ Total Quantidade = SUM(fVendas[QUANTIDADE])
 
 **Tipo de modelo:** Snowflake Schema
 
-O modelo foi estruturado com `fVendas` no centro, conectada às 8 dimensões. A diferença em relação ao Star Schema está na sub-dimensão: `dProduto` se liga a `dCategoria`, formando um nível adicional de granularidade. `dVendedor` possui auto-relacionamento via `IDGERENTE` para representar a hierarquia gerente → vendedor.
+O modelo foi estruturado com `fVendas` no centro, conectada às 7 dimensões. A diferença em relação ao Star Schema está na sub-dimensão: `dProduto` se liga a `dCategoria`, formando um nível adicional de granularidade. `dVendedor` possui auto-relacionamento via `IDGERENTE` para representar a hierarquia gerente → vendedor.
+
+> **Nota:** `dTempo` foi desconsiderada do modelo a orientação do professor, pois pertence a outro projeto. A coluna `IDTEMPO` permanece em `fVendas` mas não possui relacionamento ativo no modelo.
 
 **Relacionamentos:**
 
@@ -125,7 +127,6 @@ O modelo foi estruturado com `fVendas` no centro, conectada às 8 dimensões. A 
 | fVendas | IDVENDEDOR | dVendedor | N:1 |
 | fVendas | IDPRODUTO | dProduto | N:1 |
 | fVendas | IDFORNECEDOR | dFornecedor | N:1 |
-| fVendas | IDTEMPO | dTempo | N:1 |
 | fVendas | IDNOTA | dNota | N:1 |
 | fVendas | IDFORMA | dForma | N:1 |
 | dProduto | ID_CATEGORIA | dCategoria | N:1 |
@@ -141,7 +142,6 @@ erDiagram
         int IDFORMA FK
         int IDPRODUTO FK
         int IDFORNECEDOR FK
-        int IDTEMPO FK
         int QUANTIDADE
         float TOTAL_ITEM
         float CUSTO_TOTAL
@@ -188,19 +188,6 @@ erDiagram
         date FIM
     }
  
-    dTempo {
-        int IDTEMPO PK
-        date DATA
-        int DIA
-        string DIASEMANA
-        int MES
-        string NOMEMES
-        int QUARTO
-        int ANO
-        string ESTACAOANO
-        bool FIMSEMANA
-    }
- 
     dNota {
         int IDNOTA PK
     }
@@ -214,7 +201,6 @@ erDiagram
     fVendas }o--|| dVendedor : "IDVENDEDOR"
     fVendas }o--|| dProduto : "IDPRODUTO"
     fVendas }o--|| dFornecedor : "IDFORNECEDOR"
-    fVendas }o--|| dTempo : "IDTEMPO"
     fVendas }o--|| dNota : "IDNOTA"
     fVendas }o--|| dForma : "IDFORMA"
     dProduto }o--|| dCategoria : "ID_CATEGORIA"
@@ -253,8 +239,9 @@ erDiagram
 - Ajustado o relacionamento entre tabelas para seguir o modelo SnowFlake
 
 *17/06/2026*
-- Removido a tabela dTempo a pedido do professor
-- Desfeito o tratamento das datas da coluna **IDTEMPO** em fVendas a pedido do professor
+- Removida a tabela `dTempo` do modelo a orientação do professor — o arquivo `dTempo.xlsx` pertence a outro projeto e não deve ser utilizado no IA Vendas
+- Desfeito o tratamento das datas da coluna **IDTEMPO** em `fVendas`, retornando aos valores originais
+- O relacionamento `fVendas → dTempo` foi removido; a coluna `IDTEMPO` permanece em `fVendas` mas sem vínculo ativo no modelo
 
 ---
 
@@ -276,8 +263,8 @@ erDiagram
 
 - Revisão e correção dos relacionamentos no Power BI
 - Corrigido relacionamento `fVendas (IDNOTA) → dNota (IDNOTA)` que estava com direção invertida
-- Confirmados 8 relacionamentos ativos com cardinalidade `*:1`
-- Chave primária de `dTempo` definida como `DATA` (coluna única, sem `IDTEMPO`)
+- Confirmados 7 relacionamentos ativos com cardinalidade `*:1`
+- `dTempo` removida do modelo a orientação do professor (ver seção 2.1)
 
 **Relacionamentos finalizados:**
 
@@ -288,7 +275,6 @@ erDiagram
 | fVendas | IDFORNECEDOR | dFornecedor | *:1 |
 | fVendas | IDNOTA | dNota | *:1 |
 | fVendas | IDPRODUTO | dProduto | *:1 |
-| fVendas | IDTEMPO | dTempo (DATA) | *:1 |
 | fVendas | IDVENDEDOR | dVendedor | *:1 |
 | dProduto | ID_CATEGORIA | dCategoria | *:1 |
 
@@ -316,10 +302,6 @@ Margem % = DIVIDE([Lucro Bruto], [Total Receita], 0)
 
 ```dax
 Total Quantidade = SUM(fVendas[QUANTIDADE])
-```
-
-```dax
-Receita YTD = TOTALYTD([Total Receita], dTempo[DATA])
 ```
 
 ```dax
