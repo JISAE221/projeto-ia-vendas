@@ -37,17 +37,6 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
-	measure 'Receita YTD' =
-			
-			TOTALYTD(
-			    [Total Receita],
-			    dTempo[DATA]
-			)
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: bc7fc24c-b6cb-436d-a669-571ed1713b14
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
 	measure 'Total Custo' = SUM(fVendas[CUSTO_TOTAL])
 		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
 		lineageTag: 100f2cb6-21b1-41b8-9f64-2592760509f7
