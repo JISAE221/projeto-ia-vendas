@@ -3,7 +3,11 @@
   "pageOrder": [
     "pgAbertura",
     "5df053b61d7155cc80c0",
-    "pgClientes"
+    "pgClientes",
+    "pgProdutos",
+    "pgFornecedores",
+    "pgRegioes",
+    "pgVendas"
   ],
-  "activePageName": "5df053b61d7155cc80c0"
+  "activePageName": "pgAbertura"
 }

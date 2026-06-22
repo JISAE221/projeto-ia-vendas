@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "v3",
+  "position": {
+    "x": 216,
+    "y": 424,
+    "z": 5,
+    "width": 517,
+    "height": 270,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCliente"
+                    }
+                  },
+                  "Property": "NOME"
+                }
+              },
+              "queryRef": "dCliente.NOME",
+              "nativeQueryRef": "NOME"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Total Receita"
+                }
+              },
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Lucro Bruto"
+                }
+              },
+              "queryRef": "_Medidas.Lucro Bruto",
+              "nativeQueryRef": "Lucro Bruto"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
