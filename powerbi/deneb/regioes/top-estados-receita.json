@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Regiões — Top 15 Estados por Receita (barra horizontal). Bind: ESTADO = dCliente[ESTADO], Total Receita = medida [Total Receita]. Cor por REGIAO = dCliente[REGIAO] (opcional). Top 15 recalculado no contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Top Estados por Receita",
+    "subtitle": "Todos os estados · ordenado por receita",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "transform": [
+    { "window": [{ "op": "rank", "as": "rank" }], "sort": [{ "field": "Total Receita", "order": "descending" }] },
+    { "filter": "datum.rank <= 15" }
+  ],
+  "mark": { "type": "bar", "cornerRadiusEnd": 4, "height": { "band": 0.75 }, "tooltip": true },
+  "encoding": {
+    "y": { "field": "ESTADO", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5" } },
+    "x": { "field": "Total Receita", "type": "quantitative", "axis": { "title": "Receita (R$)", "format": "~s", "grid": true } },
+    "color": {
+      "field": "REGIAO",
+      "type": "nominal",
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B"] },
+      "legend": { "title": "Região", "orient": "bottom", "labelColor": "#B0B0CC", "titleColor": "#70709A", "labelFont": "Inter, Segoe UI" }
+    },
+    "tooltip": [
+      { "field": "ESTADO", "type": "nominal", "title": "Estado" },
+      { "field": "REGIAO", "type": "nominal", "title": "Região" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

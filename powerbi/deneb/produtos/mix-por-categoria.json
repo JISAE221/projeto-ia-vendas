@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Produtos — Mix de Receita por Categoria (donut com %). Bind: NOME = dCategoria[NOME], Total Receita = medida [Total Receita]. Responde a slicers de Categoria/Fornecedor via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Mix por Categoria",
+    "subtitle": "Participação na receita",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "transform": [
+    { "joinaggregate": [{ "op": "sum", "field": "Total Receita", "as": "totalGeral" }] },
+    { "calculate": "datum['Total Receita'] / datum.totalGeral", "as": "pct" }
+  ],
+  "encoding": {
+    "theta": { "field": "Total Receita", "type": "quantitative", "stack": true },
+    "color": {
+      "field": "NOME",
+      "type": "nominal",
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B", "#EC4899", "#06B6D4", "#EF4444", "#7C3AED"] },
+      "legend": { "title": null, "orient": "right", "labelColor": "#B0B0CC", "labelFont": "Inter, Segoe UI", "labelFontSize": 10 }
+    },
+    "tooltip": [
+      { "field": "NOME", "type": "nominal", "title": "Categoria" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" },
+      { "field": "pct", "type": "quantitative", "title": "Participação", "format": ".1%" }
+    ]
+  },
+  "mark": { "type": "arc", "innerRadius": 60, "outerRadius": 105, "cornerRadius": 3, "padAngle": 0.02, "tooltip": true },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null }
+  }
+}

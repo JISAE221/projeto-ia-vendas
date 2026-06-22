@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Produtos — Margem % por Categoria (barra com linha de média). Bind: NOME = dCategoria[NOME], Margem % = medida [Margem %] (já no formato decimal 0..1). Responde a slicers via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Margem por Categoria",
+    "subtitle": "Margem % e média geral",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 5, "tooltip": true },
+      "encoding": {
+        "x": { "field": "NOME", "type": "nominal", "sort": "-y", "axis": { "title": null, "labelAngle": -35, "labelColor": "#B0B0CC", "labelLimit": 120 } },
+        "y": { "field": "Margem %", "type": "quantitative", "axis": { "title": "Margem %", "format": ".0%", "grid": true } },
+        "color": {
+          "field": "Margem %",
+          "type": "quantitative",
+          "legend": null,
+          "scale": { "range": ["#EF4444", "#F59E0B", "#10B981"] }
+        },
+        "tooltip": [
+          { "field": "NOME", "type": "nominal", "title": "Categoria" },
+          { "field": "Margem %", "type": "quantitative", "title": "Margem", "format": ".1%" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "rule", "color": "#A78BFA", "strokeDash": [4, 4], "size": 1.5 },
+      "encoding": {
+        "y": { "field": "Margem %", "type": "quantitative", "aggregate": "mean" }
+      }
+    }
+  ],
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    },
+    "axisX": { "grid": false }
+  }
+}

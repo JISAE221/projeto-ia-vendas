@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Vendas — Receita por Forma de Pagamento (barra horizontal). Bind: FORMA = dForma[FORMA], Total Receita = medida [Total Receita]. Responde a slicers de Categoria/Forma via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Receita por Forma de Pagamento",
+    "subtitle": "Participação por meio de pagamento",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "mark": { "type": "bar", "cornerRadiusEnd": 5, "height": { "band": 0.7 }, "tooltip": true },
+  "encoding": {
+    "y": { "field": "FORMA", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5", "labelLimit": 160 } },
+    "x": { "field": "Total Receita", "type": "quantitative", "axis": { "title": "Receita (R$)", "format": "~s", "grid": true } },
+    "color": {
+      "field": "FORMA",
+      "type": "nominal",
+      "legend": null,
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B", "#EC4899", "#06B6D4"] }
+    },
+    "tooltip": [
+      { "field": "FORMA", "type": "nominal", "title": "Forma de Pagamento" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

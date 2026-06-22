@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Vendas — Receita x Custo x Lucro no tempo (multi-série). Bind: DATA = dTempo[DATA]; e as três medidas como colunas: [Total Receita], [Total Custo], [Lucro Bruto]. O 'fold' transforma as 3 medidas em série única para colorir. ATENÇÃO: depende da dimensão dTempo (removida do modelo atual — recriar). Responde ao contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Receita · Custo · Lucro",
+    "subtitle": "Evolução no período",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "transform": [
+    { "fold": ["Total Receita", "Total Custo", "Lucro Bruto"], "as": ["Métrica", "Valor"] }
+  ],
+  "mark": { "type": "line", "strokeWidth": 2, "point": { "filled": true, "size": 25 }, "tooltip": true },
+  "encoding": {
+    "x": { "field": "DATA", "type": "temporal", "axis": { "title": null, "format": "%d/%m", "labelColor": "#B0B0CC", "grid": false } },
+    "y": { "field": "Valor", "type": "quantitative", "axis": { "title": "R$", "format": "~s", "grid": true } },
+    "color": {
+      "field": "Métrica",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Total Receita", "Total Custo", "Lucro Bruto"],
+        "range": ["#8B5CF6", "#F59E0B", "#10B981"]
+      },
+      "legend": { "title": null, "orient": "top", "labelColor": "#B0B0CC", "labelFont": "Inter, Segoe UI" }
+    },
+    "tooltip": [
+      { "field": "DATA", "type": "temporal", "title": "Data", "format": "%d/%m/%Y" },
+      { "field": "Métrica", "type": "nominal" },
+      { "field": "Valor", "type": "quantitative", "title": "Valor", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI"
+    }
+  }
+}

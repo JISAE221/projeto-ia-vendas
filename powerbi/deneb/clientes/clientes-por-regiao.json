@@ -1,0 +1,59 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Clientes — Receita por Região. Bind: REGIAO = dCliente[REGIAO], Total Receita = medida [Total Receita]. Responde a slicers de Período/Estado via contexto de filtro do PBI.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Clientes por Região",
+    "subtitle": "Receita acumulada por região",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "subtitleColor": "#70709A",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 14,
+    "fontWeight": 600,
+    "subtitleFont": "Inter, Segoe UI",
+    "subtitleFontSize": 11
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 6,
+    "color": "#8B5CF6",
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "REGIAO",
+      "type": "nominal",
+      "sort": "-y",
+      "axis": { "title": null, "labelAngle": 0, "labelColor": "#B0B0CC" }
+    },
+    "y": {
+      "field": "Total Receita",
+      "type": "quantitative",
+      "axis": { "title": "Receita (R$)", "format": "~s", "grid": true }
+    },
+    "color": {
+      "field": "REGIAO",
+      "type": "nominal",
+      "legend": null,
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B"] }
+    },
+    "tooltip": [
+      { "field": "REGIAO", "type": "nominal", "title": "Região" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#B0B0CC", "titleColor": "#70709A",
+      "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14",
+      "labelFont": "Inter, Segoe UI", "titleFont": "Inter, Segoe UI",
+      "labelFontSize": 11, "titleFontSize": 11
+    },
+    "axisX": { "grid": false }
+  }
+}
