@@ -1,38 +1,34 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "chartMargem",
+  "name": "cliTopTabela",
   "position": {
-    "x": 748,
+    "x": 216,
     "y": 432,
-    "z": 7,
+    "z": 6,
     "width": 516,
     "height": 270,
-    "tabOrder": 7
+    "tabOrder": 6
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dCategoria"
+                      "Entity": "dCliente"
                     }
                   },
                   "Property": "NOME"
                 }
               },
-              "queryRef": "dCategoria.NOME",
+              "queryRef": "dCliente.NOME",
               "nativeQueryRef": "NOME"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+            },
             {
               "field": {
                 "Measure": {
@@ -41,11 +37,25 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Margem %"
+                  "Property": "Total Receita"
                 }
               },
-              "queryRef": "_Medidas.Margem %",
-              "nativeQueryRef": "Margem %"
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Lucro Bruto"
+                }
+              },
+              "queryRef": "_Medidas.Lucro Bruto",
+              "nativeQueryRef": "Lucro Bruto"
             }
           ]
         }

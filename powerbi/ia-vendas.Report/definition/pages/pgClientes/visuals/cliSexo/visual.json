@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "chartMargem",
+  "name": "cliSexo",
   "position": {
     "x": 748,
-    "y": 432,
-    "z": 7,
+    "y": 146,
+    "z": 5,
     "width": 516,
     "height": 270,
-    "tabOrder": 7
+    "tabOrder": 5
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "donutChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dCategoria"
+                      "Entity": "dCliente"
                     }
                   },
-                  "Property": "NOME"
+                  "Property": "SEXO"
                 }
               },
-              "queryRef": "dCategoria.NOME",
-              "nativeQueryRef": "NOME"
+              "queryRef": "dCliente.SEXO",
+              "nativeQueryRef": "SEXO"
             }
           ]
         },
@@ -41,11 +41,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Margem %"
+                  "Property": "Total Receita"
                 }
               },
-              "queryRef": "_Medidas.Margem %",
-              "nativeQueryRef": "Margem %"
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
             }
           ]
         }

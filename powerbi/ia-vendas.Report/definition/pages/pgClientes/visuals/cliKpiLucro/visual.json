@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "kpiLucro",
+  "name": "cliKpiLucro",
   "position": {
     "x": 482,
     "y": 20,

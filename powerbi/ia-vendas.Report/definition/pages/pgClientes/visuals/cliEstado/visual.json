@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "chartMargem",
+  "name": "cliEstado",
   "position": {
     "x": 748,
     "y": 432,
@@ -10,7 +10,7 @@
     "tabOrder": 7
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dCategoria"
+                      "Entity": "dCliente"
                     }
                   },
-                  "Property": "NOME"
+                  "Property": "ESTADO"
                 }
               },
-              "queryRef": "dCategoria.NOME",
-              "nativeQueryRef": "NOME"
+              "queryRef": "dCliente.ESTADO",
+              "nativeQueryRef": "ESTADO"
             }
           ]
         },
@@ -41,11 +41,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Margem %"
+                  "Property": "Total Receita"
                 }
               },
-              "queryRef": "_Medidas.Margem %",
-              "nativeQueryRef": "Margem %"
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
             }
           ]
         }

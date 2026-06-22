@@ -1,37 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "chartMargem",
+  "name": "cliKpiMargem",
   "position": {
     "x": 748,
-    "y": 432,
-    "z": 7,
-    "width": 516,
-    "height": 270,
-    "tabOrder": 7
+    "y": 20,
+    "z": 2,
+    "width": 250,
+    "height": 110,
+    "tabOrder": 2
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dCategoria"
-                    }
-                  },
-                  "Property": "NOME"
-                }
-              },
-              "queryRef": "dCategoria.NOME",
-              "nativeQueryRef": "NOME"
-            }
-          ]
-        },
-        "Y": {
+        "Values": {
           "projections": [
             {
               "field": {

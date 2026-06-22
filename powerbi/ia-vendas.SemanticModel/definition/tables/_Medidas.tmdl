@@ -49,6 +49,9 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
+	measure 'HTML Teste' = "<div style=""font-family:Segoe UI,sans-serif;color:#8B5CF6;padding:24px;font-size:20px;font-weight:700;text-align:center"">✅ HTML Content OK — IA Vendas</div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000001
+
 	column Coluna
 		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0
 		summarizeBy: none

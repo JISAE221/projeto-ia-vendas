@@ -1,7 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "chartCategoria",
-  "position": { "x": 648, "y": 156, "z": 5, "width": 616, "height": 266, "tabOrder": 5 },
+  "position": {
+    "x": 748,
+    "y": 146,
+    "z": 5,
+    "width": 516,
+    "height": 270,
+    "tabOrder": 5
+  },
   "visual": {
     "visualType": "donutChart",
     "query": {
@@ -11,7 +18,11 @@
             {
               "field": {
                 "Column": {
-                  "Expression": { "SourceRef": { "Entity": "dCategoria" } },
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCategoria"
+                    }
+                  },
                   "Property": "NOME"
                 }
               },
@@ -25,7 +36,11 @@
             {
               "field": {
                 "Measure": {
-                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
                   "Property": "Total Receita"
                 }
               },

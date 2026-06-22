@@ -76,7 +76,7 @@
           { "show": true, "color": { "solid": { "color": "#0E0E21" } }, "transparency": 0 }
         ],
         "border": [
-          { "show": true, "color": { "solid": { "color": "#FFFFFF14" } }, "radius": 14 }
+          { "show": true, "color": { "solid": { "color": "#26263A" } }, "radius": 14 }
         ],
         "visualHeader": [
           {
@@ -176,7 +176,7 @@
             "labelColor": { "solid": { "color": "#70709A" } },
             "fontFamily": "Inter, Segoe UI",
             "fontSize": 10,
-            "gridlineColor": { "solid": { "color": "#FFFFFF0D" } },
+            "gridlineColor": { "solid": { "color": "#1C1C30" } },
             "gridlineStyle": "solid"
           }
         ],
@@ -204,7 +204,7 @@
             "labelColor": { "solid": { "color": "#70709A" } },
             "fontFamily": "Inter, Segoe UI",
             "fontSize": 10,
-            "gridlineColor": { "solid": { "color": "#FFFFFF0D" } }
+            "gridlineColor": { "solid": { "color": "#1C1C30" } }
           }
         ]
       }
@@ -229,7 +229,7 @@
             "labelColor": { "solid": { "color": "#70709A" } },
             "fontFamily": "Inter, Segoe UI",
             "fontSize": 10,
-            "gridlineColor": { "solid": { "color": "#FFFFFF0D" } }
+            "gridlineColor": { "solid": { "color": "#1C1C30" } }
           }
         ]
       }
@@ -270,11 +270,11 @@
         "grid": [
           {
             "gridVertical": true,
-            "gridVerticalColor": { "solid": { "color": "#FFFFFF0D" } },
+            "gridVerticalColor": { "solid": { "color": "#1C1C30" } },
             "gridHorizontal": true,
-            "gridHorizontalColor": { "solid": { "color": "#FFFFFF0D" } },
+            "gridHorizontalColor": { "solid": { "color": "#1C1C30" } },
             "rowPadding": 6,
-            "outlineColor": { "solid": { "color": "#FFFFFF14" } }
+            "outlineColor": { "solid": { "color": "#26263A" } }
           }
         ],
         "columnHeaders": [
@@ -372,7 +372,7 @@
     "shape": {
       "*": {
         "fill": [ { "show": true, "fillColor": { "solid": { "color": "#0E0E21" } } } ],
-        "lineColor": [ { "show": true, "lineColor": { "solid": { "color": "#FFFFFF14" } } } ]
+        "lineColor": [ { "show": true, "lineColor": { "solid": { "color": "#26263A" } } } ]
       }
     },
 

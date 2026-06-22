@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "kpiLucro",
+  "name": "cliKpiReceita",
   "position": {
-    "x": 482,
+    "x": 216,
     "y": 20,
-    "z": 1,
+    "z": 0,
     "width": 250,
     "height": 110,
-    "tabOrder": 1
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Lucro Bruto"
+                  "Property": "Total Receita"
                 }
               },
-              "queryRef": "_Medidas.Lucro Bruto",
-              "nativeQueryRef": "Lucro Bruto"
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita"
             }
           ]
         }

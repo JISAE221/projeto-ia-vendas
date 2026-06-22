@@ -1,7 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
   "name": "chartRegiao",
-  "position": { "x": 16, "y": 156, "z": 4, "width": 616, "height": 266, "tabOrder": 4 },
+  "position": {
+    "x": 216,
+    "y": 146,
+    "z": 4,
+    "width": 516,
+    "height": 270,
+    "tabOrder": 4
+  },
   "visual": {
     "visualType": "clusteredColumnChart",
     "query": {
@@ -11,7 +18,11 @@
             {
               "field": {
                 "Column": {
-                  "Expression": { "SourceRef": { "Entity": "dCliente" } },
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dCliente"
+                    }
+                  },
                   "Property": "REGIAO"
                 }
               },
@@ -25,7 +36,11 @@
             {
               "field": {
                 "Measure": {
-                  "Expression": { "SourceRef": { "Entity": "_Medidas" } },
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
                   "Property": "Total Receita"
                 }
               },

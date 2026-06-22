@@ -1,33 +1,33 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "kpiLucro",
+  "name": "cliSlicer",
   "position": {
-    "x": 482,
+    "x": 1014,
     "y": 20,
-    "z": 1,
+    "z": 3,
     "width": 250,
     "height": 110,
-    "tabOrder": 1
+    "tabOrder": 3
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "slicer",
     "query": {
       "queryState": {
         "Values": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "_Medidas"
+                      "Entity": "dCliente"
                     }
                   },
-                  "Property": "Lucro Bruto"
+                  "Property": "ESTADO"
                 }
               },
-              "queryRef": "_Medidas.Lucro Bruto",
-              "nativeQueryRef": "Lucro Bruto"
+              "queryRef": "dCliente.ESTADO",
+              "nativeQueryRef": "ESTADO"
             }
           ]
         }
