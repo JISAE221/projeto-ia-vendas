@@ -1,19 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kTicket",
   "position": {
-    "x": 744,
-    "y": 104,
-    "z": 2,
-    "width": 250,
-    "height": 92,
-    "tabOrder": 2
+    "x": 649.65539977513959,
+    "y": 196.68466231724412,
+    "z": 8000,
+    "height": 137.0832494938368,
+    "width": 299.1990923735047,
+    "tabOrder": 8000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Ticket Médio"
+                  "Property": "HTML Card Ticket"
                 }
               },
-              "queryRef": "_Medidas.Ticket Médio",
-              "nativeQueryRef": "Ticket Médio"
+              "queryRef": "_Medidas.HTML Card Ticket",
+              "nativeQueryRef": "HTML Card Ticket"
             }
           ]
         }

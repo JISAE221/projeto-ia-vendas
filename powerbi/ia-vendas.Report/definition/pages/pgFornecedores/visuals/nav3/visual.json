@@ -1,4 +1,14 @@
 {
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "nav3",
+  "position": {
+    "x": 4,
+    "y": 216,
+    "z": 12000,
+    "height": 40,
+    "width": 192,
+    "tabOrder": 12000
+  },
   "visual": {
     "visualType": "actionButton",
     "objects": {
@@ -80,15 +90,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "nav3",
-  "position": {
-    "x": 4,
-    "y": 216,
-    "z": 33,
-    "width": 192,
-    "height": 40,
-    "tabOrder": 33
   }
 }

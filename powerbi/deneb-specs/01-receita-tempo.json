@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Receita ao Longo do Tempo — arraste dTempo[DATA] e _Medidas[Total Receita]",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "title": {
+    "text": "Receita ao Longo do Tempo",
+    "subtitle": "Série histórica · R$",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "line": { "color": "#8B5CF6", "strokeWidth": 2 },
+    "color": {
+      "x1": 1, "y1": 0, "x2": 1, "y2": 1,
+      "gradient": "linear",
+      "stops": [
+        { "offset": 0, "color": "rgba(139,92,246,0.35)" },
+        { "offset": 1, "color": "rgba(139,92,246,0.00)" }
+      ]
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "DATA",
+      "type": "temporal",
+      "timeUnit": "yearmonth",
+      "title": null,
+      "axis": {
+        "labelColor": "#6b7280",
+        "gridColor": "rgba(255,255,255,0.05)",
+        "domainColor": "transparent",
+        "tickColor": "transparent",
+        "format": "%b %Y",
+        "labelAngle": -30,
+        "labelFontSize": 11
+      }
+    },
+    "y": {
+      "field": "Total Receita",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "labelColor": "#6b7280",
+        "gridColor": "rgba(255,255,255,0.05)",
+        "domainColor": "transparent",
+        "tickColor": "transparent",
+        "labelFontSize": 11,
+        "format": "~s"
+      }
+    },
+    "tooltip": [
+      { "field": "DATA", "type": "temporal", "title": "Mês", "format": "%B %Y", "timeUnit": "yearmonth" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
+    ]
+  },
+  "config": {
+    "view": { "stroke": "transparent" }
+  }
+}

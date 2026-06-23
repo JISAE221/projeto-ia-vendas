@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA Vendas — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --surface-base:    #09091A;
+      --surface-sidebar: #06060F;
+      --surface-card:    #0E0E21;
+      --surface-raised:  #131328;
+      --accent:          #8B5CF6;
+      --accent-hover:    #A78BFA;
+      --accent-active:   #7C3AED;
+      --accent-subtle:   rgba(139,92,246,0.12);
+      --fg-1: #FFFFFF;
+      --fg-2: #E8E8F5;
+      --fg-3: #B0B0CC;
+      --fg-4: #70709A;
+      --fg-5: #44446A;
+      --glass-bg:     rgba(255,255,255,0.035);
+      --glass-border: rgba(255,255,255,0.08);
+      --success:        #10B981;
+      --success-bg:     rgba(16,185,129,0.12);
+      --success-border: rgba(16,185,129,0.25);
+      --success-fg:     #34D399;
+      --warning:        #F59E0B;
+      --warning-bg:     rgba(245,158,11,0.12);
+      --warning-border: rgba(245,158,11,0.25);
+      --warning-fg:     #FCD34D;
+      --error:          #EF4444;
+      --error-bg:       rgba(239,68,68,0.12);
+      --error-border:   rgba(239,68,68,0.25);
+      --error-fg:       #F87171;
+      --info:           #3B82F6;
+      --info-bg:        rgba(59,130,246,0.12);
+      --info-border:    rgba(59,130,246,0.25);
+      --info-fg:        #93C5FD;
+      --purple-bg:      rgba(139,92,246,0.14);
+      --purple-border:  rgba(139,92,246,0.30);
+      --radius-lg:   14px;
+      --radius-md:   10px;
+      --radius-sm:    6px;
+      --radius-full: 9999px;
+    }
+
+    body {
+      background: #EAEAE0;
+      font-family: 'Inter', sans-serif;
+      color: #1A1A2E;
+      padding: 60px 0 100px;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── Page title ─────────────────────────────── */
+    .page-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #888880;
+      letter-spacing: 0.04em;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .page-title span { color: #1A1A2E; font-weight: 600; }
+
+    /* ── Section tag (orange category label) ───── */
+    .section-tag {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #B85520;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 56px;
+      margin-bottom: 14px;
+    }
+
+    /* ── Card meta row ──────────────────────────── */
+    .card-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 16px;
+    }
+
+    .card-meta-info h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1A1A2E;
+      line-height: 1.25;
+    }
+
+    .card-meta-info p {
+      font-size: 12px;
+      color: #7070A0;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    .card-meta-info a {
+      color: #7B5CF0;
+      text-decoration: none;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+
+    .action-btn {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 7px;
+      border: 1px solid #D0D0C8;
+      background: #F8F8F4;
+      color: #444455;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 150ms, background 150ms;
+    }
+
+    .action-btn:hover {
+      border-color: #AAAAAA;
+      background: #F0F0EC;
+    }
+
+    /* ── Dark showcase card ─────────────────────── */
+    .showcase {
+      background: var(--surface-base);
+      border-radius: 16px;
+      padding: 36px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 100% 0%, rgba(139,92,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .usage-notes-link {
+      font-size: 12px;
+      color: #9090A8;
+      margin-top: 12px;
+      cursor: pointer;
+      display: block;
+      transition: color 120ms;
+    }
+
+    .usage-notes-link:hover { color: #7070A0; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin: 28px 0;
+    }
+
+    /* ════════════════════════════════════════════
+       BRAND
+    ════════════════════════════════════════════ */
+    .brand-showcase {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    /* Logo mark */
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .logo-wordmark {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .logo-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--fg-1);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .logo-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 400;
+      color: var(--fg-5);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Color swatches */
+    .swatch-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .swatch {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      border: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+
+    .swatch-label {
+      font-size: 10px;
+      color: var(--fg-4);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* Type stack */
+    .type-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .type-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .type-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--fg-1);
+      line-height: 1.2;
+    }
+
+    .type-role {
+      font-size: 10.5px;
+      color: var(--fg-4);
+      line-height: 1.3;
+    }
+
+    /* ════════════════════════════════════════════
+       BADGE
+    ════════════════════════════════════════════ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      border-radius: var(--radius-full);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .badge-sm { font-size: 11px;   padding: 3px  9px; }
+    .badge-md { font-size: 12px;   padding: 4px 11px; }
+    .badge-lg { font-size: 13.5px; padding: 5px 14px; }
+
+    .badge-default {
+      background: rgba(255,255,255,0.07);
+      color: var(--fg-2);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .badge-purple {
+      background: var(--purple-bg);
+      color: var(--accent-hover);
+      border-color: var(--purple-border);
+    }
+    .badge-success {
+      background: var(--success-bg);
+      color: var(--success-fg);
+      border-color: var(--success-border);
+    }
+    .badge-warning {
+      background: var(--warning-bg);
+      color: var(--warning-fg);
+      border-color: var(--warning-border);
+    }
+    .badge-error {
+      background: var(--error-bg);
+      color: var(--error-fg);
+      border-color: var(--error-border);
+    }
+    .badge-info {
+      background: var(--info-bg);
+      color: var(--info-fg);
+      border-color: var(--info-border);
+    }
+
+    .badge-dot {
+      width: 5.5px;
+      height: 5.5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-default .badge-dot { background: var(--fg-4); }
+    .badge-purple  .badge-dot { background: var(--accent-hover); }
+    .badge-success .badge-dot { background: var(--success-fg); }
+    .badge-warning .badge-dot { background: var(--warning-fg); }
+    .badge-error   .badge-dot { background: var(--error-fg); }
+    .badge-info    .badge-dot { background: var(--info-fg); }
+
+    .badge-group {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .component-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .row-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--fg-5);
+      width: 110px;
+      flex-shrink: 0;
+    }
+
+    .items-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* ════════════════════════════════════════════
+       BUTTON
+    ════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 160ms ease, box-shadow 160ms ease, border-color 160ms ease, transform 80ms ease;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      stroke-width: 1.75;
+    }
+
+    .btn:active:not(:disabled) { transform: scale(0.97); }
+    .btn:disabled {
+      opacity: 0.36;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn-sm { font-size: 12.5px; padding: 0 14px; height: 30px; }
+    .btn-md { font-size: 13.5px; padding: 0 18px; height: 38px; }
+    .btn-lg { font-size: 14.5px; padding: 0 24px; height: 46px; }
+
+    /* primary */
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: 0 0 20px rgba(139,92,246,0.38);
+    }
+    .btn-primary:active { background: var(--accent-active); }
+
+    /* secondary */
+    .btn-secondary {
+      background: rgba(139,92,246,0.10);
+      color: var(--accent-hover);
+      border-color: rgba(139,92,246,0.32);
+    }
+    .btn-secondary:hover {
+      background: rgba(139,92,246,0.18);
+      border-color: rgba(139,92,246,0.55);
+    }
+
+    /* ghost */
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg-2);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    /* danger */
+    .btn-danger {
+      background: rgba(239,68,68,0.10);
+      color: var(--error-fg);
+      border-color: rgba(239,68,68,0.28);
+    }
+    .btn-danger:hover {
+      background: rgba(239,68,68,0.18);
+      border-color: rgba(239,68,68,0.50);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ════════════════════════════════════════════
+       CONTEXT TABLE (DER preview)
+    ════════════════════════════════════════════ */
+    .table-wrap {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+    }
+
+    .ds-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+    }
+
+    .ds-table thead th {
+      background: rgba(255,255,255,0.04);
+      color: var(--fg-4);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .ds-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      transition: background 140ms;
+    }
+
+    .ds-table tbody tr:last-child { border-bottom: none; }
+    .ds-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+    .ds-table td {
+      padding: 9px 16px;
+      color: var(--fg-2);
+      vertical-align: middle;
+    }
+
+    .ds-table .col-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--fg-3);
+    }
+
+    .ds-table .col-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--fg-5);
+    }
+
+    .tag-pk {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      background: rgba(139,92,246,0.18);
+      color: var(--accent-hover);
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .tag-fk {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      background: rgba(59,130,246,0.14);
+      color: #93C5FD;
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <p class="page-title">IA Vendas — <span>Design System</span> &nbsp;·&nbsp; v1.0</p>
+
+  <!-- ═══════════════════════════════════════════
+       BRAND
+  ═══════════════════════════════════════════ -->
+  <span class="section-tag">Brand</span>
+
+  <div class="card-meta">
+    <div class="card-meta-info">
+      <h2>IA Vendas Brand</h2>
+      <p>Logotipo, paleta de cores e tipografia</p>
+    </div>
+    <div class="card-actions">
+      <button class="action-btn">Feedback</button>
+      <button class="action-btn">↗ Edit</button>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <div class="brand-showcase">
+
+      <!-- ── Logo lockup ──────────────────────── -->
+      <div class="logo-lockup">
+        <!-- Mark: 3 descending horizontal bars -->
+        <svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="IA Vendas mark">
+          <line x1="1.5"  y1="1.5"  x2="28.5" y2="1.5"  stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
+          <line x1="1.5"  y1="11"   x2="19"   y2="11"   stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
+          <line x1="1.5"  y1="20.5" x2="9.5"  y2="20.5" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-wordmark">
+          <div class="logo-name">IA Vendas</div>
+          <div class="logo-sub">Grupo 4</div>
+        </div>
+      </div>
+
+      <!-- ── Color swatches ───────────────────── -->
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch" style="background:#8B5CF6; border-color:rgba(139,92,246,0.35);"></div>
+          <span class="swatch-label">accent</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch" style="background:#A78BFA; border-color:rgba(167,139,250,0.35);"></div>
+          <span class="swatch-label">hover</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch" style="background:#06060F;"></div>
+          <span class="swatch-label">sidebar</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch" style="background:#09091A;"></div>
+          <span class="swatch-label">base</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch" style="background:#0E0E21;"></div>
+          <span class="swatch-label">card</span>
+        </div>
+      </div>
+
+      <!-- ── Typography note ──────────────────── -->
+      <div class="type-stack">
+        <div class="type-row">
+          <div class="type-name" style="font-family:'Space Grotesk';">Space Grotesk</div>
+          <div class="type-role" style="color:#A78BFA;">— Display</div>
+        </div>
+        <div class="type-row">
+          <div class="type-name" style="font-family:'Inter'; font-size:13px; font-weight:600;">Inter</div>
+          <div class="type-role">— Body &amp; UI</div>
+        </div>
+        <div class="type-row">
+          <div class="type-name" style="font-family:'JetBrains Mono'; font-size:12px; font-weight:500; color:#8B5CF6;">JetBrains Mono</div>
+          <div class="type-role">— Data</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <span class="usage-notes-link">+ Add usage notes</span>
+
+
+  <!-- ═══════════════════════════════════════════
+       BADGE
+  ═══════════════════════════════════════════ -->
+  <span class="section-tag">Components</span>
+
+  <div class="card-meta">
+    <div class="card-meta-info">
+      <h2>Badge</h2>
+      <p>Indicador de status compacto com variantes por cor. Use em linhas de tabela, listas e labels de KPI.</p>
+    </div>
+    <div class="card-actions">
+      <button class="action-btn">Feedback</button>
+      <button class="action-btn">↗ Edit</button>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <div class="badge-group">
+
+      <div class="component-row">
+        <span class="row-label">variant · dot</span>
+        <div class="items-wrap">
+          <span class="badge badge-md badge-success"><span class="badge-dot"></span>Ativo</span>
+          <span class="badge badge-md badge-warning"><span class="badge-dot"></span>Pendente</span>
+          <span class="badge badge-md badge-error"><span class="badge-dot"></span>Cancelado</span>
+          <span class="badge badge-md badge-info"><span class="badge-dot"></span>Informação</span>
+          <span class="badge badge-md badge-purple"><span class="badge-dot"></span>Destaque</span>
+          <span class="badge badge-md badge-default"><span class="badge-dot"></span>Inativo</span>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <span class="row-label">variant · sem dot</span>
+        <div class="items-wrap">
+          <span class="badge badge-md badge-success">Ativo</span>
+          <span class="badge badge-md badge-warning">Pendente</span>
+          <span class="badge badge-md badge-error">Cancelado</span>
+          <span class="badge badge-md badge-info">Novo</span>
+          <span class="badge badge-md badge-purple">Destaque</span>
+          <span class="badge badge-md badge-default">Inativo</span>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <span class="row-label">size · sm / md / lg</span>
+        <div class="items-wrap">
+          <span class="badge badge-sm badge-info"><span class="badge-dot"></span>Novo</span>
+          <span class="badge badge-md badge-purple">Destaque</span>
+          <span class="badge badge-lg badge-success"><span class="badge-dot"></span>Ativo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <span class="usage-notes-link">+ Add usage notes</span>
+
+
+  <!-- ═══════════════════════════════════════════
+       BUTTON
+  ═══════════════════════════════════════════ -->
+  <div class="card-meta" style="margin-top:36px;">
+    <div class="card-meta-info">
+      <h2>Button</h2>
+      <p>Botão de ação com estados de hover, press e disabled. Use para todos os CTAs e ações da interface.</p>
+    </div>
+    <div class="card-actions">
+      <button class="action-btn">Feedback</button>
+      <button class="action-btn">↗ Edit</button>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <div class="btn-group">
+
+      <div class="component-row">
+        <span class="row-label">variant · md</span>
+        <div class="items-wrap">
+          <button class="btn btn-md btn-primary">Exportar</button>
+          <button class="btn btn-md btn-secondary">
+            <i data-lucide="download"></i>Baixar CSV
+          </button>
+          <button class="btn btn-md btn-ghost">Ver Detalhes</button>
+          <button class="btn btn-md btn-danger">Excluir</button>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <span class="row-label">size · primary</span>
+        <div class="items-wrap">
+          <button class="btn btn-sm btn-primary">Exportar</button>
+          <button class="btn btn-md btn-primary">Exportar</button>
+          <button class="btn btn-lg btn-primary">Exportar</button>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <span class="row-label">ícone · esq / dir</span>
+        <div class="items-wrap">
+          <button class="btn btn-md btn-primary">
+            <i data-lucide="filter"></i>Filtrar
+          </button>
+          <button class="btn btn-md btn-secondary">
+            <i data-lucide="download"></i>Baixar CSV
+          </button>
+          <button class="btn btn-md btn-ghost">
+            Ver Detalhes<i data-lucide="arrow-up-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="component-row">
+        <span class="row-label">disabled</span>
+        <div class="items-wrap">
+          <button class="btn btn-md btn-primary" disabled>Exportar</button>
+          <button class="btn btn-md btn-secondary" disabled>Baixar CSV</button>
+          <button class="btn btn-md btn-ghost" disabled>Ver Detalhes</button>
+          <button class="btn btn-md btn-danger" disabled>Excluir</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <span class="usage-notes-link">+ Add usage notes</span>
+
+
+  <!-- ═══════════════════════════════════════════
+       DATA MODEL
+  ═══════════════════════════════════════════ -->
+  <span class="section-tag">Data</span>
+
+  <div class="card-meta">
+    <div class="card-meta-info">
+      <h2>Modelo de Dados — fVendas</h2>
+      <p>Star schema · tabela fato + dimensões. Chave de negócio: IDNOTA + IDPRODUTO.</p>
+    </div>
+    <div class="card-actions">
+      <button class="action-btn">Feedback</button>
+      <button class="action-btn">↗ Edit</button>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <div class="table-wrap">
+      <table class="ds-table">
+        <thead>
+          <tr>
+            <th>Tabela</th>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Papel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDNOTA</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDCLIENTE</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDVENDEDOR</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDPRODUTO</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDFORNECEDOR</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">IDTEMPO</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">QUANTIDADE</td>
+            <td class="col-type">int</td>
+            <td style="color:var(--fg-5); font-size:11px;">métrica</td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">TOTAL_ITEM</td>
+            <td class="col-type">float</td>
+            <td style="color:var(--fg-5); font-size:11px;">métrica</td>
+          </tr>
+          <tr>
+            <td class="col-mono">fVendas</td>
+            <td class="col-mono">LUCRO_TOTAL</td>
+            <td class="col-type">float</td>
+            <td style="color:var(--fg-5); font-size:11px;">métrica</td>
+          </tr>
+          <tr>
+            <td class="col-mono">dCliente</td>
+            <td class="col-mono">IDCLIENTE</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-pk">PK</span></td>
+          </tr>
+          <tr>
+            <td class="col-mono">dVendedor</td>
+            <td class="col-mono">IDGERENTE</td>
+            <td class="col-type">int</td>
+            <td style="color:var(--fg-5); font-size:11px;">self-join</td>
+          </tr>
+          <tr>
+            <td class="col-mono">dProduto</td>
+            <td class="col-mono">ID_CATEGORIA</td>
+            <td class="col-type">int</td>
+            <td><span class="tag-fk">FK</span> → dCategoria</td>
+          </tr>
+          <tr>
+            <td class="col-mono">dTempo</td>
+            <td class="col-mono">ESTACAOANO</td>
+            <td class="col-type">string</td>
+            <td style="color:var(--fg-5); font-size:11px;">sazonalidade</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <span class="usage-notes-link">+ Add usage notes</span>
+
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "fReg",
   "position": {
-    "x": 480,
-    "y": 12,
-    "z": 1,
-    "height": 84,
-    "width": 250,
-    "tabOrder": 1
+    "x": 649.65539977513959,
+    "y": 19.072452103490338,
+    "z": 3000,
+    "height": 168.07598416200861,
+    "width": 197.87669057371227,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "slicer",
@@ -48,7 +48,47 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Região'"
+                  "Value": "'RegiÃƒÂ£o'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "''"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

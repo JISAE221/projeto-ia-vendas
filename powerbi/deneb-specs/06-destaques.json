@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Destaques — métricas de apoio. Campos: _Medidas[Margem %], [Lucro Bruto], [Total Custo]",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "title": {
+    "text": "Destaques",
+    "subtitle": "Métricas de apoio",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "transform": [
+    { "fold": ["Margem %", "Lucro Bruto", "Total Custo"], "as": ["metrica", "valor"] },
+    {
+      "calculate": "datum.metrica == 'Margem %' ? format(datum.valor, '.1%') : 'R$ ' + format(datum.valor, ',.0f')",
+      "as": "valorFmt"
+    }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "text", "align": "left", "fontSize": 13, "fontWeight": 500, "color": "#9ca3af", "x": 8 },
+      "encoding": {
+        "y": { "field": "metrica", "type": "nominal", "axis": null, "sort": ["Margem %", "Lucro Bruto", "Total Custo"] },
+        "text": { "field": "metrica", "type": "nominal" }
+      }
+    },
+    {
+      "mark": { "type": "text", "align": "right", "fontSize": 16, "fontWeight": 700, "color": "#ffffff", "x": { "expr": "width - 8" } },
+      "encoding": {
+        "y": { "field": "metrica", "type": "nominal", "axis": null, "sort": ["Margem %", "Lucro Bruto", "Total Custo"] },
+        "text": { "field": "valorFmt", "type": "nominal" }
+      }
+    }
+  ],
+  "config": { "view": { "stroke": "transparent" } }
+}

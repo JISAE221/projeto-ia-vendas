@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "fPag",
   "position": {
-    "x": 1008,
-    "y": 12,
-    "z": 1,
-    "height": 84,
-    "width": 250,
-    "tabOrder": 1
+    "x": 1065.6732612825226,
+    "y": 11.920282564681461,
+    "z": 2000,
+    "height": 184.76437975256263,
+    "width": 197.87669057371227,
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -53,6 +53,11 @@
               }
             }
           }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
         }
       ]
     },

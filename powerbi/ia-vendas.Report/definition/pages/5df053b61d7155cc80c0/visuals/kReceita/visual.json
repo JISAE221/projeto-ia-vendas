@@ -1,19 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kReceita",
   "position": {
-    "x": 216,
-    "y": 104,
-    "z": 2,
-    "width": 250,
-    "height": 92,
-    "tabOrder": 2
+    "x": 15.4963673340859,
+    "y": 196.68466231724412,
+    "z": 7000,
+    "height": 137.0832494938368,
+    "width": 300.39112062997282,
+    "tabOrder": 7000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Total Receita"
+                  "Property": "HTML Card Receita"
                 }
               },
-              "queryRef": "_Medidas.Total Receita",
-              "nativeQueryRef": "Total Receita"
+              "queryRef": "_Medidas.HTML Card Receita",
+              "nativeQueryRef": "HTML Card Receita"
             }
           ]
         }

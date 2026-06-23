@@ -144,6 +144,7 @@ erDiagram
         int IDFORMA FK
         int IDPRODUTO FK
         int IDFORNECEDOR FK
+        date IDTEMPO FK
         int QUANTIDADE
         float TOTAL_ITEM
         float CUSTO_TOTAL

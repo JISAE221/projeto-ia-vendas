@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Top Clientes (Top 6) — dCliente[NOME] + _Medidas[Total Receita]",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "title": {
+    "text": "Top Clientes",
+    "subtitle": "Top 6 · Maiores receitas",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "transform": [
+    { "window": [{ "op": "rank", "as": "rnk" }], "sort": [{ "field": "Total Receita", "order": "descending" }] },
+    { "filter": "datum.rnk <= 6" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 6, "height": 10 },
+      "encoding": {
+        "y": { "field": "NOME", "type": "nominal", "sort": { "field": "Total Receita", "order": "descending" }, "title": null,
+          "axis": { "labelColor": "#e5e7eb", "domainColor": "transparent", "tickColor": "transparent", "labelFontSize": 12, "labelLimit": 180 } },
+        "x": { "field": "Total Receita", "type": "quantitative", "title": null,
+          "axis": { "labels": false, "grid": false, "domainColor": "transparent", "tickColor": "transparent" } },
+        "color": { "field": "Total Receita", "type": "quantitative", "scale": { "range": ["rgba(139,92,246,0.25)", "#8B5CF6"] }, "legend": null },
+        "tooltip": [
+          { "field": "NOME", "type": "nominal", "title": "Cliente" },
+          { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "dx": 6, "color": "#9ca3af", "fontSize": 11 },
+      "encoding": {
+        "y": { "field": "NOME", "type": "nominal", "sort": { "field": "Total Receita", "order": "descending" } },
+        "x": { "field": "Total Receita", "type": "quantitative" },
+        "text": { "field": "Total Receita", "type": "quantitative", "format": ",.0f" }
+      }
+    }
+  ],
+  "config": { "view": { "stroke": "transparent" } }
+}

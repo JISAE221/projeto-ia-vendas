@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Mapa de Calor — dTempo[DIASEMANA] + dTempo[NOMEMES] + _Medidas[Total Receita]",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "title": {
+    "text": "Mapa de Calor — Vendas por Dia",
+    "subtitle": "Dia da semana × mês · intensidade de receita",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "#09091A",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "NOMEMES",
+      "type": "ordinal",
+      "sort": ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+      "title": null,
+      "axis": { "labelColor": "#6b7280", "domainColor": "transparent", "tickColor": "transparent", "labelFontSize": 11, "labelAngle": -30 }
+    },
+    "y": {
+      "field": "DIASEMANA",
+      "type": "ordinal",
+      "sort": ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"],
+      "title": null,
+      "axis": { "labelColor": "#6b7280", "domainColor": "transparent", "tickColor": "transparent", "labelFontSize": 11 }
+    },
+    "color": {
+      "field": "Total Receita",
+      "type": "quantitative",
+      "scale": { "range": ["rgba(139,92,246,0.06)", "rgba(139,92,246,0.25)", "rgba(139,92,246,0.50)", "rgba(139,92,246,0.75)", "#8B5CF6"] },
+      "legend": null
+    },
+    "tooltip": [
+      { "field": "DIASEMANA", "type": "nominal", "title": "Dia da semana" },
+      { "field": "NOMEMES", "type": "nominal", "title": "Mês" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
+    ]
+  },
+  "config": {
+    "view": { "stroke": "transparent" },
+    "axis": { "grid": false }
+  }
+}

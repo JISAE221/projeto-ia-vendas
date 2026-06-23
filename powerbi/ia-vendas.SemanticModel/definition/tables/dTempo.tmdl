@@ -3,12 +3,14 @@ table dTempo
 
 	column DATA
 		dataType: dateTime
-		formatString: General Date
+		formatString: Long Date
 		lineageTag: 0ab60e74-67dd-480b-a4ec-4a326d1f7a03
 		summarizeBy: none
 		sourceColumn: DATA
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column DIA
 		dataType: int64
@@ -114,3 +116,4 @@ table dTempo
 	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navegação
+

@@ -26,3 +26,7 @@ relationship 61e8a361-fd9d-4665-3fd0-646fa99b0be6
 	fromColumn: fVendas.IDCLIENTE
 	toColumn: dCliente.IDCLIENTE
 
+relationship b3a7c521-de04-4f8e-9c12-f0e3d8a1bc45
+	fromColumn: fVendas.IDTEMPO
+	toColumn: dTempo.DATA
+
