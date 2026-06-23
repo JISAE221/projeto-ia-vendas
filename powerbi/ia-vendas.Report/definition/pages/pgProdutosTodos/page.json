@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "pgProdutos",
-  "displayName": "Produtos",
+  "name": "pgProdutosTodos",
+  "displayName": "Todos os Produtos",
   "displayOption": "FitToWidth",
-  "height": 960,
+  "height": 720,
   "width": 1280
 }

@@ -22,6 +22,8 @@ ref table dVendedor
 ref table fVendas
 ref table _Medidas
 ref table dTempo
+ref table 'Ordenar Clientes'
+ref table 'Ordenar Produtos'
 
 ref cultureInfo pt-BR
 

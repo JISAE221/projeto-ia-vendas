@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "kpi2",
+  "name": "tbl",
   "position": {
-    "x": 648.46337151867147,
-    "y": 113.24268436447387,
-    "z": 5000,
-    "height": 140.65933426324125,
-    "width": 299.1990923735047,
-    "tabOrder": 5000
+    "x": 8.3441977952770223,
+    "y": 108.47457133860129,
+    "z": 1000,
+    "height": 596.014128234073,
+    "width": 1263.5499518562349,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "HTML Card Margem Media"
+                  "Property": "HTML Catalogo Produtos"
                 }
               },
-              "queryRef": "_Medidas.HTML Card Margem Media",
-              "nativeQueryRef": "HTML Card Margem Media"
+              "queryRef": "_Medidas.HTML Catalogo Produtos",
+              "nativeQueryRef": "HTML Catalogo Produtos"
             }
           ]
         }

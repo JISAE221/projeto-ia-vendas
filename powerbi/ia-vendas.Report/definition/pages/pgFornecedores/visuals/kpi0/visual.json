@@ -1,19 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kpi0",
   "position": {
-    "x": 216,
-    "y": 20,
-    "z": 0,
-    "width": 250,
-    "height": 104,
-    "tabOrder": 0
+    "x": 15.4963673340859,
+    "y": 103.70645831272871,
+    "z": 7000,
+    "height": 141.8513625197094,
+    "width": 300.39112062997282,
+    "tabOrder": 7000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Qtd Fornecedores"
+                  "Property": "HTML Card Total Fornecedores"
                 }
               },
-              "queryRef": "_Medidas.Qtd Fornecedores",
-              "nativeQueryRef": "Qtd Fornecedores"
+              "queryRef": "_Medidas.HTML Card Total Fornecedores",
+              "nativeQueryRef": "HTML Card Total Fornecedores"
             }
           ]
         }

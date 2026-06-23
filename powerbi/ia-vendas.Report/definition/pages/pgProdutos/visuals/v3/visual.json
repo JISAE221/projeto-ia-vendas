@@ -2,60 +2,32 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "v3",
   "position": {
-    "x": 216,
-    "y": 424,
-    "z": 7000,
-    "height": 270,
-    "width": 517,
-    "tabOrder": 7000
+    "x": 16,
+    "y": 536,
+    "z": 11000,
+    "height": 400,
+    "width": 1248,
+    "tabOrder": 11000
   },
   "visual": {
-    "visualType": "tableEx",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dProduto"
-                    }
-                  },
-                  "Property": "NOME"
-                }
-              },
-              "queryRef": "dProduto.NOME",
-              "nativeQueryRef": "NOME"
-            },
-            {
-              "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Total Receita"
+                  "Property": "HTML Top Produtos"
                 }
               },
-              "queryRef": "_Medidas.Total Receita",
-              "nativeQueryRef": "Total Receita"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Medidas"
-                    }
-                  },
-                  "Property": "Total Quantidade"
-                }
-              },
-              "queryRef": "_Medidas.Total Quantidade",
-              "nativeQueryRef": "Total Quantidade"
+              "queryRef": "_Medidas.HTML Top Produtos",
+              "nativeQueryRef": "HTML Top Produtos"
             }
           ]
         }

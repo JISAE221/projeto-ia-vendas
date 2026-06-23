@@ -2,18 +2,18 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kpi1",
   "position": {
-    "x": 480,
-    "y": 20,
-    "z": 2000,
-    "height": 104,
-    "width": 250,
-    "tabOrder": 2000
+    "x": 332.57588355461274,
+    "y": 103.70645831272871,
+    "z": 6000,
+    "height": 141.8513625197094,
+    "width": 299.1990923735047,
+    "tabOrder": 6000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Total Custo"
+                  "Property": "HTML Card Fornecedores Ativos"
                 }
               },
-              "queryRef": "_Medidas.Total Custo",
-              "nativeQueryRef": "Total Custo"
+              "queryRef": "_Medidas.HTML Card Fornecedores Ativos",
+              "nativeQueryRef": "HTML Card Fornecedores Ativos"
             }
           ]
         }

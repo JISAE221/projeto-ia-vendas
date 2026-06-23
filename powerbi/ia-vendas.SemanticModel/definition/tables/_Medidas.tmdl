@@ -245,19 +245,27 @@ table _Medidas
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000076
 
 	measure 'HTML Todos Clientes' =
+			VAR _ord = SELECTEDVALUE('Ordenar Clientes'[Opção], "Receita (maior)")
 			VAR _base =
 				ADDCOLUMNS(
 					SUMMARIZE(dCliente, dCliente[NOME], dCliente[CIDADE], dCliente[ESTADO], dCliente[REGIAO]),
 					"@rec", [Total Receita], "@ped", [Nº de Pedidos], "@tk", [Ticket Médio]
 				)
-			VAR _rk = ADDCOLUMNS(_base, "@rk", RANKX(_base, [@rec], , DESC, DENSE))
+			VAR _sorted =
+				ADDCOLUMNS(_base, "@sk",
+					SWITCH(_ord,
+						"Nome (A-Z)", RANKX(_base, dCliente[NOME], , ASC, DENSE),
+						"Pedidos (maior)", RANKX(_base, [@ped], , DESC, DENSE),
+						"Ticket (maior)", RANKX(_base, [@tk], , DESC, DENSE),
+						RANKX(_base, [@rec], , DESC, DENSE)
+					))
 			VAR _th = "<th style='position:sticky;top:0;background:#14142A;text-align:left;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
 			VAR _thn = "<th style='position:sticky;top:0;background:#14142A;text-align:right;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
 			VAR _rows =
 				CONCATENATEX(
-					_rk,
+					_sorted,
 					"<tr style='border-top:1px solid #16162A'><td style='padding:7px 10px;white-space:nowrap'><span style='display:inline-block;min-width:22px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:rgba(139,92,246,0.15);color:#A78BFA;font-size:10.5px;font-weight:700;margin-right:8px;padding:0 4px'>"
-					& [@rk] & "</span><span style='color:#E5E7EB;font-size:12px'>" & dCliente[NOME]
+					& [@sk] & "</span><span style='color:#E5E7EB;font-size:12px'>" & dCliente[NOME]
 					& "</span></td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[CIDADE]
 					& "</td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[ESTADO]
 					& "</td><td style='padding:7px 10px;color:#7A7A98;font-size:11.5px'>" & dCliente[REGIAO]
@@ -266,14 +274,162 @@ table _Medidas
 					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT([@tk], "#,0")
 					& "</td><td style='padding:7px 10px;text-align:right'><span style='display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.12);color:#34D399;font-size:10.5px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Ativo</span></td></tr>",
 					"",
-					[@rec], DESC
+					[@sk], ASC
 				)
 			RETURN
-				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:16px;font-weight:600;color:#fff'>Todos os Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>" & FORMAT([Total Clientes], "#,0") & " clientes · ordenados por receita</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:16px;font-weight:600;color:#fff'>Todos os Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>" & FORMAT([Total Clientes], "#,0") & " clientes · ordenado por " & _ord & "</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
 				& _th & "Cliente</th>" & _th & "Cidade</th>" & _th & "Estado</th>" & _th & "Região</th>"
 				& _thn & "Pedidos</th>" & _thn & "Receita</th>" & _thn & "Ticket</th>" & _thn & "Status</th></tr></thead><tbody>"
 				& _rows & "</tbody></table></div></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000077
+
+	measure 'Total Produtos' = COUNTROWS(dProduto)
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000080
+
+	measure Categorias = COUNTROWS(dCategoria)
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000081
+
+	measure 'HTML Card Total Produtos' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Total Produtos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/><polyline points='3.27 6.96 12 12.01 20.73 6.96'/><line x1='12' y1='22.08' x2='12' y2='12'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Total Produtos], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>no catálogo</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000082
+
+	measure 'HTML Card Categorias' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Categorias</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Categorias], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>categorias ativas</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000083
+
+	measure 'HTML Card Margem Media' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Margem Média</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='19' y1='5' x2='5' y2='19'/><circle cx='6.5' cy='6.5' r='2.5'/><circle cx='17.5' cy='17.5' r='2.5'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Margem %], "0.0%") & "</div><div style='font-size:11.5px;color:#34D399;margin-top:8px'>margem bruta geral</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000084
+
+	measure 'HTML Card Qtd Vendida' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Qtd. Total Vendida</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='20' x2='12' y2='10'/><line x1='18' y1='20' x2='18' y2='4'/><line x1='6' y1='20' x2='6' y2='16'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Total Quantidade], "#,0") & " un</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>unidades vendidas</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000085
+
+	measure 'HTML Top Produtos' =
+			VAR _base =
+				ADDCOLUMNS(
+					TOPN(8, SUMMARIZE(dProduto, dProduto[IDPRODUTO], dProduto[NOME], dCategoria[NOME], dProduto[CUSTO_MEDIO], dProduto[VALOR_UNITARIO]), [Total Receita], DESC),
+					"@rec", [Total Receita], "@qtd", [Total Quantidade], "@marg", [Margem %]
+				)
+			VAR _rk = ADDCOLUMNS(_base, "@rk", RANKX(_base, [@rec], , DESC, DENSE))
+			VAR _th = "<th style='text-align:left;padding:7px 9px;color:#6B6B85;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>"
+			VAR _thn = "<th style='text-align:right;padding:7px 9px;color:#6B6B85;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>"
+			VAR _rows =
+				CONCATENATEX(
+					_rk,
+					VAR _m = [@marg]
+					VAR _c = IF(_m >= 0.30, "#34D399", IF(_m >= 0.15, "#F59E0B", "#F87171"))
+					VAR _b = IF(_m >= 0.30, "rgba(52,211,153,0.14)", IF(_m >= 0.15, "rgba(245,158,11,0.14)", "rgba(248,113,113,0.14)"))
+					RETURN "<tr style='border-top:1px solid #16162A'><td style='padding:7px 9px;white-space:nowrap'><span style='display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:rgba(139,92,246,0.15);color:#A78BFA;font-size:10.5px;font-weight:700;margin-right:8px'>" & [@rk] & "</span><span style='color:#E5E7EB;font-size:12px'>" & dProduto[NOME]
+					& "</span></td><td style='padding:7px 9px;color:#9A9AB5;font-size:11.5px'>" & dCategoria[NOME]
+					& "</td><td style='padding:7px 9px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT(dProduto[CUSTO_MEDIO], "#,0")
+					& "</td><td style='padding:7px 9px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT(dProduto[VALOR_UNITARIO], "#,0")
+					& "</td><td style='padding:7px 9px;text-align:right'><span style='border:1px solid " & _c & ";color:" & _c & ";background:" & _b & ";border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600'>" & FORMAT(_m, "0.0%") & "</span></td><td style='padding:7px 9px;text-align:right;color:#C8C8DC;font-size:11.5px'>" & FORMAT([@qtd], "#,0")
+					& "</td><td style='padding:7px 9px;text-align:right;color:#fff;font-size:12px;font-weight:600'>R$ " & FORMAT([@rec], "#,0") & "</td></tr>",
+					"",
+					[@rec], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px'><div style='font-size:15px;font-weight:600;color:#fff'>Catálogo de Produtos</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>Top 8 · maiores receitas</div><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Produto</th>" & _th & "Categoria</th>" & _thn & "Custo</th>" & _thn & "Valor</th>" & _thn & "Margem</th>" & _thn & "Qtd</th>" & _thn & "Receita</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000086
+
+	measure 'HTML Catalogo Produtos' =
+			VAR _ord = SELECTEDVALUE('Ordenar Produtos'[Opção], "Receita (maior)")
+			VAR _base =
+				ADDCOLUMNS(
+					SUMMARIZE(dProduto, dProduto[IDPRODUTO], dProduto[NOME], dCategoria[NOME], dProduto[CUSTO_MEDIO], dProduto[VALOR_UNITARIO]),
+					"@rec", [Total Receita], "@qtd", [Total Quantidade], "@marg", [Margem %]
+				)
+			VAR _sorted =
+				ADDCOLUMNS(_base, "@sk",
+					SWITCH(_ord,
+						"Nome (A-Z)", RANKX(_base, dProduto[NOME], , ASC, DENSE),
+						"Qtd (maior)", RANKX(_base, [@qtd], , DESC, DENSE),
+						"Margem (maior)", RANKX(_base, [@marg], , DESC, DENSE),
+						RANKX(_base, [@rec], , DESC, DENSE)
+					))
+			VAR _th = "<th style='position:sticky;top:0;background:#14142A;text-align:left;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _thn = "<th style='position:sticky;top:0;background:#14142A;text-align:right;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _rows =
+				CONCATENATEX(
+					_sorted,
+					VAR _m = [@marg]
+					VAR _c = IF(_m >= 0.30, "#34D399", IF(_m >= 0.15, "#F59E0B", "#F87171"))
+					VAR _b = IF(_m >= 0.30, "rgba(52,211,153,0.14)", IF(_m >= 0.15, "rgba(245,158,11,0.14)", "rgba(248,113,113,0.14)"))
+					RETURN "<tr style='border-top:1px solid #16162A'><td style='padding:7px 10px;color:#E5E7EB;font-size:12px'>" & dProduto[NOME]
+					& "</td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & dCategoria[NOME]
+					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT(dProduto[CUSTO_MEDIO], "#,0.00")
+					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT(dProduto[VALOR_UNITARIO], "#,0.00")
+					& "</td><td style='padding:7px 10px;text-align:right'><span style='border:1px solid " & _c & ";color:" & _c & ";background:" & _b & ";border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600'>" & FORMAT(_m, "0.0%") & "</span></td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>" & FORMAT([@qtd], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right;color:#fff;font-size:12px;font-weight:600'>R$ " & FORMAT([@rec], "#,0") & "</td></tr>",
+					"",
+					[@sk], ASC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:16px;font-weight:600;color:#fff'>Todos os Produtos</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>" & FORMAT([Total Produtos], "#,0") & " produtos · ordenado por " & _ord & "</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Produto</th>" & _th & "Categoria</th>" & _thn & "Custo Médio</th>" & _thn & "Valor Unit.</th>" & _thn & "Margem</th>" & _thn & "Qtd. Vendida</th>" & _thn & "Receita</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000086B
+
+	measure 'Total Fornecedores' = COUNTROWS(dFornecedor)
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000090
+
+	measure 'Fornecedores Ativos' = CALCULATE(COUNTROWS(dFornecedor), FILTER(dFornecedor, ISBLANK(dFornecedor[FIM])))
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000091
+
+	measure 'Fornecedores Inativos' = CALCULATE(COUNTROWS(dFornecedor), FILTER(dFornecedor, NOT ISBLANK(dFornecedor[FIM])))
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000092
+
+	measure 'Produtos Fornecidos' = DISTINCTCOUNT(fVendas[IDPRODUTO])
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000093
+
+	measure 'HTML Card Total Fornecedores' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Total Fornecedores</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='1' y='3' width='15' height='13'/><polygon points='16 8 20 8 23 11 23 16 16 16 16 8'/><circle cx='5.5' cy='18.5' r='2.5'/><circle cx='18.5' cy='18.5' r='2.5'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Total Fornecedores], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>cadastrados</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000094
+
+	measure 'HTML Card Fornecedores Ativos' =
+			VAR _pct = FORMAT(DIVIDE([Fornecedores Ativos], [Total Fornecedores]), "0%")
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Ativos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/><polyline points='22 4 12 14.01 9 11.01'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Fornecedores Ativos], "#,0") & "</div><div style='font-size:11.5px;color:#34D399;margin-top:8px'>" & _pct & " ativos</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000095
+
+	measure 'HTML Card Fornecedores Inativos' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Inativos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='15' y1='9' x2='9' y2='15'/><line x1='9' y1='9' x2='15' y2='15'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Fornecedores Inativos], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>contratos encerrados</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000096
+
+	measure 'HTML Card Produtos Fornecidos' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Produtos Fornecidos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/><polyline points='3.27 6.96 12 12.01 20.73 6.96'/><line x1='12' y1='22.08' x2='12' y2='12'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Produtos Fornecidos], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>itens distintos</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000097
+
+	measure 'HTML Cadastro Fornecedores' =
+			VAR _base =
+				ADDCOLUMNS(
+					SUMMARIZE(dFornecedor, dFornecedor[IDFORNECEDOR], dFornecedor[NOME], dFornecedor[INICIO], dFornecedor[FIM]),
+					"@prod", CALCULATE(DISTINCTCOUNT(fVendas[IDPRODUTO])), "@custo", [Total Custo]
+				)
+			VAR _th = "<th style='position:sticky;top:0;background:#14142A;text-align:left;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _thn = "<th style='position:sticky;top:0;background:#14142A;text-align:right;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _rows =
+				CONCATENATEX(
+					_base,
+					VAR _fim = dFornecedor[FIM]
+					VAR _ativo = ISBLANK(_fim)
+					VAR _fimTxt = IF(_ativo, "—", FORMAT(_fim, "dd/mm/yyyy"))
+					VAR _badge = IF(_ativo, "<span style='display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.12);color:#34D399;font-size:10.5px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Ativo</span>", "<span style='display:inline-flex;align-items:center;gap:5px;background:rgba(120,120,140,0.15);color:#9A9AB5;font-size:10.5px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#9A9AB5;display:inline-block'></span>Inativo</span>")
+					RETURN "<tr style='border-top:1px solid #16162A'><td style='padding:7px 10px;color:#E5E7EB;font-size:12px'>" & dFornecedor[NOME]
+					& "</td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & FORMAT(dFornecedor[INICIO], "dd/mm/yyyy")
+					& "</td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & _fimTxt
+					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>" & FORMAT([@prod], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right;color:#fff;font-size:12px;font-weight:600'>R$ " & FORMAT([@custo], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right'>" & _badge & "</td></tr>",
+					"",
+					[@custo], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:15px;font-weight:600;color:#fff'>Cadastro de Fornecedores</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>" & FORMAT([Total Fornecedores], "#,0") & " fornecedores · ordenados por custo fornecido</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Fornecedor</th>" & _th & "Início Contrato</th>" & _th & "Fim Contrato</th>" & _thn & "Produtos</th>" & _thn & "Custo Fornecido</th>" & _thn & "Status</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000098
 
 	column Coluna
 		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0

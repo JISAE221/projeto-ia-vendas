@@ -2,18 +2,18 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kpi1",
   "position": {
-    "x": 480,
-    "y": 20,
-    "z": 2000,
-    "height": 104,
-    "width": 250,
-    "tabOrder": 2000
+    "x": 332.57588355461274,
+    "y": 113.24268436447387,
+    "z": 6000,
+    "height": 140.65933426324125,
+    "width": 299.1990923735047,
+    "tabOrder": 6000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Total Quantidade"
+                  "Property": "HTML Card Categorias"
                 }
               },
-              "queryRef": "_Medidas.Total Quantidade",
-              "nativeQueryRef": "Total Quantidade"
+              "queryRef": "_Medidas.HTML Card Categorias",
+              "nativeQueryRef": "HTML Card Categorias"
             }
           ]
         }

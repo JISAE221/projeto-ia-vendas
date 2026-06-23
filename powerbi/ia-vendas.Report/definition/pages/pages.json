@@ -6,9 +6,10 @@
     "pgClientes",
     "pgClientesTodos",
     "pgProdutos",
+    "pgProdutosTodos",
     "pgFornecedores",
     "pgRegioes",
     "pgVendas"
   ],
-  "activePageName": "pgClientesTodos"
+  "activePageName": "pgFornecedores"
 }

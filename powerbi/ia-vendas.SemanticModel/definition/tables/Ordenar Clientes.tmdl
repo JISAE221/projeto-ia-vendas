@@ -1,0 +1,27 @@
+table 'Ordenar Clientes'
+	lineageTag: b2b2b2b2-0000-4000-8000-000000000001
+
+	column Opção
+		dataType: string
+		lineageTag: b2b2b2b2-0000-4000-8000-000000000002
+		summarizeBy: none
+		sourceColumn: [Opção]
+		sortByColumn: Ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: b2b2b2b2-0000-4000-8000-000000000003
+		summarizeBy: none
+		sourceColumn: [Ordem]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Ordenar Clientes' = calculated
+		mode: import
+		source = DATATABLE("Opção", STRING, "Ordem", INTEGER, {{"Receita (maior)", 1}, {"Nome (A-Z)", 2}, {"Pedidos (maior)", 3}, {"Ticket (maior)", 4}})
+
+	annotation PBI_Id = b2b2b2b20001
+
