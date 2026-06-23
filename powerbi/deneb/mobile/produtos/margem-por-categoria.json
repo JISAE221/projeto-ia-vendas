@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Margem % por Categoria (barra horizontal + média). Bind: NOME = dCategoria[NOME], Margem % = medida [Margem %] (decimal 0..1). Versão celular: barras horizontais (melhor p/ tile estreito), regra de média vertical, fontes reduzidas.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Margem por Categoria",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 5, "height": { "band": 0.7 }, "tooltip": true },
+      "encoding": {
+        "y": { "field": "NOME", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5", "labelLimit": 90, "labelFontSize": 9 } },
+        "x": { "field": "Margem %", "type": "quantitative", "axis": { "title": null, "format": ".0%", "grid": true, "labelFontSize": 9 } },
+        "color": { "field": "Margem %", "type": "quantitative", "legend": null, "scale": { "range": ["#EF4444", "#F59E0B", "#10B981"] } },
+        "tooltip": [
+          { "field": "NOME", "type": "nominal", "title": "Categoria" },
+          { "field": "Margem %", "type": "quantitative", "title": "Margem", "format": ".1%" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "rule", "color": "#A78BFA", "strokeDash": [4, 4], "size": 1.5 },
+      "encoding": { "x": { "field": "Margem %", "type": "quantitative", "aggregate": "mean" } }
+    }
+  ],
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Receita x Custo x Lucro no tempo (multi-série). Bind: DATA = dTempo[DATA]; medidas [Total Receita], [Total Custo], [Lucro Bruto] como colunas. ATENÇÃO: depende de dTempo. Versão celular: legenda embaixo compacta, menos ticks, pontos menores, fontes reduzidas.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Receita · Custo · Lucro",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "transform": [
+    { "fold": ["Total Receita", "Total Custo", "Lucro Bruto"], "as": ["Métrica", "Valor"] }
+  ],
+  "mark": { "type": "line", "strokeWidth": 2, "point": { "filled": true, "size": 16 }, "tooltip": true },
+  "encoding": {
+    "x": { "field": "DATA", "type": "temporal", "axis": { "title": null, "format": "%d/%m", "labelColor": "#B0B0CC", "grid": false, "labelFontSize": 9, "tickCount": 4, "labelOverlap": true } },
+    "y": { "field": "Valor", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } },
+    "color": {
+      "field": "Métrica",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Total Receita", "Total Custo", "Lucro Bruto"],
+        "range": ["#8B5CF6", "#F59E0B", "#10B981"]
+      },
+      "legend": { "title": null, "orient": "bottom", "direction": "horizontal", "labelColor": "#B0B0CC", "labelFont": "Inter, Segoe UI", "labelFontSize": 8, "symbolSize": 60 }
+    },
+    "tooltip": [
+      { "field": "DATA", "type": "temporal", "title": "Data", "format": "%d/%m/%Y" },
+      { "field": "Métrica", "type": "nominal" },
+      { "field": "Valor", "type": "quantitative", "title": "Valor", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" }
+  }
+}

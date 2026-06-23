@@ -39,7 +39,20 @@
   .sidebar:hover .nav-item .lbl,.sidebar.open .nav-item .lbl{opacity:1;width:auto}
   .nav-item:hover{background:rgba(255,255,255,0.06);color:var(--txt)}
   .nav-item.active{background:var(--accent-soft);color:#fff}
-  .nav-item.active svg{stroke:#A78BFA}</style></head><body><div class="frame"><iframe src="https://app.powerbi.com/view?r=eyJrIjoiYjI3NDU1ZDMtZGU0ZC00YmFkLTkxOGUtMTViY2IxNjFiZGJkIiwidCI6ImRhZGFhOGQzLTIxYWEtNGRjNS05ODBlLTFiZjI0ZWY5Yzc0OCJ9&navContentPaneEnabled=false&filterPaneEnabled=false&pageName=pgClientes" allowfullscreen title="Clientes"></iframe></div><header class="topbar"><h1>Clientes</h1><span class="crumb">- Análise da base de clientes</span></header>  <aside class="sidebar" id="sb">
+  .nav-item.active svg{stroke:#A78BFA}
+  /* ===== Mobile (mesmo tema do dash) ===== */
+  @media (max-width:768px){
+    .sidebar{top:auto;left:8px;right:8px;bottom:8px;width:auto !important;height:60px;flex-direction:row;align-items:center !important;justify-content:space-around;padding:6px 6px !important;gap:2px;border-radius:16px;cursor:default}
+    .sidebar:hover,.sidebar.open{width:auto !important;align-items:center;padding:6px 6px}
+    .logo,.sep{display:none !important}
+    .nav-item{width:auto !important;flex:1;height:46px;justify-content:center !important;gap:0 !important;padding:0 !important;margin:0 !important}
+    .sidebar:hover .nav-item,.sidebar.open .nav-item{width:auto;justify-content:center;gap:0;padding:0;margin:0}
+    .nav-item .lbl,.sidebar:hover .nav-item .lbl{display:none}
+    .topbar{left:8px;right:8px;top:8px;height:48px;padding:0 16px}
+    .topbar h1{font-size:15px}
+    .topbar .crumb{display:none}
+    .frame{top:64px;left:8px;right:8px;bottom:8px}
+  }</style></head><body><div class="frame"><iframe src="https://app.powerbi.com/view?r=eyJrIjoiYjI3NDU1ZDMtZGU0ZC00YmFkLTkxOGUtMTViY2IxNjFiZGJkIiwidCI6ImRhZGFhOGQzLTIxYWEtNGRjNS05ODBlLTFiZjI0ZWY5Yzc0OCJ9&navContentPaneEnabled=false&filterPaneEnabled=false&pageName=pgClientes" allowfullscreen title="Clientes"></iframe></div><header class="topbar"><h1>Clientes</h1><span class="crumb">- Análise da base de clientes</span></header>  <aside class="sidebar" id="sb">
     <div class="logo"><div class="mark"><span></span><span></span><span></span></div><div class="name">IA Vendas</div></div>
     <div class="sep"></div>
     <a class="nav-item" href="Conservador.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><span class="lbl">Visão Geral</span></a>

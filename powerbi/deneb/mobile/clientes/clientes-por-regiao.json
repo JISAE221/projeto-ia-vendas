@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Clientes por Região (barra vertical). Bind: REGIAO = dCliente[REGIAO], Total Receita = medida [Total Receita]. Versão para layout de celular do Power BI (tile estreito): fontes reduzidas, rótulo de valor na barra, sem título de eixo.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Clientes por Região",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 5, "tooltip": true },
+      "encoding": {
+        "color": {
+          "field": "REGIAO",
+          "type": "nominal",
+          "legend": null,
+          "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B"] }
+        }
+      }
+    },
+    {
+      "mark": { "type": "text", "align": "center", "baseline": "bottom", "dy": -3, "fill": "#E8E8F5", "font": "Inter, Segoe UI", "fontSize": 9 },
+      "encoding": { "text": { "field": "Total Receita", "type": "quantitative", "format": "~s" } }
+    }
+  ],
+  "encoding": {
+    "x": { "field": "REGIAO", "type": "nominal", "sort": "-y", "axis": { "title": null, "labelAngle": 0, "labelColor": "#B0B0CC", "labelFontSize": 9 } },
+    "y": { "field": "Total Receita", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } },
+    "tooltip": [
+      { "field": "REGIAO", "type": "nominal", "title": "Região" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" },
+    "axisX": { "grid": false }
+  }
+}

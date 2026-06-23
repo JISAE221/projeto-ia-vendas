@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Ranking de Vendedores (barra horizontal com rótulo). Bind: NOME = dVendedor[NOME], Total Receita = medida [Total Receita], Rank Vendedor = medida [Rank Vendedor]. Versão celular: Top 8, rótulo reduzido, sem título de eixo X.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Ranking de Vendedores",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "transform": [
+    { "filter": "datum['Rank Vendedor'] <= 8" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 5, "height": { "band": 0.72 }, "tooltip": true },
+      "encoding": {
+        "color": { "field": "Total Receita", "type": "quantitative", "legend": null, "scale": { "range": ["#7C3AED", "#8B5CF6", "#A78BFA"] } }
+      }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "dx": 5, "fill": "#E8E8F5", "font": "Inter, Segoe UI", "fontSize": 9 },
+      "encoding": { "text": { "field": "Total Receita", "type": "quantitative", "format": "~s" } }
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "NOME",
+      "type": "nominal",
+      "sort": { "field": "Rank Vendedor", "order": "ascending" },
+      "axis": { "title": null, "labelColor": "#E8E8F5", "labelLimit": 90, "labelFontSize": 9 }
+    },
+    "x": { "field": "Total Receita", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } },
+    "tooltip": [
+      { "field": "Rank Vendedor", "type": "quantitative", "title": "Posição" },
+      { "field": "NOME", "type": "nominal", "title": "Vendedor" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

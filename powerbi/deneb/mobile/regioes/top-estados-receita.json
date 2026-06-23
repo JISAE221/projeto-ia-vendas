@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Top 8 Estados por Receita (barra horizontal). Bind: ESTADO = dCliente[ESTADO], REGIAO = dCliente[REGIAO], Total Receita = medida [Total Receita]. Versão celular: Top 8, legenda embaixo compacta, fontes reduzidas.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Top 8 Estados",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "transform": [
+    { "window": [{ "op": "rank", "as": "rank" }], "sort": [{ "field": "Total Receita", "order": "descending" }] },
+    { "filter": "datum.rank <= 8" }
+  ],
+  "mark": { "type": "bar", "cornerRadiusEnd": 4, "height": { "band": 0.75 }, "tooltip": true },
+  "encoding": {
+    "y": { "field": "ESTADO", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5", "labelFontSize": 9 } },
+    "x": { "field": "Total Receita", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } },
+    "color": {
+      "field": "REGIAO",
+      "type": "nominal",
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B"] },
+      "legend": { "title": null, "orient": "bottom", "direction": "horizontal", "labelColor": "#B0B0CC", "labelFont": "Inter, Segoe UI", "labelFontSize": 8, "symbolSize": 60 }
+    },
+    "tooltip": [
+      { "field": "ESTADO", "type": "nominal", "title": "Estado" },
+      { "field": "REGIAO", "type": "nominal", "title": "Região" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

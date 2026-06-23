@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Receita ao longo do tempo (linha + área). Bind: DATA = dTempo[DATA], Total Receita = medida [Total Receita]. ATENÇÃO: depende da dimensão dTempo. Versão celular: menos ticks no eixo X, pontos menores, fontes reduzidas, sem título de eixo.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Receita no Período",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "encoding": {
+    "x": { "field": "DATA", "type": "temporal", "axis": { "title": null, "format": "%d/%m", "labelColor": "#B0B0CC", "grid": false, "labelFontSize": 9, "tickCount": 4, "labelOverlap": true } },
+    "y": { "field": "Total Receita", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "line": { "color": "#8B5CF6", "strokeWidth": 2 },
+        "color": {
+          "x1": 1, "y1": 1, "x2": 1, "y2": 0,
+          "gradient": "linear",
+          "stops": [
+            { "offset": 0, "color": "#8B5CF600" },
+            { "offset": 1, "color": "#8B5CF659" }
+          ]
+        }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "color": "#A78BFA", "size": 18, "tooltip": true },
+      "encoding": {
+        "tooltip": [
+          { "field": "DATA", "type": "temporal", "title": "Data", "format": "%d/%m/%Y" },
+          { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" }
+  }
+}

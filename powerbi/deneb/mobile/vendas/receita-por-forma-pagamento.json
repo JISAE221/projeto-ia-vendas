@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "MOBILE — Receita por Forma de Pagamento (barra horizontal). Bind: FORMA = dForma[FORMA], Total Receita = medida [Total Receita]. Versão celular: rótulo reduzido, sem título de eixo X.",
+  "data": { "name": "dataset" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Receita por Forma de Pgto",
+    "anchor": "start",
+    "color": "#FFFFFF",
+    "font": "Space Grotesk, Segoe UI",
+    "fontSize": 12,
+    "fontWeight": 600
+  },
+  "mark": { "type": "bar", "cornerRadiusEnd": 5, "height": { "band": 0.72 }, "tooltip": true },
+  "encoding": {
+    "y": { "field": "FORMA", "type": "nominal", "sort": "-x", "axis": { "title": null, "labelColor": "#E8E8F5", "labelLimit": 95, "labelFontSize": 9 } },
+    "x": { "field": "Total Receita", "type": "quantitative", "axis": { "title": null, "format": "~s", "grid": true, "labelFontSize": 9 } },
+    "color": {
+      "field": "FORMA",
+      "type": "nominal",
+      "legend": null,
+      "scale": { "range": ["#8B5CF6", "#A78BFA", "#3B82F6", "#10B981", "#F59E0B", "#EC4899", "#06B6D4"] }
+    },
+    "tooltip": [
+      { "field": "FORMA", "type": "nominal", "title": "Forma de Pagamento" },
+      { "field": "Total Receita", "type": "quantitative", "title": "Receita", "format": "$,.2f" }
+    ]
+  },
+  "config": {
+    "background": "#0E0E21",
+    "font": "Inter, Segoe UI, sans-serif",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#B0B0CC", "titleColor": "#70709A", "gridColor": "#FFFFFF0D", "domainColor": "#FFFFFF14", "tickColor": "#FFFFFF14", "labelFont": "Inter, Segoe UI" },
+    "axisY": { "domain": false, "ticks": false }
+  }
+}

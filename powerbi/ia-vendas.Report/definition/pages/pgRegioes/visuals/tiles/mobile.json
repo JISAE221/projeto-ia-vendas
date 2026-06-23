@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.5.0/schema.json",
   "position": {
     "x": 0,
-    "y": 3070,
-    "z": 12000,
-    "height": 132.85880077369438,
-    "width": 323.99999999999994,
-    "tabOrder": 12000
+    "y": 98,
+    "z": 9000,
+    "height": 445,
+    "width": 324,
+    "tabOrder": 9000
   },
   "objects": {
     "vega": [],
@@ -16,7 +16,7 @@
           "viewportHeight": {
             "expr": {
               "Literal": {
-                "Value": "123D"
+                "Value": "435D"
               }
             }
           },
@@ -30,7 +30,6 @@
         }
       }
     ],
-    "developer": [],
-    "editor": []
+    "developer": []
   }
 }
