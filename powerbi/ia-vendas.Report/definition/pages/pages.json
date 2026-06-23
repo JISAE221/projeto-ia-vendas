@@ -4,10 +4,11 @@
     "pgAbertura",
     "5df053b61d7155cc80c0",
     "pgClientes",
+    "pgClientesTodos",
     "pgProdutos",
     "pgFornecedores",
     "pgRegioes",
     "pgVendas"
   ],
-  "activePageName": "5df053b61d7155cc80c0"
+  "activePageName": "pgClientesTodos"
 }

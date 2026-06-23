@@ -2,18 +2,18 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kpi2",
   "position": {
-    "x": 744,
-    "y": 20,
-    "z": 3000,
-    "height": 104,
-    "width": 250,
-    "tabOrder": 3000
+    "x": 648.14814814814815,
+    "y": 103.7037037037037,
+    "z": 5000,
+    "height": 138.27160493827159,
+    "width": 300,
+    "tabOrder": 5000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Margem %"
+                  "Property": "HTML Card Clientes Unicos"
                 }
               },
-              "queryRef": "_Medidas.Margem %",
-              "nativeQueryRef": "Margem %"
+              "queryRef": "_Medidas.HTML Card Clientes Unicos",
+              "nativeQueryRef": "HTML Card Clientes Unicos"
             }
           ]
         }

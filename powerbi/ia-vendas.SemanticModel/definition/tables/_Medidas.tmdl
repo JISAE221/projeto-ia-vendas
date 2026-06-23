@@ -179,6 +179,102 @@ table _Medidas
 				& _rows & "</tbody></table></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000060
 
+	measure 'Total Clientes' = COUNTROWS(dCliente)
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000070
+
+	measure 'Clientes Ativos' = CALCULATE(COUNTROWS(dCliente), FILTER(dCliente, ISBLANK(dCliente[FIM])))
+		formatString: #,0
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000071
+
+	measure 'HTML Card Total Clientes' =
+			VAR _v = FORMAT([Total Clientes], "#,0")
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Total Clientes</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M22 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & _v & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>base completa</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000072
+
+	measure 'HTML Card Clientes Ativos' =
+			VAR _v = FORMAT([Clientes Ativos], "#,0")
+			VAR _pct = FORMAT(DIVIDE([Clientes Ativos], [Total Clientes]), "0%")
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Clientes Ativos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='8.5' cy='7' r='4'/><polyline points='17 11 19 13 23 9'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & _v & "</div><div style='font-size:11.5px;color:#34D399;margin-top:8px'>" & _pct & " ativos</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000073
+
+	measure 'HTML Card Clientes Unicos' =
+			VAR _v = FORMAT([Clientes Únicos], "#,0")
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Clientes Únicos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='4' y1='9' x2='20' y2='9'/><line x1='4' y1='15' x2='20' y2='15'/><line x1='10' y1='3' x2='8' y2='21'/><line x1='16' y1='3' x2='14' y2='21'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & _v & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>clientes únicos</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000074
+
+	measure 'HTML Card Ticket Cliente' =
+			VAR _v = "R$ " & FORMAT([Ticket Médio], "#,0.00")
+			VAR _var = [Ticket Var %]
+			VAR _up = COALESCE(_var, 0) >= 0
+			VAR _cor = IF(ISBLANK(_var), "#6B6B85", IF(_up, "#34D399", "#F87171"))
+			VAR _seta = IF(ISBLANK(_var), "", IF(_up, UNICHAR(9650) & " ", UNICHAR(9660) & " "))
+			VAR _pct = IF(ISBLANK(_var), "ticket médio geral", (IF(_up, "+", "") & FORMAT(_var, "0.0%") & " vs mês ant."))
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Ticket Médio</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z'/><path d='M16 8h-6'/><path d='M16 12h-6'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & _v & "</div><div style='font-size:11.5px;color:" & _cor & ";margin-top:8px'>" & _seta & _pct & "</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000075
+
+	measure 'HTML Top Clientes Detalhado' =
+			VAR _base =
+				ADDCOLUMNS(
+					TOPN(8, SUMMARIZE(dCliente, dCliente[NOME], dCliente[CIDADE], dCliente[ESTADO], dCliente[REGIAO]), [Total Receita], DESC),
+					"@rec", [Total Receita], "@ped", [Nº de Pedidos], "@tk", [Ticket Médio]
+				)
+			VAR _rk = ADDCOLUMNS(_base, "@rk", RANKX(_base, [@rec], , DESC, DENSE))
+			VAR _th = "<th style='text-align:left;padding:7px 10px;color:#6B6B85;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>"
+			VAR _thn = "<th style='text-align:right;padding:7px 10px;color:#6B6B85;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>"
+			VAR _rows =
+				CONCATENATEX(
+					_rk,
+					"<tr style='border-top:1px solid #16162A'><td style='padding:8px 10px;white-space:nowrap'><span style='display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:rgba(139,92,246,0.15);color:#A78BFA;font-size:10.5px;font-weight:700;margin-right:8px'>"
+					& [@rk] & "</span><span style='color:#E5E7EB;font-size:12px'>" & dCliente[NOME]
+					& "</span></td><td style='padding:8px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[CIDADE]
+					& "</td><td style='padding:8px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[ESTADO]
+					& "</td><td style='padding:8px 10px;color:#7A7A98;font-size:11.5px'>" & dCliente[REGIAO]
+					& "</td><td style='padding:8px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>" & FORMAT([@ped], "#,0")
+					& "</td><td style='padding:8px 10px;text-align:right;color:#fff;font-size:12px;font-weight:600'>R$ " & FORMAT([@rec], "#,0")
+					& "</td><td style='padding:8px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT([@tk], "#,0")
+					& "</td><td style='padding:8px 10px;text-align:right'><span style='display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.12);color:#34D399;font-size:10.5px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Ativo</span></td></tr>",
+					"",
+					[@rec], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px'><div style='font-size:15px;font-weight:600;color:#fff'>Top Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>Maiores receitas · detalhado</div><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Cliente</th>" & _th & "Cidade</th>" & _th & "Estado</th>" & _th & "Região</th>"
+				& _thn & "Pedidos</th>" & _thn & "Receita</th>" & _thn & "Ticket</th>" & _thn & "Status</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000076
+
+	measure 'HTML Todos Clientes' =
+			VAR _base =
+				ADDCOLUMNS(
+					SUMMARIZE(dCliente, dCliente[NOME], dCliente[CIDADE], dCliente[ESTADO], dCliente[REGIAO]),
+					"@rec", [Total Receita], "@ped", [Nº de Pedidos], "@tk", [Ticket Médio]
+				)
+			VAR _rk = ADDCOLUMNS(_base, "@rk", RANKX(_base, [@rec], , DESC, DENSE))
+			VAR _th = "<th style='position:sticky;top:0;background:#14142A;text-align:left;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _thn = "<th style='position:sticky;top:0;background:#14142A;text-align:right;padding:8px 10px;color:#8A8AA8;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;z-index:1'>"
+			VAR _rows =
+				CONCATENATEX(
+					_rk,
+					"<tr style='border-top:1px solid #16162A'><td style='padding:7px 10px;white-space:nowrap'><span style='display:inline-block;min-width:22px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:rgba(139,92,246,0.15);color:#A78BFA;font-size:10.5px;font-weight:700;margin-right:8px;padding:0 4px'>"
+					& [@rk] & "</span><span style='color:#E5E7EB;font-size:12px'>" & dCliente[NOME]
+					& "</span></td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[CIDADE]
+					& "</td><td style='padding:7px 10px;color:#9A9AB5;font-size:11.5px'>" & dCliente[ESTADO]
+					& "</td><td style='padding:7px 10px;color:#7A7A98;font-size:11.5px'>" & dCliente[REGIAO]
+					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>" & FORMAT([@ped], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right;color:#fff;font-size:12px;font-weight:600'>R$ " & FORMAT([@rec], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right;color:#C8C8DC;font-size:11.5px'>R$ " & FORMAT([@tk], "#,0")
+					& "</td><td style='padding:7px 10px;text-align:right'><span style='display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.12);color:#34D399;font-size:10.5px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Ativo</span></td></tr>",
+					"",
+					[@rec], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:16px;font-weight:600;color:#fff'>Todos os Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>" & FORMAT([Total Clientes], "#,0") & " clientes · ordenados por receita</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Cliente</th>" & _th & "Cidade</th>" & _th & "Estado</th>" & _th & "Região</th>"
+				& _thn & "Pedidos</th>" & _thn & "Receita</th>" & _thn & "Ticket</th>" & _thn & "Status</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000077
+
 	column Coluna
 		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0
 		summarizeBy: none

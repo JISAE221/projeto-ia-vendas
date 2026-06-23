@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Distribuição por Sexo — dCliente[SEXO] + _Medidas[Total Clientes]. Cores: maior fatia roxa.",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "transform": [
+    { "joinaggregate": [{ "op": "sum", "field": "Total Clientes", "as": "tot" }] },
+    { "calculate": "datum['Total Clientes'] / datum.tot", "as": "pct" }
+  ],
+  "title": {
+    "text": "Distribuição por Sexo",
+    "subtitle": "Participação da base de clientes",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "encoding": {
+    "theta": { "field": "Total Clientes", "type": "quantitative", "stack": true },
+    "order": { "field": "Total Clientes", "sort": "descending" },
+    "color": {
+      "field": "SEXO",
+      "type": "nominal",
+      "sort": { "field": "Total Clientes", "order": "descending" },
+      "scale": { "range": ["#8B5CF6", "#EC4899"] },
+      "legend": {
+        "orient": "right",
+        "title": null,
+        "labelColor": "#c8c8dc",
+        "labelFontSize": 12,
+        "symbolType": "circle"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "arc", "innerRadius": 52, "outerRadius": 82, "stroke": "#0E0E20", "strokeWidth": 2, "cursor": "pointer" },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["SEXO"], "clear": "dblclick" } }
+      ],
+      "encoding": {
+        "tooltip": [
+          { "field": "SEXO", "type": "nominal", "title": "Sexo" },
+          { "field": "Total Clientes", "type": "quantitative", "title": "Clientes", "format": ",.0f" },
+          { "field": "pct", "type": "quantitative", "title": "Participação", "format": ".1%" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "text", "radius": 102, "fontSize": 13, "fontWeight": 700, "fill": "#ffffff" },
+      "encoding": { "text": { "field": "pct", "type": "quantitative", "format": ".0%" } }
+    }
+  ],
+  "config": { "view": { "stroke": "transparent" } }
+}

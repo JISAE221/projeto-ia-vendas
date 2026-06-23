@@ -1,19 +1,19 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kpi0",
   "position": {
-    "x": 216,
-    "y": 20,
-    "z": 0,
-    "width": 250,
-    "height": 104,
-    "tabOrder": 0
+    "x": 16.049382716049383,
+    "y": 103.7037037037037,
+    "z": 7000,
+    "height": 138.27160493827159,
+    "width": 300,
+    "tabOrder": 7000
   },
   "visual": {
-    "visualType": "card",
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
     "query": {
       "queryState": {
-        "Values": {
+        "content": {
           "projections": [
             {
               "field": {
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "Clientes Únicos"
+                  "Property": "HTML Card Total Clientes"
                 }
               },
-              "queryRef": "_Medidas.Clientes Únicos",
-              "nativeQueryRef": "Clientes Únicos"
+              "queryRef": "_Medidas.HTML Card Total Clientes",
+              "nativeQueryRef": "HTML Card Total Clientes"
             }
           ]
         }
