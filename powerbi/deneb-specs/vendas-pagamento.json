@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Forma de Pagamento (Top 5) — dForma[FORMA] + _Medidas[Total Receita]",
+  "data": { "name": "dataset" },
+  "background": "transparent",
+  "title": {
+    "text": "Forma de Pagamento",
+    "subtitle": "Top 5 · participação na receita",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "hconcat": [
+    {
+      "width": 150,
+      "height": 168,
+      "transform": [
+        { "joinaggregate": [{ "op": "sum", "field": "Total Receita", "as": "tot" }] },
+        { "window": [{ "op": "rank", "as": "rnk" }], "sort": [{ "field": "Total Receita", "order": "descending" }] },
+        { "filter": "datum.rnk <= 5" },
+        { "calculate": "datum['Total Receita'] / datum.tot", "as": "pct" }
+      ],
+      "mark": { "type": "arc", "innerRadius": 48, "outerRadius": 78, "stroke": "#0E0E20", "strokeWidth": 2, "cursor": "pointer" },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["FORMA"], "clear": "dblclick" } }
+      ],
+      "encoding": {
+        "theta": { "field": "Total Receita", "type": "quantitative", "stack": true },
+        "order": { "field": "Total Receita", "sort": "descending" },
+        "color": {
+          "field": "FORMA",
+          "type": "nominal",
+          "sort": { "field": "Total Receita", "order": "descending" },
+          "scale": { "range": ["#8B5CF6", "#EC4899", "#22D3EE", "#34D399", "#F59E0B"] },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "FORMA", "type": "nominal", "title": "Pagamento" },
+          { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" },
+          { "field": "pct", "type": "quantitative", "title": "Participação", "format": ".1%" }
+        ]
+      }
+    },
+    {
+      "width": 230,
+      "transform": [
+        { "joinaggregate": [{ "op": "sum", "field": "Total Receita", "as": "tot" }] },
+        { "window": [{ "op": "rank", "as": "rnk" }], "sort": [{ "field": "Total Receita", "order": "descending" }] },
+        { "filter": "datum.rnk <= 5" },
+        { "calculate": "datum['Total Receita'] / datum.tot", "as": "pct" },
+        { "calculate": "'R$ ' + format(datum['Total Receita']/1000000, ',.1f') + ' mi  ·  ' + format(datum.pct, '.0%')", "as": "rotulo" }
+      ],
+      "encoding": {
+        "y": { "field": "FORMA", "type": "nominal", "sort": { "field": "Total Receita", "order": "descending" }, "axis": null }
+      },
+      "layer": [
+        {
+          "mark": { "type": "circle", "size": 90 },
+          "encoding": { "x": { "value": 6 }, "color": { "field": "FORMA", "type": "nominal", "sort": { "field": "Total Receita", "order": "descending" }, "scale": { "range": ["#8B5CF6", "#EC4899", "#22D3EE", "#34D399", "#F59E0B"] }, "legend": null } }
+        },
+        {
+          "mark": { "type": "text", "align": "left", "fontSize": 11, "color": "#d2d2e4" },
+          "encoding": { "x": { "value": 18 }, "text": { "field": "FORMA", "type": "nominal" } }
+        },
+        {
+          "mark": { "type": "text", "align": "right", "fontSize": 10.5, "fontWeight": 700, "color": "#ffffff" },
+          "encoding": { "x": { "value": 230 }, "text": { "field": "rotulo", "type": "nominal" } }
+        }
+      ]
+    }
+  ],
+  "resolve": { "scale": { "color": "shared" } },
+  "config": { "view": { "stroke": "transparent" } }
+}

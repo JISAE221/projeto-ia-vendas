@@ -474,6 +474,50 @@ table _Medidas
 				& _rows & "</tbody></table></div></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-0000000000A1
 
+	measure 'HTML Card Total Notas' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Total de Notas</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='16' y1='13' x2='8' y2='13'/><line x1='16' y1='17' x2='8' y2='17'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & FORMAT([Nº de Pedidos], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>notas fiscais emitidas</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-0000000000B0
+
+	measure 'HTML Card Receita Vendas' =
+			VAR _var = [Receita Var %]
+			VAR _up = COALESCE(_var, 0) >= 0
+			VAR _cor = IF(ISBLANK(_var), "#6B6B85", IF(_up, "#34D399", "#F87171"))
+			VAR _seta = IF(ISBLANK(_var), "", IF(_up, UNICHAR(9650) & " ", UNICHAR(9660) & " "))
+			VAR _pct = IF(ISBLANK(_var), "receita total", (IF(_up, "+", "") & FORMAT(_var, "0.0%") & " vs mês ant."))
+			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Receita Total</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2' x2='12' y2='22'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/></svg></div></div><div style='font-size:25px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>R$ " & FORMAT([Total Receita], "#,0") & "</div><div style='font-size:11.5px;color:" & _cor & ";margin-top:8px'>" & _seta & _pct & "</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-0000000000B1
+
+	measure 'HTML Card Lucro Vendas' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Lucro Total</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='22 7 13.5 15.5 8.5 10.5 2 17'/><polyline points='16 7 22 7 22 13'/></svg></div></div><div style='font-size:25px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>R$ " & FORMAT([Lucro Bruto], "#,0") & "</div><div style='font-size:11.5px;color:#34D399;margin-top:8px'>" & FORMAT([Margem %], "0.0%") & " de margem</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-0000000000B2
+
+	measure 'HTML Card Custo Vendas' = "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Custo Total</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='22 17 13.5 8.5 8.5 13.5 2 7'/><polyline points='16 17 22 17 22 11'/></svg></div></div><div style='font-size:25px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>R$ " & FORMAT([Total Custo], "#,0") & "</div><div style='font-size:11.5px;color:#6B6B85;margin-top:8px'>custo das mercadorias</div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-0000000000B3
+
+	measure 'HTML Vendas Recentes' =
+			VAR _top = TOPN(30, fVendas, fVendas[IDTEMPO], DESC)
+			VAR _th = "<th style='position:sticky;top:0;background:#14142A;text-align:left;padding:7px 9px;color:#8A8AA8;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;z-index:1'>"
+			VAR _thn = "<th style='position:sticky;top:0;background:#14142A;text-align:right;padding:7px 9px;color:#8A8AA8;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;z-index:1'>"
+			VAR _rows =
+				CONCATENATEX(
+					_top,
+					"<tr style='border-top:1px solid #16162A'><td style='padding:6px 9px;color:#C8C8DC;font-size:11px;font-weight:600'>" & fVendas[IDNOTA]
+					& "</td><td style='padding:6px 9px;color:#9A9AB5;font-size:11px'>" & FORMAT(fVendas[IDTEMPO], "dd/mm/yy")
+					& "</td><td style='padding:6px 9px;color:#E5E7EB;font-size:11px'>" & RELATED(dCliente[NOME])
+					& "</td><td style='padding:6px 9px;color:#9A9AB5;font-size:11px'>" & RELATED(dVendedor[NOME])
+					& "</td><td style='padding:6px 9px;color:#9A9AB5;font-size:11px'>" & RELATED(dCategoria[NOME])
+					& "</td><td style='padding:6px 9px;color:#9A9AB5;font-size:11px'>" & RELATED(dForma[FORMA])
+					& "</td><td style='padding:6px 9px;text-align:right;color:#C8C8DC;font-size:11px'>" & FORMAT(fVendas[QUANTIDADE], "#,0")
+					& "</td><td style='padding:6px 9px;text-align:right;color:#fff;font-size:11px;font-weight:600'>R$ " & FORMAT(fVendas[TOTAL_ITEM], "#,0")
+					& "</td><td style='padding:6px 9px;text-align:right;color:#34D399;font-size:11px'>R$ " & FORMAT(fVendas[LUCRO_TOTAL], "#,0")
+					& "</td><td style='padding:6px 9px;text-align:right'><span style='display:inline-flex;align-items:center;gap:4px;background:rgba(52,211,153,0.12);color:#34D399;font-size:10px;padding:2px 7px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Concluída</span></td></tr>",
+					"",
+					fVendas[IDTEMPO], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column'><div style='font-size:15px;font-weight:600;color:#fff'>Vendas Recentes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>Últimas 30 transações</div><div style='flex:1;overflow-y:auto'><table style='width:100%;border-collapse:collapse'><thead><tr>"
+				& _th & "Nota</th>" & _th & "Data</th>" & _th & "Cliente</th>" & _th & "Vendedor</th>" & _th & "Categoria</th>" & _th & "Pagamento</th>" & _thn & "Qtd</th>" & _thn & "Total</th>" & _thn & "Lucro</th>" & _thn & "Status</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-0000000000B4
+
 	column Coluna
 		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0
 		summarizeBy: none

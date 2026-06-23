@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Receita por Mês — dTempo[NOMEMES] + dTempo[MES] + _Medidas[Total Receita]",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "title": {
+    "text": "Receita por Mês",
+    "subtitle": "Distribuição da receita no ano",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "NOMEMES",
+      "type": "nominal",
+      "sort": { "field": "MES", "op": "min" },
+      "title": null,
+      "axis": { "labelColor": "#6b7280", "domainColor": "transparent", "tickColor": "transparent", "labelFontSize": 10, "labelAngle": -30 }
+    },
+    "y": {
+      "field": "Total Receita",
+      "type": "quantitative",
+      "title": null,
+      "axis": { "labelColor": "#6b7280", "gridColor": "rgba(255,255,255,0.05)", "domainColor": "transparent", "tickColor": "transparent", "labelFontSize": 10, "format": "~s" }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 5, "width": { "band": 0.62 } },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["NOMEMES"], "clear": "dblclick" } }
+      ],
+      "encoding": {
+        "color": {
+          "field": "Total Receita",
+          "type": "quantitative",
+          "scale": { "range": ["rgba(139,92,246,0.35)", "#8B5CF6"] },
+          "legend": null
+        },
+        "opacity": { "condition": { "param": "sel", "value": 1 }, "value": 0.55 },
+        "tooltip": [
+          { "field": "NOMEMES", "type": "nominal", "title": "Mês" },
+          { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
+        ]
+      }
+    }
+  ],
+  "config": { "view": { "stroke": "transparent" } }
+}

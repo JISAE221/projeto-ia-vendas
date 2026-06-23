@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "fAno",
+  "name": "fMes",
   "position": {
-    "x": 171.65206893141303,
+    "x": 15.4963673340859,
     "y": 15.4963673340859,
-    "z": 15000,
-    "height": 79.865893183365785,
+    "z": 16000,
+    "height": 78.673864926897636,
     "width": 150.19556031498641,
-    "tabOrder": 15000
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "slicer",
@@ -23,11 +23,11 @@
                       "Entity": "dTempo"
                     }
                   },
-                  "Property": "ANO"
+                  "Property": "NOMEMES"
                 }
               },
-              "queryRef": "dTempo.ANO",
-              "nativeQueryRef": "ANO",
+              "queryRef": "dTempo.NOMEMES",
+              "nativeQueryRef": "NOMEMES",
               "active": true
             }
           ]
@@ -61,55 +61,8 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Ano'"
+                  "Value": "'Mês'"
                 }
-              }
-            }
-          }
-        }
-      ],
-      "general": [
-        {
-          "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "d",
-                    "Entity": "dTempo",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "In": {
-                        "Expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "d"
-                                }
-                              },
-                              "Property": "ANO"
-                            }
-                          }
-                        ],
-                        "Values": [
-                          [
-                            {
-                              "Literal": {
-                                "Value": "2014L"
-                              }
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  }
-                ]
               }
             }
           }

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "sbPanel",
+  "name": "kpi3",
   "position": {
-    "x": 0,
-    "y": 0,
-    "z": 1000,
-    "height": 720,
-    "width": 200,
-    "tabOrder": 1000
+    "x": 964.35085948273024,
+    "y": 103.70645831272871,
+    "z": 4000,
+    "height": 138.27527775030495,
+    "width": 299.1990923735047,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "HTML Sidebar"
+                  "Property": "HTML Card Custo Vendas"
                 }
               },
-              "queryRef": "_Medidas.HTML Sidebar",
-              "nativeQueryRef": "HTML Sidebar"
+              "queryRef": "_Medidas.HTML Card Custo Vendas",
+              "nativeQueryRef": "HTML Card Custo Vendas"
             }
           ]
         }
