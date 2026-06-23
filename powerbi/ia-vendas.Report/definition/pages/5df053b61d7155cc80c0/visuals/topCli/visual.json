@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "topCli",
   "position": {
-    "x": 648.46337151867147,
-    "y": 673.49596490450256,
+    "x": 550.71705448828345,
+    "y": 653.23148454454406,
     "z": 13000,
-    "height": 295.62300760410022,
-    "width": 615.08658033756342,
+    "height": 307.54329016878171,
+    "width": 712.83289736795132,
     "tabOrder": 13000
   },
   "visual": {

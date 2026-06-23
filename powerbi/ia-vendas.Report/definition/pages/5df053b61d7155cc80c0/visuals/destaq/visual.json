@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "destaq",
   "position": {
-    "x": 648.46337151867147,
+    "x": 890.44510758170509,
     "y": 975.07911379094355,
     "z": 14000,
     "height": 252.709990371247,
-    "width": 615.08658033756342,
+    "width": 373.10484427452974,
     "tabOrder": 14000
   },
   "visual": {
@@ -154,7 +154,7 @@
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "519D"
+                  "Value": "311D"
                 }
               }
             }

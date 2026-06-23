@@ -6,7 +6,7 @@
     "y": 975.07911379094355,
     "z": 12000,
     "height": 252.709990371247,
-    "width": 616.27860859403154,
+    "width": 866.60454245234223,
     "tabOrder": 12000
   },
   "visual": {
@@ -78,7 +78,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"description\": \"Mapa de Calor Ã¢â‚¬â€ dTempo[DIASEMANA] + dTempo[NOMEMES] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": { \"text\": \"Mapa de Calor · Vendas por Dia\", \"subtitle\": \"Dia da semana x mês\", \"anchor\": \"start\", \"color\": \"#ffffff\", \"fontSize\": 15, \"fontWeight\": 600, \"subtitleColor\": \"#8888A8\", \"subtitleFontSize\": 11, \"subtitlePadding\": 4, \"offset\": 6, \"dx\": 2 },\n  \"mark\": {\n    \"type\": \"rect\",\n    \"cornerRadius\": 3,\n    \"stroke\": \"#09091A\",\n    \"strokeWidth\": 2\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"NOMEMES\",\n      \"type\": \"ordinal\",\n      \"sort\": [\"Janeiro\",\"Fevereiro\",\"MarÃƒÂ§o\",\"Abril\",\"Maio\",\"Junho\",\"Julho\",\"Agosto\",\"Setembro\",\"Outubro\",\"Novembro\",\"Dezembro\"],\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#6b7280\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 11, \"labelAngle\": -30 }\n    },\n    \"y\": {\n      \"field\": \"DIASEMANA\",\n      \"type\": \"ordinal\",\n      \"sort\": [\"Segunda\",\"TerÃƒÂ§a\",\"Quarta\",\"Quinta\",\"Sexta\",\"SÃƒÂ¡bado\",\"Domingo\"],\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#6b7280\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 11 }\n    },\n    \"color\": {\n      \"field\": \"Total Receita\",\n      \"type\": \"quantitative\",\n      \"scale\": { \"range\": [\"rgba(139,92,246,0.06)\", \"rgba(139,92,246,0.25)\", \"rgba(139,92,246,0.50)\", \"rgba(139,92,246,0.75)\", \"#8B5CF6\"] },\n      \"legend\": null\n    },\n    \"tooltip\": [\n      { \"field\": \"DIASEMANA\", \"type\": \"nominal\", \"title\": \"Dia da semana\" },\n      { \"field\": \"NOMEMES\", \"type\": \"nominal\", \"title\": \"MÃƒÂªs\" },\n      { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n    ]\n  },\n  \"config\": {\n    \"view\": { \"stroke\": \"transparent\" },\n    \"axis\": { \"grid\": false }\n  }\n}'"
+                  "Value": "'{\n  \"description\": \"Mapa de Calor — dTempo[DIASEMANA] + dTempo[NOMEMES] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"params\": [\n    { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"DIASEMANA\", \"NOMEMES\"], \"clear\": \"dblclick\" } }\n  ],\n  \"title\": {\n    \"text\": \"Mapa de Calor — Vendas por Dia\",\n    \"subtitle\": \"Dia da semana × mês · intensidade de receita\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"mark\": {\n    \"type\": \"rect\",\n    \"cornerRadius\": 3,\n    \"stroke\": \"#09091A\",\n    \"strokeWidth\": 2\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"NOMEMES\",\n      \"type\": \"ordinal\",\n      \"sort\": [\"Janeiro\",\"Fevereiro\",\"Março\",\"Abril\",\"Maio\",\"Junho\",\"Julho\",\"Agosto\",\"Setembro\",\"Outubro\",\"Novembro\",\"Dezembro\"],\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#6b7280\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 11, \"labelAngle\": -30 }\n    },\n    \"y\": {\n      \"field\": \"DIASEMANA\",\n      \"type\": \"ordinal\",\n      \"sort\": [\"Segunda\",\"Terça\",\"Quarta\",\"Quinta\",\"Sexta\",\"Sábado\",\"Domingo\"],\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#6b7280\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 11 }\n    },\n    \"color\": {\n      \"field\": \"Total Receita\",\n      \"type\": \"quantitative\",\n      \"scale\": { \"range\": [\"rgba(139,92,246,0.06)\", \"rgba(139,92,246,0.25)\", \"rgba(139,92,246,0.50)\", \"rgba(139,92,246,0.75)\", \"#8B5CF6\"] },\n      \"legend\": null\n    },\n    \"tooltip\": [\n      { \"field\": \"DIASEMANA\", \"type\": \"nominal\", \"title\": \"Dia da semana\" },\n      { \"field\": \"NOMEMES\", \"type\": \"nominal\", \"title\": \"Mês\" },\n      { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n    ]\n  },\n  \"config\": {\n    \"view\": { \"stroke\": \"transparent\" },\n    \"axis\": { \"grid\": false }\n  }\n}'"
                 }
               }
             },
@@ -113,7 +113,7 @@
             "enableSelection": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -154,7 +154,7 @@
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "520D"
+                  "Value": "736D"
                 }
               }
             }

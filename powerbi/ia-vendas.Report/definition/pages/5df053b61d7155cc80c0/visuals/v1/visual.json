@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "v1",
   "position": {
-    "x": 15.4963673340859,
-    "y": 354.03239217103942,
+    "x": 15.189873417721518,
+    "y": 262.02531645569621,
     "z": 9000,
-    "height": 319.46357273346314,
-    "width": 616.27860859403154,
+    "height": 260.75949367088606,
+    "width": 706.3291139240506,
     "tabOrder": 9000
   },
   "visual": {
@@ -81,7 +81,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"description\": \"Receita ao Longo do Tempo ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â arraste dTempo[DATA] e _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": { \"text\": \"Receita ao Longo do Tempo\", \"subtitle\": \"Série histórica · R$\", \"anchor\": \"start\", \"color\": \"#ffffff\", \"fontSize\": 15, \"fontWeight\": 600, \"subtitleColor\": \"#8888A8\", \"subtitleFontSize\": 11, \"subtitlePadding\": 4, \"offset\": 6, \"dx\": 2 },\n  \"mark\": {\n    \"type\": \"area\",\n    \"interpolate\": \"monotone\",\n    \"line\": { \"color\": \"#8B5CF6\", \"strokeWidth\": 2 },\n    \"color\": {\n      \"x1\": 1, \"y1\": 0, \"x2\": 1, \"y2\": 1,\n      \"gradient\": \"linear\",\n      \"stops\": [\n        { \"offset\": 0, \"color\": \"rgba(139,92,246,0.35)\" },\n        { \"offset\": 1, \"color\": \"rgba(139,92,246,0.00)\" }\n      ]\n    }\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"DATA\",\n      \"type\": \"temporal\",\n      \"timeUnit\": \"yearmonth\",\n      \"title\": null,\n      \"axis\": {\n        \"labelColor\": \"#6b7280\",\n        \"gridColor\": \"rgba(255,255,255,0.05)\",\n        \"domainColor\": \"transparent\",\n        \"tickColor\": \"transparent\",\n        \"format\": \"%b %Y\",\n        \"labelAngle\": -30,\n        \"labelFontSize\": 11\n      }\n    },\n    \"y\": {\n      \"field\": \"Total Receita\",\n      \"type\": \"quantitative\",\n      \"title\": null,\n      \"axis\": {\n        \"labelColor\": \"#6b7280\",\n        \"gridColor\": \"rgba(255,255,255,0.05)\",\n        \"domainColor\": \"transparent\",\n        \"tickColor\": \"transparent\",\n        \"labelFontSize\": 11,\n        \"format\": \"~s\"\n      }\n    },\n    \"tooltip\": [\n      { \"field\": \"DATA\", \"type\": \"temporal\", \"title\": \"MÃƒÆ’Ã‚Âªs\", \"format\": \"%B %Y\", \"timeUnit\": \"yearmonth\" },\n      { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n    ]\n  },\n  \"config\": {\n    \"view\": { \"stroke\": \"transparent\" }\n  }\n}'"
+                  "Value": "'{\n  \"description\": \"Receita ao Longo do Tempo (últimos 12 meses, rolling) — dTempo[DATA] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"transform\": [\n    { \"timeUnit\": \"yearmonth\", \"field\": \"DATA\", \"as\": \"mes\" },\n    { \"aggregate\": [{ \"op\": \"sum\", \"field\": \"Total Receita\", \"as\": \"receita\" }], \"groupby\": [\"mes\"] },\n    { \"joinaggregate\": [{ \"op\": \"max\", \"field\": \"mes\", \"as\": \"maxMes\" }] },\n    { \"filter\": \"datum.mes >= timeOffset(''month'', datum.maxMes, -11)\" }\n  ],\n  \"title\": {\n    \"text\": \"Receita ao Longo do Tempo\",\n    \"subtitle\": \"Últimos 12 meses · R$\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"mes\",\n      \"type\": \"temporal\",\n      \"title\": null,\n      \"axis\": {\n        \"labelColor\": \"#6b7280\",\n        \"gridColor\": \"rgba(255,255,255,0.05)\",\n        \"domainColor\": \"transparent\",\n        \"tickColor\": \"transparent\",\n        \"format\": \"%b/%y\",\n        \"labelAngle\": -30,\n        \"labelFontSize\": 10,\n        \"tickCount\": \"month\"\n      }\n    },\n    \"y\": {\n      \"field\": \"receita\",\n      \"type\": \"quantitative\",\n      \"title\": null,\n      \"axis\": {\n        \"labelColor\": \"#6b7280\",\n        \"gridColor\": \"rgba(255,255,255,0.05)\",\n        \"domainColor\": \"transparent\",\n        \"tickColor\": \"transparent\",\n        \"labelFontSize\": 11,\n        \"format\": \"~s\"\n      }\n    }\n  },\n  \"layer\": [\n    {\n      \"mark\": {\n        \"type\": \"area\",\n        \"interpolate\": \"monotone\",\n        \"line\": { \"color\": \"#8B5CF6\", \"strokeWidth\": 2 },\n        \"color\": {\n          \"x1\": 1, \"y1\": 0, \"x2\": 1, \"y2\": 1,\n          \"gradient\": \"linear\",\n          \"stops\": [\n            { \"offset\": 0, \"color\": \"rgba(139,92,246,0.35)\" },\n            { \"offset\": 1, \"color\": \"rgba(139,92,246,0.00)\" }\n          ]\n        }\n      }\n    },\n    {\n      \"mark\": {\n        \"type\": \"point\",\n        \"filled\": true,\n        \"color\": \"#8B5CF6\",\n        \"size\": 55,\n        \"stroke\": \"#09091A\",\n        \"strokeWidth\": 1.5\n      },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"mes\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"tooltip\": [\n          { \"field\": \"mes\", \"type\": \"temporal\", \"title\": \"Mês\", \"format\": \"%B %Y\" },\n          { \"field\": \"receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n        ]\n      }\n    }\n  ],\n  \"config\": {\n    \"view\": { \"stroke\": \"transparent\" }\n  }\n}'"
                 }
               }
             },
@@ -116,7 +116,7 @@
             "enableSelection": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -163,14 +163,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "309.46357273346314D"
+                  "Value": "119D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "606.2786085940315D"
+                  "Value": "598D"
                 }
               }
             }

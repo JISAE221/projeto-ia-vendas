@@ -3,10 +3,10 @@
   "name": "v3",
   "position": {
     "x": 15.4963673340859,
-    "y": 673.49596490450256,
+    "y": 653.23148454454406,
     "z": 11000,
-    "height": 295.62300760410022,
-    "width": 616.27860859403154,
+    "height": 307.54329016878171,
+    "width": 526.87648935892059,
     "tabOrder": 11000
   },
   "visual": {
@@ -63,7 +63,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"description\": \"Ranking de Vendedores (Top 6) Ã¢â‚¬â€ dVendedor[NOME] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": { \"text\": \"Ranking de Vendedores\", \"subtitle\": \"Top 6 · Receita\", \"anchor\": \"start\", \"color\": \"#ffffff\", \"fontSize\": 15, \"fontWeight\": 600, \"subtitleColor\": \"#8888A8\", \"subtitleFontSize\": 11, \"subtitlePadding\": 4, \"offset\": 6, \"dx\": 2 },\n  \"transform\": [\n    { \"window\": [{ \"op\": \"rank\", \"as\": \"rnk\" }], \"sort\": [{ \"field\": \"Total Receita\", \"order\": \"descending\" }] },\n    { \"filter\": \"datum.rnk <= 6\" }\n  ],\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"rgba(139,92,246,0.12)\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" }, \"title\": null,\n          \"axis\": { \"labelColor\": \"#e5e7eb\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 12, \"labelLimit\": 180 } },\n        \"x\": { \"aggregate\": \"max\", \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": null,\n          \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" } }\n      }\n    },\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"#8B5CF6\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"tooltip\": [\n          { \"field\": \"NOME\", \"type\": \"nominal\", \"title\": \"Vendedor\" },\n          { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 6, \"color\": \"#9ca3af\", \"fontSize\": 11 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"format\": \",.0f\" }\n      }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
+                  "Value": "'{\n  \"description\": \"Ranking de Vendedores (Top 6) — dVendedor[NOME] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": {\n    \"text\": \"Ranking de Vendedores\",\n    \"subtitle\": \"Top 6 · Receita\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"transform\": [\n    { \"window\": [{ \"op\": \"rank\", \"as\": \"rnk\" }], \"sort\": [{ \"field\": \"Total Receita\", \"order\": \"descending\" }] },\n    { \"filter\": \"datum.rnk <= 6\" }\n  ],\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"rgba(139,92,246,0.12)\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" }, \"title\": null,\n          \"axis\": { \"labelColor\": \"#e5e7eb\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 12, \"labelLimit\": 180 } },\n        \"x\": { \"aggregate\": \"max\", \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": null,\n          \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" } }\n      }\n    },\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"#8B5CF6\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"NOME\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"tooltip\": [\n          { \"field\": \"NOME\", \"type\": \"nominal\", \"title\": \"Vendedor\" },\n          { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 6, \"color\": \"#9ca3af\", \"fontSize\": 11 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"format\": \",.0f\" }\n      }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
                 }
               }
             },
@@ -98,7 +98,7 @@
             "enableSelection": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
@@ -145,14 +145,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "136D"
+                  "Value": "141D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "520D"
+                  "Value": "443D"
                 }
               }
             }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kReceita",
   "position": {
-    "x": 15.4963673340859,
-    "y": 196.68466231724412,
+    "x": 14.864864864864865,
+    "y": 106.75675675675676,
     "z": 7000,
-    "height": 137.0832494938368,
-    "width": 300.39112062997282,
+    "height": 137.83783783783784,
+    "width": 301.35135135135135,
     "tabOrder": 7000
   },
   "visual": {

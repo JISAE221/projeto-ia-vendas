@@ -390,8 +390,45 @@ Ferramentas e padrões adotados:
 
 ### Estado atual
 
-- Página **Visão Geral** reconstruída: 6 slicers (Ano, Mês, Vendedor, Região, Categoria, Pagamento), 4 cards de KPI com tendência, e 6 visuais (Receita ao longo do tempo, Vendas por região, Ranking de vendedores, Top clientes, Mapa de calor, Destaques).
-- Pendências (a fazer no Power BI Desktop): modais "ver todos" e filtro flutuante (via *bookmarks* + botões); replicar o padrão nas demais páginas.
+- Página **Visão Geral** reconstruída: slicers, 4 cards de KPI com tendência, e 6 visuais (Receita ao longo do tempo, Vendas por região, Ranking de vendedores, Top clientes, Mapa de calor, Destaques).
+- Pendências: o cross-filter por clique, o ajuste dos filtros e a entrega da página seguem na atualização de 23/06.
+
+---
+
+# Atualização — 23 de junho de 2026
+
+**Responsável:** Daniel (Tech Lead)
+
+## Entrega da primeira página (Visão Geral) — desafios superados
+
+Hoje finalizei e **entreguei a primeira página do dashboard — a Visão Geral** — já com a aparência fiel ao design do grupo e com os dados reais do Power BI. O caminho até aqui teve vários desafios técnicos que vale registrar:
+
+### Reconstrução fiel dos visuais
+
+Refiz cada visual da Visão Geral espelhando o design de referência (a tela "Conservador"):
+
+- **Cards de KPI** com ícone, valor e variação **"% vs mês anterior"** (seta verde/vermelha), via HTML Content + medidas de *time-intelligence*.
+- **Receita ao longo do tempo**: ajustei para mostrar os **últimos 12 meses (móvel)**, com pontos em cada mês; recalcula sozinho conforme o filtro.
+- **Vendas por região**: comecei como um mosaico de tamanho fixo (que eu havia *hard-coded*), mas percebi que o ideal era um **treemap de verdade** — onde o tamanho de cada região é proporcional à receita. Refiz em **Vega** (o Vega-Lite não tem treemap nativo), eliminando o *hard-code* de posição.
+- **Top Clientes**: troquei o gráfico de barras por uma **tabela** (rank, região, pedidos, receita, status), idêntica ao design, gerada por DAX (`TOPN` + `CONCATENATEX`).
+- **Ranking de Vendedores** (Top 6), **Mapa de Calor** (dia × mês, com *tooltip*) e **Destaques**.
+
+### Filtros no estilo do design
+
+Reorganizei a experiência de filtros para ficar fiel ao original e mais limpa:
+
+- Mantive apenas os **filtros de Mês e Ano** no topo, como *pills* (dropdown estilizado).
+- Os demais filtros viraram **filtro cruzado por clique** (*cross-filter*): clicar no Ranking (vendedor), no Mapa de Calor (dia/mês) ou na Receita (mês) filtra a página inteira. Filtros de Categoria e Pagamento passam a viver nas páginas de Produtos e Vendas, respectivamente, onde fazem mais sentido.
+
+### Dificuldades técnicas (e limitações honestas)
+
+- **Cross-filter no Deneb:** funciona bem nos visuais **Vega-Lite** (Ranking, Mapa, Receita). Para o **treemap (Vega)**, o filtro por clique **não funcionou** — a identidade do registro não sobrevive ao *transform* do treemap. Decidimos manter o treemap apenas como visualização (sem clique), para não atrasar a entrega.
+- **Limitação do HTML Content:** os cards de KPI e a tabela de Top Clientes são visuais de exibição e **não suportam** filtro cruzado.
+- **Erro de carregamento do projeto (TMDL):** ao remover uma medida, uma quebra de indentação (um *tab* perdido em `_Medidas.tmdl`) fez o Power BI recusar abrir o projeto inteiro. Identificamos e corrigimos a indentação; o `.pbip` voltou a abrir normalmente.
+
+### Resultado
+
+A **Visão Geral está entregue e funcional** — design fiel, dados reais, KPIs com tendência, filtros por Mês/Ano e interatividade por clique nos gráficos. As demais páginas (Clientes, Produtos, Fornecedores, Regiões, Vendas) seguem o mesmo padrão e serão construídas na sequência. Itens opcionais como modais "ver todos" e painel de filtros flutuante ficam como evolução futura.
 
 ---
 

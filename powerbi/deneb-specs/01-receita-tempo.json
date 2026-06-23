@@ -79,6 +79,9 @@
         "stroke": "#09091A",
         "strokeWidth": 1.5
       },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["mes"], "clear": "dblclick" } }
+      ],
       "encoding": {
         "tooltip": [
           { "field": "mes", "type": "temporal", "title": "Mês", "format": "%B %Y" },

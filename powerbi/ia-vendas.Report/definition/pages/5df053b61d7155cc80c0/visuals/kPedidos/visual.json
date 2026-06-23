@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "kPedidos",
   "position": {
-    "x": 957.19868994392129,
-    "y": 196.68466231724412,
+    "x": 954.05405405405406,
+    "y": 106.75675675675676,
     "z": 6000,
-    "height": 137.0832494938368,
-    "width": 299.1990923735047,
+    "height": 137.83783783783784,
+    "width": 300,
     "tabOrder": 6000
   },
   "visual": {

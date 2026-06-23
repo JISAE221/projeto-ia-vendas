@@ -34,6 +34,9 @@
     },
     {
       "mark": { "type": "bar", "color": "#8B5CF6", "cornerRadiusEnd": 6, "height": 10 },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["NOME"], "clear": "dblclick" } }
+      ],
       "encoding": {
         "y": { "field": "NOME", "type": "nominal", "sort": { "field": "Total Receita", "order": "descending" } },
         "x": { "field": "Total Receita", "type": "quantitative" },

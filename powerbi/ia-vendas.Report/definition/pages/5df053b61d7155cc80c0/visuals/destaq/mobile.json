@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.5.0/schema.json",
+  "position": {
+    "x": 0,
+    "y": 3211,
+    "z": 14000,
+    "height": 133.11627906976744,
+    "width": 324,
+    "tabOrder": 14000
+  },
+  "objects": {
+    "vega": [],
+    "stateManagement": [
+      {
+        "properties": {
+          "viewportHeight": {
+            "expr": {
+              "Literal": {
+                "Value": "123D"
+              }
+            }
+          },
+          "viewportWidth": {
+            "expr": {
+              "Literal": {
+                "Value": "314D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "editor": [],
+    "developer": []
+  }
+}

@@ -5,6 +5,9 @@
   "width": "container",
   "height": "container",
   "background": "transparent",
+  "params": [
+    { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["DIASEMANA", "NOMEMES"], "clear": "dblclick" } }
+  ],
   "title": {
     "text": "Mapa de Calor — Vendas por Dia",
     "subtitle": "Dia da semana × mês · intensidade de receita",

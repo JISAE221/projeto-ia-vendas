@@ -6,7 +6,15 @@
   "autosize": { "type": "none", "contains": "padding" },
   "signals": [
     { "name": "titleH", "value": 48 },
-    { "name": "total", "update": "length(data('totais')) > 0 ? data('totais')[0].sm : 1" }
+    { "name": "total", "update": "length(data('totais')) > 0 ? data('totais')[0].sm : 1" },
+    {
+      "name": "crossFilter",
+      "value": null,
+      "on": [
+        { "events": "rect:click", "update": "pbiCrossFilterApply(event, datum)" },
+        { "events": "dblclick", "update": "pbiCrossFilterClear()" }
+      ]
+    }
   ],
   "data": [
     { "name": "dataset" },
@@ -76,7 +84,8 @@
           "fill": { "value": "#8B5CF6" },
           "stroke": { "value": "#0E0E20" },
           "strokeWidth": { "value": 3 },
-          "cornerRadius": { "value": 8 }
+          "cornerRadius": { "value": 8 },
+          "cursor": { "value": "pointer" }
         },
         "update": {
           "x": { "field": "x0" },
