@@ -87,6 +87,22 @@ table dCliente
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Estado Nome' =
+			SWITCH(dCliente[ESTADO],
+				"AC", "Acre", "AL", "Alagoas", "AP", "Amapá", "AM", "Amazonas", "BA", "Bahia",
+				"CE", "Ceará", "DF", "Distrito Federal", "ES", "Espírito Santo", "GO", "Goiás",
+				"MA", "Maranhão", "MT", "Mato Grosso", "MS", "Mato Grosso do Sul", "MG", "Minas Gerais",
+				"PA", "Pará", "PB", "Paraíba", "PR", "Paraná", "PE", "Pernambuco", "PI", "Piauí",
+				"RJ", "Rio de Janeiro", "RN", "Rio Grande do Norte", "RS", "Rio Grande do Sul",
+				"RO", "Rondônia", "RR", "Roraima", "SC", "Santa Catarina", "SP", "São Paulo",
+				"SE", "Sergipe", "TO", "Tocantins", dCliente[ESTADO])
+		dataType: string
+		lineageTag: c1c1c1c1-0000-4000-8000-000000000001
+		dataCategory: StateOrProvince
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dCliente = m
 		mode: import
 		source =

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Cards de Região (clicável, cor fixa por região) — REGIAO + Total Receita + Clientes Únicos + Nº de Pedidos",
+  "data": { "name": "dataset" },
+  "width": "container",
+  "height": "container",
+  "background": "transparent",
+  "transform": [
+    { "joinaggregate": [{ "op": "sum", "field": "Total Receita", "as": "tot" }] },
+    { "calculate": "datum['Total Receita'] / datum.tot", "as": "pct" },
+    { "calculate": "{'NORTE':'#34D399','NORDESTE':'#F59E0B','CENTRO-OESTE':'#22D3EE','SUDESTE':'#8B5CF6','SUL':'#A78BFA'}[datum.REGIAO]", "as": "cor" },
+    { "calculate": "{'NORTE':'Norte','NORDESTE':'Nordeste','CENTRO-OESTE':'Centro-Oeste','SUDESTE':'Sudeste','SUL':'Sul'}[datum.REGIAO]", "as": "nome" },
+    { "calculate": "'R$ ' + format(datum['Total Receita']/1000000, ',.2f') + ' mi'", "as": "valor" },
+    { "calculate": "format(datum['Clientes Únicos'], ',.0f') + ' clientes  ·  ' + format(datum['Nº de Pedidos'], ',.0f') + ' pedidos'", "as": "sub" },
+    { "calculate": "format(datum.pct, '.1%')", "as": "pctTxt" }
+  ],
+  "title": {
+    "text": "Regiões",
+    "subtitle": "Clique numa região para filtrar a página",
+    "anchor": "start",
+    "color": "#ffffff",
+    "fontSize": 15,
+    "fontWeight": 600,
+    "subtitleColor": "#8888A8",
+    "subtitleFontSize": 11,
+    "subtitlePadding": 4,
+    "offset": 6,
+    "dx": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "REGIAO",
+      "type": "nominal",
+      "sort": { "field": "Total Receita", "order": "descending" },
+      "axis": null,
+      "scale": { "paddingInner": 0.28, "paddingOuter": 0.1 }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "rect", "fill": "#15152B", "cornerRadius": 10, "x": 0, "x2": { "expr": "width" }, "height": { "band": 1 } },
+      "params": [
+        { "name": "sel", "select": { "type": "point", "on": "click", "fields": ["REGIAO"], "clear": "dblclick" } }
+      ],
+      "encoding": {
+        "opacity": { "condition": { "param": "sel", "value": 1 }, "value": 0.45 },
+        "tooltip": [
+          { "field": "nome", "type": "nominal", "title": "Região" },
+          { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" },
+          { "field": "pct", "type": "quantitative", "title": "Participação", "format": ".1%" }
+        ]
+      }
+    },
+    {
+      "mark": { "type": "rect", "x": 0, "x2": 4, "height": { "band": 1 }, "cornerRadiusTopLeft": 10, "cornerRadiusBottomLeft": 10 },
+      "encoding": { "color": { "field": "cor", "type": "nominal", "scale": null, "legend": null } }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "x": 16, "dy": -16, "fontSize": 10.5, "color": "#8A8AA8" },
+      "encoding": { "text": { "field": "nome", "type": "nominal" } }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "x": 16, "dy": 3, "fontSize": 17, "fontWeight": 700, "color": "#ffffff" },
+      "encoding": { "text": { "field": "valor", "type": "nominal" } }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "x": 16, "dy": 21, "fontSize": 9.5, "color": "#6B6B85" },
+      "encoding": { "text": { "field": "sub", "type": "nominal" } }
+    },
+    {
+      "mark": { "type": "text", "align": "right", "baseline": "middle", "x": { "expr": "width - 14" }, "fontSize": 13, "fontWeight": 700 },
+      "encoding": { "text": { "field": "pctTxt", "type": "nominal" }, "color": { "field": "cor", "type": "nominal", "scale": null, "legend": null } }
+    }
+  ],
+  "config": { "view": { "stroke": "transparent" } }
+}

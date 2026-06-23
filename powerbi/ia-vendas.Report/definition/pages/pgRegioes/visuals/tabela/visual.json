@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "sbPanel",
+  "name": "tabela",
   "position": {
-    "x": 0,
-    "y": 0,
-    "z": 1000,
-    "height": 720,
-    "width": 200,
-    "tabOrder": 1000
+    "x": 16,
+    "y": 692,
+    "z": 10000,
+    "height": 412,
+    "width": 1248,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
@@ -23,11 +23,11 @@
                       "Entity": "_Medidas"
                     }
                   },
-                  "Property": "HTML Sidebar"
+                  "Property": "HTML Estados Tabela"
                 }
               },
-              "queryRef": "_Medidas.HTML Sidebar",
-              "nativeQueryRef": "HTML Sidebar"
+              "queryRef": "_Medidas.HTML Estados Tabela",
+              "nativeQueryRef": "HTML Estados Tabela"
             }
           ]
         }
