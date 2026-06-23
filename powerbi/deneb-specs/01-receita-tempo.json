@@ -1,13 +1,19 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Receita ao Longo do Tempo — arraste dTempo[DATA] e _Medidas[Total Receita]",
+  "description": "Receita ao Longo do Tempo (últimos 12 meses, rolling) — dTempo[DATA] + _Medidas[Total Receita]",
   "data": { "name": "dataset" },
   "width": "container",
   "height": "container",
   "background": "transparent",
+  "transform": [
+    { "timeUnit": "yearmonth", "field": "DATA", "as": "mes" },
+    { "aggregate": [{ "op": "sum", "field": "Total Receita", "as": "receita" }], "groupby": ["mes"] },
+    { "joinaggregate": [{ "op": "max", "field": "mes", "as": "maxMes" }] },
+    { "filter": "datum.mes >= timeOffset('month', datum.maxMes, -11)" }
+  ],
   "title": {
     "text": "Receita ao Longo do Tempo",
-    "subtitle": "Série histórica · R$",
+    "subtitle": "Últimos 12 meses · R$",
     "anchor": "start",
     "color": "#ffffff",
     "fontSize": 15,
@@ -18,37 +24,24 @@
     "offset": 6,
     "dx": 2
   },
-  "mark": {
-    "type": "area",
-    "interpolate": "monotone",
-    "line": { "color": "#8B5CF6", "strokeWidth": 2 },
-    "color": {
-      "x1": 1, "y1": 0, "x2": 1, "y2": 1,
-      "gradient": "linear",
-      "stops": [
-        { "offset": 0, "color": "rgba(139,92,246,0.35)" },
-        { "offset": 1, "color": "rgba(139,92,246,0.00)" }
-      ]
-    }
-  },
   "encoding": {
     "x": {
-      "field": "DATA",
+      "field": "mes",
       "type": "temporal",
-      "timeUnit": "yearmonth",
       "title": null,
       "axis": {
         "labelColor": "#6b7280",
         "gridColor": "rgba(255,255,255,0.05)",
         "domainColor": "transparent",
         "tickColor": "transparent",
-        "format": "%b %Y",
+        "format": "%b/%y",
         "labelAngle": -30,
-        "labelFontSize": 11
+        "labelFontSize": 10,
+        "tickCount": "month"
       }
     },
     "y": {
-      "field": "Total Receita",
+      "field": "receita",
       "type": "quantitative",
       "title": null,
       "axis": {
@@ -59,12 +52,41 @@
         "labelFontSize": 11,
         "format": "~s"
       }
-    },
-    "tooltip": [
-      { "field": "DATA", "type": "temporal", "title": "Mês", "format": "%B %Y", "timeUnit": "yearmonth" },
-      { "field": "Total Receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
-    ]
+    }
   },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "line": { "color": "#8B5CF6", "strokeWidth": 2 },
+        "color": {
+          "x1": 1, "y1": 0, "x2": 1, "y2": 1,
+          "gradient": "linear",
+          "stops": [
+            { "offset": 0, "color": "rgba(139,92,246,0.35)" },
+            { "offset": 1, "color": "rgba(139,92,246,0.00)" }
+          ]
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#8B5CF6",
+        "size": 55,
+        "stroke": "#09091A",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "tooltip": [
+          { "field": "mes", "type": "temporal", "title": "Mês", "format": "%B %Y" },
+          { "field": "receita", "type": "quantitative", "title": "Receita (R$)", "format": ",.2f" }
+        ]
+      }
+    }
+  ],
   "config": {
     "view": { "stroke": "transparent" }
   }

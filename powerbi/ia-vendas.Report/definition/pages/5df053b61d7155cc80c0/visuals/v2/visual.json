@@ -47,6 +47,24 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dCliente"
+                  }
+                },
+                "Property": "REGIAO"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -56,14 +74,14 @@
             "provider": {
               "expr": {
                 "Literal": {
-                  "Value": "'vegaLite'"
+                  "Value": "'vega'"
                 }
               }
             },
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n\"description\": \"Vendas por RegiÃƒÆ’Ã‚Â£o ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â arraste dCliente[REGIAO] e _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": { \"text\": \"Vendas por Região\", \"subtitle\": \"Participação na receita\", \"anchor\": \"start\", \"color\": \"#ffffff\", \"fontSize\": 15, \"fontWeight\": 600, \"subtitleColor\": \"#8888A8\", \"subtitleFontSize\": 11, \"subtitlePadding\": 4, \"offset\": 6, \"dx\": 2 },\n  \"layer\": [\n    {\n      \"mark\": {\n        \"type\": \"bar\",\n        \"cornerRadius\": 8,\n        \"height\": { \"band\": 0.6 }\n      },\n      \"encoding\": {\n        \"y\": {\n          \"field\": \"REGIAO\",\n          \"type\": \"nominal\",\n          \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" },\n          \"title\": null,\n          \"axis\": {\n            \"labelColor\": \"#e5e7eb\",\n            \"domainColor\": \"transparent\",\n            \"tickColor\": \"transparent\",\n            \"labelFontSize\": 12\n          }\n        },\n        \"x\": {\n          \"field\": \"Total Receita\",\n          \"type\": \"quantitative\",\n          \"title\": null,\n          \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" }\n        },\n        \"color\": {\n          \"field\": \"Total Receita\",\n          \"type\": \"quantitative\",\n          \"scale\": {\n            \"range\": [\"rgba(139,92,246,0.20)\", \"#8B5CF6\"]\n          },\n          \"legend\": null\n        },\n        \"tooltip\": [\n          { \"field\": \"REGIAO\", \"type\": \"nominal\", \"title\": \"RegiÃƒÆ’Ã‚Â£o\" },\n          { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n        ]\n      }\n    },\n    {\n      \"mark\": {\n        \"type\": \"text\",\n        \"align\": \"left\",\n        \"dx\": 6,\n        \"color\": \"#9ca3af\",\n        \"fontSize\": 11\n      },\n      \"encoding\": {\n        \"y\": {\n          \"field\": \"REGIAO\",\n          \"type\": \"nominal\",\n          \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" }\n        },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"format\": \",.0f\" }\n      }\n    }\n  ],\n  \"config\": {\n    \"view\": { \"stroke\": \"transparent\" }\n  }\n}'"
+                  "Value": "'{\n  \"description\": \"Vendas por Região — Treemap real (tamanho ∝ receita). Campos: dCliente[REGIAO] + _Medidas[Total Receita]. PROVIDER: Vega (não Vega-Lite).\",\n  \"background\": \"transparent\",\n  \"padding\": 0,\n  \"autosize\": { \"type\": \"none\", \"contains\": \"padding\" },\n  \"signals\": [\n    { \"name\": \"titleH\", \"value\": 48 },\n    { \"name\": \"total\", \"update\": \"length(data(''totais'')) > 0 ? data(''totais'')[0].sm : 1\" }\n  ],\n  \"data\": [\n    { \"name\": \"dataset\" },\n    {\n      \"name\": \"totais\",\n      \"source\": \"dataset\",\n      \"transform\": [{ \"type\": \"aggregate\", \"fields\": [\"Total Receita\"], \"ops\": [\"sum\"], \"as\": [\"sm\"] }]\n    },\n    {\n      \"name\": \"tree\",\n      \"source\": \"dataset\",\n      \"transform\": [\n        { \"type\": \"nest\", \"keys\": [] },\n        {\n          \"type\": \"treemap\",\n          \"field\": \"Total Receita\",\n          \"sort\": { \"field\": \"value\", \"order\": \"descending\" },\n          \"round\": true,\n          \"method\": \"squarify\",\n          \"ratio\": 1.5,\n          \"paddingInner\": 6,\n          \"size\": [{ \"signal\": \"width\" }, { \"signal\": \"max(height - titleH, 10)\" }]\n        }\n      ]\n    },\n    {\n      \"name\": \"leaves\",\n      \"source\": \"tree\",\n      \"transform\": [{ \"type\": \"filter\", \"expr\": \"datum.depth === 1\" }]\n    }\n  ],\n  \"scales\": [\n    {\n      \"name\": \"op\",\n      \"type\": \"linear\",\n      \"zero\": true,\n      \"domain\": { \"data\": \"leaves\", \"field\": \"Total Receita\" },\n      \"range\": [0.22, 0.9]\n    }\n  ],\n  \"marks\": [\n    {\n      \"type\": \"text\",\n      \"encode\": {\n        \"enter\": {\n          \"x\": { \"value\": 2 }, \"y\": { \"value\": 0 },\n          \"text\": { \"value\": \"Vendas por Região\" },\n          \"fill\": { \"value\": \"#ffffff\" }, \"fontSize\": { \"value\": 15 }, \"fontWeight\": { \"value\": 600 }, \"baseline\": { \"value\": \"top\" }\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"encode\": {\n        \"enter\": {\n          \"x\": { \"value\": 2 }, \"y\": { \"value\": 22 },\n          \"text\": { \"value\": \"Participação na receita\" },\n          \"fill\": { \"value\": \"#8888A8\" }, \"fontSize\": { \"value\": 11 }, \"baseline\": { \"value\": \"top\" }\n        }\n      }\n    },\n    {\n      \"type\": \"rect\",\n      \"from\": { \"data\": \"leaves\" },\n      \"encode\": {\n        \"enter\": {\n          \"fill\": { \"value\": \"#8B5CF6\" },\n          \"stroke\": { \"value\": \"#0E0E20\" },\n          \"strokeWidth\": { \"value\": 3 },\n          \"cornerRadius\": { \"value\": 8 }\n        },\n        \"update\": {\n          \"x\": { \"field\": \"x0\" },\n          \"y\": { \"signal\": \"datum.y0 + titleH\" },\n          \"x2\": { \"field\": \"x1\" },\n          \"y2\": { \"signal\": \"datum.y1 + titleH\" },\n          \"fillOpacity\": { \"scale\": \"op\", \"field\": \"Total Receita\" },\n          \"tooltip\": { \"signal\": \"{''Região'': datum.REGIAO, ''Receita (R$)'': format(datum[''Total Receita''], '',.2f''), ''Participação'': format(datum[''Total Receita'']/total, ''.1%'')}\" }\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"from\": { \"data\": \"leaves\" },\n      \"encode\": {\n        \"enter\": { \"fill\": { \"value\": \"#ffffff\" }, \"fontSize\": { \"value\": 12 }, \"fontWeight\": { \"value\": 600 }, \"baseline\": { \"value\": \"top\" } },\n        \"update\": {\n          \"x\": { \"signal\": \"datum.x0 + 12\" },\n          \"y\": { \"signal\": \"datum.y0 + titleH + 11\" },\n          \"text\": { \"field\": \"REGIAO\" },\n          \"opacity\": { \"signal\": \"(datum.x1 - datum.x0) > 64 && (datum.y1 - datum.y0) > 34 ? 1 : 0\" }\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"from\": { \"data\": \"leaves\" },\n      \"encode\": {\n        \"enter\": { \"fill\": { \"value\": \"#F2EEFE\" }, \"fontSize\": { \"value\": 14 }, \"fontWeight\": { \"value\": 700 }, \"baseline\": { \"value\": \"top\" } },\n        \"update\": {\n          \"x\": { \"signal\": \"datum.x0 + 12\" },\n          \"y\": { \"signal\": \"datum.y0 + titleH + 28\" },\n          \"text\": { \"signal\": \"''R$ '' + format(datum[''Total Receita'']/1000000, '',.1f'') + '' mi''\" },\n          \"opacity\": { \"signal\": \"(datum.x1 - datum.x0) > 70 && (datum.y1 - datum.y0) > 52 ? 1 : 0\" }\n        }\n      }\n    },\n    {\n      \"type\": \"text\",\n      \"from\": { \"data\": \"leaves\" },\n      \"encode\": {\n        \"enter\": { \"fill\": { \"value\": \"#C3B4EE\" }, \"fontSize\": { \"value\": 10.5 }, \"baseline\": { \"value\": \"top\" } },\n        \"update\": {\n          \"x\": { \"signal\": \"datum.x0 + 12\" },\n          \"y\": { \"signal\": \"datum.y0 + titleH + 47\" },\n          \"text\": { \"signal\": \"format(datum[''Total Receita'']/total, ''.1%'')\" },\n          \"opacity\": { \"signal\": \"(datum.x1 - datum.x0) > 70 && (datum.y1 - datum.y0) > 70 ? 1 : 0\" }\n        }\n      }\n    }\n  ]\n}'"
                 }
               }
             },
@@ -119,7 +137,7 @@
             "version": {
               "expr": {
                 "Literal": {
-                  "Value": "'6.4.1'"
+                  "Value": "'6.2.0'"
                 }
               }
             }
@@ -145,27 +163,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "309.46357273346314D"
+                  "Value": "148D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "605.0865803375634D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "developer": [
-        {
-          "properties": {
-            "version": {
-              "expr": {
-                "Literal": {
-                  "Value": "'1.9.1.0'"
+                  "Value": "519D"
                 }
               }
             }

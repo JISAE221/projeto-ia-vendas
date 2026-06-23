@@ -154,6 +154,31 @@ table _Medidas
 			RETURN "<div style='height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px;font-family:sans-serif;display:flex;flex-direction:column;justify-content:space-between'><div style='display:flex;align-items:flex-start;justify-content:space-between'><div style='font-size:12px;color:#8888A8'>Nº de Pedidos</div><div style='width:34px;height:34px;border-radius:9px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center'><svg width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='#8B5CF6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='8' cy='21' r='1'/><circle cx='19' cy='21' r='1'/><path d='M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12'/></svg></div></div><div style='font-size:26px;font-weight:700;color:#fff;line-height:1;margin-top:6px'>" & _v & "</div><div style='font-size:11.5px;color:" & _cor & ";margin-top:8px'>" & _seta & _pct & " <span style='color:#6B6B85'>vs mês anterior</span></div></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000053
 
+	measure 'HTML Top Clientes' =
+			VAR _base =
+				ADDCOLUMNS(
+					TOPN(6, SUMMARIZE(dCliente, dCliente[NOME], dCliente[REGIAO]), [Total Receita], DESC),
+					"@rec", [Total Receita],
+					"@ped", [Nº de Pedidos]
+				)
+			VAR _rk = ADDCOLUMNS(_base, "@rk", RANKX(_base, [@rec], , DESC, DENSE))
+			VAR _rows =
+				CONCATENATEX(
+					_rk,
+					"<tr style='border-top:1px solid #16162A'><td style='padding:9px 8px;white-space:nowrap'><span style='display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:rgba(139,92,246,0.15);color:#A78BFA;font-size:11px;font-weight:700;margin-right:9px'>"
+					& [@rk] & "</span><span style='color:#E5E7EB;font-size:12.5px'>" & dCliente[NOME]
+					& "</span></td><td style='padding:9px 8px;color:#7A7A98;font-size:12px'>" & dCliente[REGIAO]
+					& "</td><td style='padding:9px 8px;text-align:right;color:#C8C8DC;font-size:12px'>" & FORMAT([@ped], "#,0")
+					& "</td><td style='padding:9px 8px;text-align:right;color:#fff;font-size:12.5px;font-weight:600'>R$ " & FORMAT([@rec], "#,0")
+					& "</td><td style='padding:9px 8px;text-align:right'><span style='display:inline-flex;align-items:center;gap:5px;background:rgba(52,211,153,0.12);color:#34D399;font-size:11px;padding:2px 8px;border-radius:20px'><span style='width:5px;height:5px;border-radius:50%;background:#34D399;display:inline-block'></span>Ativo</span></td></tr>",
+					"",
+					[@rec], DESC
+				)
+			RETURN
+				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px'><div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px'><div><div style='font-size:15px;font-weight:600;color:#fff'>Top Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px'>Maiores receitas</div></div></div><table style='width:100%;border-collapse:collapse'><thead><tr><th style='text-align:left;padding:6px 8px;color:#6B6B85;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>Cliente</th><th style='text-align:left;padding:6px 8px;color:#6B6B85;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>Região</th><th style='text-align:right;padding:6px 8px;color:#6B6B85;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>Pedidos</th><th style='text-align:right;padding:6px 8px;color:#6B6B85;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>Receita</th><th style='text-align:right;padding:6px 8px;color:#6B6B85;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em'>Status</th></tr></thead><tbody>"
+				& _rows & "</tbody></table></div>"
+		lineageTag: a1a1a1a1-0000-4000-8000-000000000060
+
 	column Coluna
 		lineageTag: 076459bf-7533-4efa-b92e-4a74f3e4e4e0
 		summarizeBy: none

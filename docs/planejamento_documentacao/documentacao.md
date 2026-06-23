@@ -351,6 +351,50 @@ Soma = SUM(tabela[coluna])
 
 ---
 
+# Atualização — 22 de junho de 2026
+
+**Responsável:** Daniel (Tech Lead)
+
+## Integração do front-end com os dados — dificuldades e decisões
+
+Esta seção registra o processo de unir o design visual (criado em HTML) com os dados reais do Power BI, incluindo os obstáculos enfrentados e as decisões técnicas tomadas.
+
+### Contexto
+
+O grupo havia produzido um conjunto de telas em HTML (pasta `web/`) com um design próprio e bem acabado para os dashboards (sidebar, cabeçalho, cards de KPI, gráficos). A intenção inicial era usar esses HTMLs como camada visual e **plotar os dados reais por cima**, mantendo o design customizado.
+
+### Descoberta: não dá para plotar os dados diretamente nos HTMLs
+
+Ao investigar os arquivos da pasta `web/site/`, descobrimos que **não era viável plotar os dados reais diretamente neles**, pelos seguintes motivos:
+
+- **Os HTMLs são *bundles* compilados (Framer):** cada página tem ~650 KB, com todo o conteúdo (HTML, CSS, fontes) comprimido em *gzip* e embutido em blocos `<script type="__bundler/manifest">`. O design é renderizado em tempo de execução por JavaScript, e os dados exibidos estavam **fixos no código (*hard-coded*)** — não havia ponto de entrada para injetar dados dinâmicos.
+- **O *bundler* recria o DOM ao carregar**, o que descartava qualquer elemento injetado manualmente (ex.: um `<iframe>`), inviabilizando sobrepor conteúdo externo.
+- Uma tentativa de reescrever as telas em **Vega-Lite carregando os `.xlsx` via SheetJS** no navegador funcionou tecnicamente, mas exigia servidor local e duplicava a lógica de modelagem que já existe no Power BI — sem ganho real.
+
+### Decisão: construir os visuais no próprio Power BI com Deneb
+
+Diante disso, decidimos **inverter a abordagem**: em vez de plotar dados sobre o HTML, **reconstruímos o design dentro do Power BI**, para depois publicar e embedar o relatório no site via `iframe`. Assim o dado é 100% Power BI (interativo, filtrável, atualizável) e o visual mantém a identidade do design do grupo.
+
+Ferramentas e padrões adotados:
+
+- **Deneb** (visual customizado de Vega-Lite) para os gráficos com aparência idêntica ao design. Os *specs* ficam versionados em `powerbi/deneb-specs/`.
+- **HTML Content** (visual customizado) para elementos que o Deneb não cobre bem — sidebar, cards de KPI e a tabela de Top Clientes — alimentados por medidas DAX que geram o HTML.
+
+### Dificuldades técnicas encontradas e como resolvemos
+
+- **Codificação de arquivos (UTF-16/BOM):** no Windows, alguns arquivos eram salvos em UTF-16 ou com BOM, quebrando a renderização (README no GitHub, acentos nos `.tmdl`). Padronizamos a gravação em **UTF-8 sem BOM**.
+- **Deneb: *spec* × *template*:** o Deneb diferencia o *spec* puro (Vega-Lite) do *template* (com metadados `usermeta`). Colar o *spec* pela opção *Import* gerava erro "not a valid Deneb template"; o caminho correto é colar no editor de **Specification**.
+- **Vínculo de dados no Deneb:** o *data role* do Deneb chama-se `dataset`; os *specs* usam `"data": { "name": "dataset" }`.
+- **KPIs com tendência ("vs mês anterior"):** o card nativo do Power BI não exibe ícone + variação. Resolvido com **HTML Content + medidas de *time-intelligence*** (`DATEADD(dTempo[DATA], -1, MONTH)`), que só calculam a variação quando exatamente um mês está selecionado — daí a necessidade do **slicer de Mês/Ano** no topo da página.
+- **Layout para embed:** removemos a sidebar interna do relatório (redundante com a navegação do site) e estendemos a página (modo *FitToWidth*) para o relatório rolar como uma página de site dentro do `iframe`.
+
+### Estado atual
+
+- Página **Visão Geral** reconstruída: 6 slicers (Ano, Mês, Vendedor, Região, Categoria, Pagamento), 4 cards de KPI com tendência, e 6 visuais (Receita ao longo do tempo, Vendas por região, Ranking de vendedores, Top clientes, Mapa de calor, Destaques).
+- Pendências (a fazer no Power BI Desktop): modais "ver todos" e filtro flutuante (via *bookmarks* + botões); replicar o padrão nas demais páginas.
+
+---
+
 ### 2.4. Design e Desenvolvimento
 
 > _[Descrever as visualizações criadas e as decisões de design]_
