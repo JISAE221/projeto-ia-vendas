@@ -494,6 +494,69 @@ Após a Visão Geral, repliquei o mesmo padrão (Deneb + HTML Content, *pills* d
 
 ---
 
+# Atualização — 23 de junho de 2026 (responsividade e layout mobile)
+
+**Responsável:** Daniel (Tech Lead)
+
+## Adaptação para celular — site responsivo + páginas mobile no Power BI
+
+Com o dashboard completo e publicado, ataquei a última frente: deixar a experiência **usável no celular**. Esse trabalho tem duas camadas independentes, e entender a diferença entre elas foi metade da batalha.
+
+### Camada 1 — Responsividade do site (HTML)
+
+As páginas em `web/site/` (o *shell* que embeda o Power BI via `iframe`) usavam uma **sidebar lateral que expandia no *hover***. Problema: *hover* não existe em toque, então no celular a navegação ficava inutilizável.
+
+Adicionei um bloco `@media (max-width:768px)` em todas as 7 páginas do dashboard, reaproveitando as mesmas variáveis e o mesmo *glass blur* do tema (não recriei nada):
+
+- A sidebar **vira uma barra inferior horizontal**, acionada por toque (sem depender de *hover*).
+- A barra **flutua por cima do `iframe` com o efeito *glass blur*** (`backdrop-filter`), igual à sidebar expandida no desktop — o frame ocupa a tela inteira e a barra fica sobreposta.
+- *Topbar* compacta, *breadcrumb* oculto e margens reduzidas.
+- Acima de 768px tudo volta ao layout desktop automaticamente. É 100% CSS, sem JS.
+
+### Descoberta: o *embed* "publish to web" ignora o layout de celular do Power BI
+
+Aqui caí numa armadilha que vale registrar. Montei o **Layout para celular** no Power BI Desktop (a visão de telefone, que gera os arquivos `mobile.json` por visual) achando que isso resolveria. Ao testar no site, **o `iframe` continuava mostrando o canvas desktop encolhido**, com um grande espaço morto embaixo.
+
+Motivo: **o *embed* "publish to web" sempre renderiza o canvas desktop.** O layout de telefone que montamos só aparece no **app do Power BI / no Service quando detecta um celular** — nunca no `iframe` público. Ou seja, todo o trabalho de "Layout para celular" não tem efeito no site.
+
+### Decisão: páginas dedicadas em canvas retrato
+
+Para o `iframe` realmente ficar vertical no celular, a saída é ter **páginas cujo canvas já nasce em formato retrato**. Como mudar o canvas das páginas existentes quebraria o desktop, **dupliquei as páginas do menu em versões mobile** (`pg...Mobile`), com canvas estreito (**324 px de largura**, `FitToWidth`, rolando na vertical). Reaproveitei as posições que eu já tinha desenhado no Layout para celular (os `mobile.json`) como base das posições empilhadas dessas páginas.
+
+Páginas mobile criadas:
+
+| Página mobile | Canvas (L×A) | Visuais | Observação |
+|---|---|---|---|
+| `pgVisaoGeralMobile` | 324×2021 | 11 | sem o Deneb `v4` (removido de propósito) |
+| `pgClientesMobile` | 324×1740 | 11 | — |
+| `pgProdutosMobile` | 325×1669 | 11 | — |
+| `pgFornecedoresMobile` | 325×1490 | 9 | — |
+| `pgRegioesMobile` | 324×1772 | 4 | sem o **Azure Map** (não rende bem em telefone) |
+| `pgVendasMobile` | 325×1829 | 11 | — |
+
+A página de **Abertura** ficou de fora do mobile intencionalmente; o relatório abre direto na Visão Geral (`activePageName`), então isso não afeta a navegação.
+
+### *Specs* Deneb em versão mobile
+
+Versionei variantes mobile de todos os gráficos Deneb em `powerbi/deneb/mobile/` (mesmos *binds* e tema, ajustados para *tile* estreito): título menor sem subtítulo, eixos compactos sem rótulo de eixo, Top N reduzido (10→6, 15→8), *donuts* com legenda embaixo e barras antes rotacionadas viradas horizontais. Documentação em `powerbi/deneb/mobile/README.md`.
+
+### Dificuldade técnica — o BOM que travou o projeto (UTF-8)
+
+As páginas mobile foram geradas por *script* (copiar a página, trocar o bloco `position` de cada `visual.json` pela posição do `mobile.json`, ajustar o `page.json` e o `pages.json`). Na primeira tentativa, o Power BI recusou abrir o projeto com **erro de UTF-8**.
+
+Causa: o `Set-Content` do PowerShell 5.1 grava arquivos **com BOM** (marca de ordem de bytes no início). O formato **PBIR exige UTF-8 *sem* BOM**, e como eu também havia regravado o `pages.json` (lido logo na abertura), o BOM ali derrubava o relatório inteiro. Reescrevi tudo usando `.NET WriteAllText` com `UTF8Encoding($false)` (sem BOM) e validei byte a byte. Reforça a padronização de **UTF-8 sem BOM** já registrada na atualização de 22/06.
+
+### Próximo passo
+
+- **Republicar no Fabric** com as 6 páginas mobile.
+- No HTML, adicionar um JS que troca o `pageName` do `iframe` para a versão `...Mobile` quando a tela é ≤768px — assim o `iframe` passa a exibir o canvas retrato de verdade, sem espaço morto. O *embed* só reconhece as páginas mobile **após** a republicação.
+
+### Resultado
+
+Site responsivo (barra inferior *glass*, automática) + 6 páginas mobile em canvas retrato no relatório + *specs* Deneb mobile versionados. Falta apenas republicar e fazer a troca do `pageName` no `iframe` para fechar a experiência mobile ponta a ponta.
+
+---
+
 ### 2.4. Design e Desenvolvimento
 
 > _[Descrever as visualizações criadas e as decisões de design]_

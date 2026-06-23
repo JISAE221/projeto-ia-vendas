@@ -1,16 +1,21 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
   "pageOrder": [
     "pgAbertura",
     "5df053b61d7155cc80c0",
+    "pgVisaoGeralMobile",
     "pgClientes",
     "pgClientesMobile",
     "pgClientesTodos",
     "pgProdutos",
+    "pgProdutosMobile",
     "pgProdutosTodos",
     "pgFornecedores",
+    "pgFornecedoresMobile",
     "pgRegioes",
-    "pgVendas"
+    "pgRegioesMobile",
+    "pgVendas",
+    "pgVendasMobile"
   ],
-  "activePageName": "5df053b61d7155cc80c0"
+  "activePageName": "pgVendasMobile"
 }

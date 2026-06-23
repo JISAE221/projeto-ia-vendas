@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "v1",
   "position": {
@@ -63,7 +63,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"description\": \"Clientes por RegiÃ£o â€” dCliente[REGIAO] + _Medidas[Total Clientes]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"transform\": [\n    { \"joinaggregate\": [{ \"op\": \"sum\", \"field\": \"Total Clientes\", \"as\": \"tot\" }] },\n    { \"calculate\": \"datum[''Total Clientes''] / datum.tot\", \"as\": \"pct\" },\n    { \"calculate\": \"format(datum[''Total Clientes''], '',.0f'') + ''  Â·  '' + format(datum.pct, ''.0%'')\", \"as\": \"rotulo\" }\n  ],\n  \"title\": {\n    \"text\": \"Clientes por RegiÃ£o\",\n    \"subtitle\": \"DistribuiÃ§Ã£o da base\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"REGIAO\",\n      \"type\": \"nominal\",\n      \"sort\": { \"field\": \"Total Clientes\", \"order\": \"descending\" },\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#e5e7eb\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 12 }\n    },\n    \"x\": {\n      \"field\": \"Total Clientes\",\n      \"type\": \"quantitative\",\n      \"title\": null,\n      \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" }\n    }\n  },\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"bar\", \"cornerRadiusEnd\": 6, \"height\": 16 },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"REGIAO\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"color\": {\n          \"field\": \"Total Clientes\",\n          \"type\": \"quantitative\",\n          \"scale\": { \"range\": [\"rgba(139,92,246,0.30)\", \"#8B5CF6\"] },\n          \"legend\": null\n        },\n        \"tooltip\": [\n          { \"field\": \"REGIAO\", \"type\": \"nominal\", \"title\": \"RegiÃ£o\" },\n          { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"title\": \"Clientes\", \"format\": \",.0f\" },\n          { \"field\": \"pct\", \"type\": \"quantitative\", \"title\": \"ParticipaÃ§Ã£o\", \"format\": \".1%\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 6, \"color\": \"#9ca3af\", \"fontSize\": 11 },\n      \"encoding\": { \"text\": { \"field\": \"rotulo\", \"type\": \"nominal\" } }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
+                  "Value": "'{\n  \"description\": \"Clientes por Região — dCliente[REGIAO] + _Medidas[Total Clientes]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"transform\": [\n    { \"joinaggregate\": [{ \"op\": \"sum\", \"field\": \"Total Clientes\", \"as\": \"tot\" }] },\n    { \"calculate\": \"datum[''Total Clientes''] / datum.tot\", \"as\": \"pct\" },\n    { \"calculate\": \"format(datum[''Total Clientes''], '',.0f'') + ''  ·  '' + format(datum.pct, ''.0%'')\", \"as\": \"rotulo\" }\n  ],\n  \"title\": {\n    \"text\": \"Clientes por Região\",\n    \"subtitle\": \"Distribuição da base\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"encoding\": {\n    \"y\": {\n      \"field\": \"REGIAO\",\n      \"type\": \"nominal\",\n      \"sort\": { \"field\": \"Total Clientes\", \"order\": \"descending\" },\n      \"title\": null,\n      \"axis\": { \"labelColor\": \"#e5e7eb\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 12 }\n    },\n    \"x\": {\n      \"field\": \"Total Clientes\",\n      \"type\": \"quantitative\",\n      \"title\": null,\n      \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" }\n    }\n  },\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"bar\", \"cornerRadiusEnd\": 6, \"height\": 16 },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"REGIAO\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"color\": {\n          \"field\": \"Total Clientes\",\n          \"type\": \"quantitative\",\n          \"scale\": { \"range\": [\"rgba(139,92,246,0.30)\", \"#8B5CF6\"] },\n          \"legend\": null\n        },\n        \"tooltip\": [\n          { \"field\": \"REGIAO\", \"type\": \"nominal\", \"title\": \"Região\" },\n          { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"title\": \"Clientes\", \"format\": \",.0f\" },\n          { \"field\": \"pct\", \"type\": \"quantitative\", \"title\": \"Participação\", \"format\": \".1%\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 6, \"color\": \"#9ca3af\", \"fontSize\": 11 },\n      \"encoding\": { \"text\": { \"field\": \"rotulo\", \"type\": \"nominal\" } }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
                 }
               }
             },
@@ -132,14 +132,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "267.77777777777777D"
+                  "Value": "136.09218436873746D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "606.0493827160493D"
+                  "Value": "314D"
                 }
               }
             }

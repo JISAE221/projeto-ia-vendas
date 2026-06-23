@@ -1,0 +1,178 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "v3",
+  "position": {
+    "x": 0,
+    "y": 1723,
+    "z": 11000,
+    "height": 155,
+    "width": 324,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "query": {
+      "queryState": {
+        "dataset": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dVendedor"
+                    }
+                  },
+                  "Property": "NOME"
+                }
+              },
+              "queryRef": "dVendedor.NOME",
+              "nativeQueryRef": "NOME",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Total Receita"
+                }
+              },
+              "queryRef": "_Medidas.Total Receita",
+              "nativeQueryRef": "Total Receita",
+              "active": false
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "vega": [
+        {
+          "properties": {
+            "provider": {
+              "expr": {
+                "Literal": {
+                  "Value": "'vegaLite'"
+                }
+              }
+            },
+            "jsonSpec": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\n  \"description\": \"Ranking de Vendedores (Top 6) — dVendedor[NOME] + _Medidas[Total Receita]\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"title\": {\n    \"text\": \"Ranking de Vendedores\",\n    \"subtitle\": \"Top 6 · Receita\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"transform\": [\n    { \"window\": [{ \"op\": \"rank\", \"as\": \"rnk\" }], \"sort\": [{ \"field\": \"Total Receita\", \"order\": \"descending\" }] },\n    { \"filter\": \"datum.rnk <= 6\" }\n  ],\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"rgba(139,92,246,0.12)\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" }, \"title\": null,\n          \"axis\": { \"labelColor\": \"#e5e7eb\", \"domainColor\": \"transparent\", \"tickColor\": \"transparent\", \"labelFontSize\": 12, \"labelLimit\": 180 } },\n        \"x\": { \"aggregate\": \"max\", \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": null,\n          \"axis\": { \"labels\": false, \"grid\": false, \"domainColor\": \"transparent\", \"tickColor\": \"transparent\" } }\n      }\n    },\n    {\n      \"mark\": { \"type\": \"bar\", \"color\": \"#8B5CF6\", \"cornerRadiusEnd\": 6, \"height\": 10 },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"NOME\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"tooltip\": [\n          { \"field\": \"NOME\", \"type\": \"nominal\", \"title\": \"Vendedor\" },\n          { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"title\": \"Receita (R$)\", \"format\": \",.2f\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"align\": \"left\", \"dx\": 6, \"color\": \"#9ca3af\", \"fontSize\": 11 },\n      \"encoding\": {\n        \"y\": { \"field\": \"NOME\", \"type\": \"nominal\", \"sort\": { \"field\": \"Total Receita\", \"order\": \"descending\" } },\n        \"x\": { \"field\": \"Total Receita\", \"type\": \"quantitative\" },\n        \"text\": { \"field\": \"Total Receita\", \"type\": \"quantitative\", \"format\": \",.0f\" }\n      }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
+                }
+              }
+            },
+            "jsonConfig": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{}'"
+                }
+              }
+            },
+            "enableTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableContextMenu": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "enableHighlight": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "enableSelection": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "selectionMaxDataPoints": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            },
+            "selectionMode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'simple'"
+                }
+              }
+            },
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'6.4.1'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "editor": [
+        {
+          "properties": {
+            "theme": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dark'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stateManagement": [
+        {
+          "properties": {
+            "viewportHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "145D"
+                }
+              }
+            },
+            "viewportWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "314D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "developer": [
+        {
+          "properties": {
+            "version": {
+              "expr": {
+                "Literal": {
+                  "Value": "'1.9.1.0'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

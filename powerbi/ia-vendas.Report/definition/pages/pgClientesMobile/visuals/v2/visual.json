@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "v2",
   "position": {
@@ -63,7 +63,7 @@
             "jsonSpec": {
               "expr": {
                 "Literal": {
-                  "Value": "'{\n  \"description\": \"DistribuiÃ§Ã£o por Sexo â€” dCliente[SEXO] + _Medidas[Total Clientes]. Cores: maior fatia roxa.\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"transform\": [\n    { \"joinaggregate\": [{ \"op\": \"sum\", \"field\": \"Total Clientes\", \"as\": \"tot\" }] },\n    { \"calculate\": \"datum[''Total Clientes''] / datum.tot\", \"as\": \"pct\" }\n  ],\n  \"title\": {\n    \"text\": \"DistribuiÃ§Ã£o por Sexo\",\n    \"subtitle\": \"ParticipaÃ§Ã£o da base de clientes\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"encoding\": {\n    \"theta\": { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"stack\": true },\n    \"order\": { \"field\": \"Total Clientes\", \"sort\": \"descending\" },\n    \"color\": {\n      \"field\": \"SEXO\",\n      \"type\": \"nominal\",\n      \"sort\": { \"field\": \"Total Clientes\", \"order\": \"descending\" },\n      \"scale\": { \"range\": [\"#8B5CF6\", \"#EC4899\"] },\n      \"legend\": {\n        \"orient\": \"right\",\n        \"title\": null,\n        \"labelColor\": \"#c8c8dc\",\n        \"labelFontSize\": 12,\n        \"symbolType\": \"circle\"\n      }\n    }\n  },\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"arc\", \"innerRadius\": 52, \"outerRadius\": 82, \"stroke\": \"#0E0E20\", \"strokeWidth\": 2, \"cursor\": \"pointer\" },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"SEXO\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"tooltip\": [\n          { \"field\": \"SEXO\", \"type\": \"nominal\", \"title\": \"Sexo\" },\n          { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"title\": \"Clientes\", \"format\": \",.0f\" },\n          { \"field\": \"pct\", \"type\": \"quantitative\", \"title\": \"ParticipaÃ§Ã£o\", \"format\": \".1%\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"radius\": 102, \"fontSize\": 13, \"fontWeight\": 700, \"fill\": \"#ffffff\" },\n      \"encoding\": { \"text\": { \"field\": \"pct\", \"type\": \"quantitative\", \"format\": \".0%\" } }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
+                  "Value": "'{\n  \"description\": \"Distribuição por Sexo — dCliente[SEXO] + _Medidas[Total Clientes]. Cores: maior fatia roxa.\",\n  \"data\": { \"name\": \"dataset\" },\n  \"width\": \"container\",\n  \"height\": \"container\",\n  \"background\": \"transparent\",\n  \"transform\": [\n    { \"joinaggregate\": [{ \"op\": \"sum\", \"field\": \"Total Clientes\", \"as\": \"tot\" }] },\n    { \"calculate\": \"datum[''Total Clientes''] / datum.tot\", \"as\": \"pct\" }\n  ],\n  \"title\": {\n    \"text\": \"Distribuição por Sexo\",\n    \"subtitle\": \"Participação da base de clientes\",\n    \"anchor\": \"start\",\n    \"color\": \"#ffffff\",\n    \"fontSize\": 15,\n    \"fontWeight\": 600,\n    \"subtitleColor\": \"#8888A8\",\n    \"subtitleFontSize\": 11,\n    \"subtitlePadding\": 4,\n    \"offset\": 6,\n    \"dx\": 2\n  },\n  \"encoding\": {\n    \"theta\": { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"stack\": true },\n    \"order\": { \"field\": \"Total Clientes\", \"sort\": \"descending\" },\n    \"color\": {\n      \"field\": \"SEXO\",\n      \"type\": \"nominal\",\n      \"sort\": { \"field\": \"Total Clientes\", \"order\": \"descending\" },\n      \"scale\": { \"range\": [\"#8B5CF6\", \"#EC4899\"] },\n      \"legend\": {\n        \"orient\": \"right\",\n        \"title\": null,\n        \"labelColor\": \"#c8c8dc\",\n        \"labelFontSize\": 12,\n        \"symbolType\": \"circle\"\n      }\n    }\n  },\n  \"layer\": [\n    {\n      \"mark\": { \"type\": \"arc\", \"innerRadius\": 52, \"outerRadius\": 82, \"stroke\": \"#0E0E20\", \"strokeWidth\": 2, \"cursor\": \"pointer\" },\n      \"params\": [\n        { \"name\": \"sel\", \"select\": { \"type\": \"point\", \"on\": \"click\", \"fields\": [\"SEXO\"], \"clear\": \"dblclick\" } }\n      ],\n      \"encoding\": {\n        \"tooltip\": [\n          { \"field\": \"SEXO\", \"type\": \"nominal\", \"title\": \"Sexo\" },\n          { \"field\": \"Total Clientes\", \"type\": \"quantitative\", \"title\": \"Clientes\", \"format\": \",.0f\" },\n          { \"field\": \"pct\", \"type\": \"quantitative\", \"title\": \"Participação\", \"format\": \".1%\" }\n        ]\n      }\n    },\n    {\n      \"mark\": { \"type\": \"text\", \"radius\": 102, \"fontSize\": 13, \"fontWeight\": 700, \"fill\": \"#ffffff\" },\n      \"encoding\": { \"text\": { \"field\": \"pct\", \"type\": \"quantitative\", \"format\": \".0%\" } }\n    }\n  ],\n  \"config\": { \"view\": { \"stroke\": \"transparent\" } }\n}'"
                 }
               }
             },
@@ -132,14 +132,14 @@
             "viewportHeight": {
               "expr": {
                 "Literal": {
-                  "Value": "267.77777777777777D"
+                  "Value": "212D"
                 }
               }
             },
             "viewportWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "604.8148148148148D"
+                  "Value": "314D"
                 }
               }
             }
