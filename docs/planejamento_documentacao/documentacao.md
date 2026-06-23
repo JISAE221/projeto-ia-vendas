@@ -432,6 +432,68 @@ A **Visão Geral está entregue e funcional** — design fiel, dados reais, KPIs
 
 ---
 
+# Atualização — 23 de junho de 2026 (conclusão das 6 páginas)
+
+**Responsável:** Daniel (Tech Lead)
+
+## Construção das demais páginas — dashboard completo
+
+Após a Visão Geral, repliquei o mesmo padrão (Deneb + HTML Content, *pills* de Mês/Ano no topo e filtro cruzado por clique) nas outras cinco páginas. O dashboard ficou **completo, com 8 páginas no total** (6 principais + 2 de detalhe).
+
+### Padrão técnico adotado em todas as páginas
+
+- **KPIs**: visuais **HTML Content** alimentados por medidas DAX que geram o HTML (ícone SVG + valor + descritor/tendência).
+- **Gráficos**: **Deneb** (Vega-Lite/Vega), com *specs* versionados em `powerbi/deneb-specs/`.
+- **Tabelas**: HTML Content geradas por DAX (`SUMMARIZE`/`TOPN`/`CONCATENATEX`), com cabeçalho fixo e rolagem interna.
+- **Filtros**: *slicers* nativos em modo *dropdown* estilizados como *pills*; o restante via **filtro cruzado** (clique nos gráficos Deneb).
+- **Layout**: páginas em modo *FitToWidth* para rolarem como página de site dentro do `iframe`.
+- A **barra lateral** interna e os botões de navegação foram removidos de todas as páginas — a navegação será feita por **links do HTML** no momento do *embed*.
+
+### Página Clientes
+
+- **KPIs**: Total Clientes, Clientes Ativos, Clientes Únicos, Ticket Médio.
+- **Gráficos**: Clientes por Região (barras, com %), Distribuição por Sexo (rosca roxo/rosa, com %), Top Clientes (tabela).
+- **Página de detalhe "Todos os Clientes"**: tabela com os 1.002 clientes no mesmo design, com **filtro de ordenação** (Receita/Nome/Pedidos/Ticket) e **busca**.
+
+### Página Produtos
+
+- **KPIs**: Total Produtos, Categorias, Margem Média, Qtd. Total Vendida.
+- **Gráficos**: Top Produtos por Receita (barras Top 8), Mix por Categoria (rosca com legenda valor·%), Catálogo (Top 8 com **margem em *badge* colorido** por faixa).
+- **Página de detalhe "Todos os Produtos"**: catálogo completo (234 itens) com ordenação e busca.
+
+### Página Fornecedores
+
+- **KPIs**: Total Fornecedores, Ativos, Inativos, Produtos Fornecidos.
+- **Gráficos**: Top Fornecedores por Custo (barras), Fornecedores por Categoria (barras), Cadastro de Fornecedores (tabela com datas de contrato Início/Fim e *badge* de status Ativo/Inativo).
+
+### Página Regiões
+
+- **Mapa do Brasil** (visual **Azure Map**): estilo escuro, **bolhas por estado** dimensionadas pela receita e **coloridas por região**; *tooltip* com Receita, Clientes e Pedidos.
+- Para o *geocoding*, criei a coluna calculada `dCliente[Estado Nome]` (sigla → nome completo), marcada como geográfica.
+- **Cards de região** (Deneb, clicáveis) com cor fixa por região: Norte (verde), Nordeste (laranja), Centro-Oeste (ciano), Sudeste (roxo), Sul (lilás) — clicar filtra a página.
+- **Tabela de Estados** (27 UFs) com Estado, Capital (mapeada por DAX), Região, Clientes, Pedidos, Receita.
+
+### Página Vendas
+
+- **KPIs**: Total de Notas, Receita Total (com tendência), Lucro Total (com margem), Custo Total.
+- **Gráficos**: Receita por Mês (barras Jan→Dez), Forma de Pagamento (rosca Top 5 com legenda valor·%), Vendas Recentes (tabela transacional das últimas 30 vendas: Nota, Data, Cliente, Vendedor, Categoria, Pagamento, Qtd, Total, Lucro, Status).
+
+### Novas medidas e objetos do modelo
+
+- Dezenas de medidas DAX adicionadas em `_Medidas` (contagens, cartões HTML, tabelas HTML, *time-intelligence* de tendência).
+- Tabelas desconectadas `Ordenar Clientes` e `Ordenar Produtos` (parâmetros para a ordenação dinâmica das tabelas de detalhe).
+- Coluna calculada `dCliente[Estado Nome]` para o mapa.
+
+### Dificuldade adicional registrada
+
+- Durante a remoção de uma medida, uma quebra de indentação por *tab* em `_Medidas.tmdl` deixou um objeto na coluna 0 e o Power BI recusou abrir o projeto inteiro (erro `UnsupportedObjectType`). Corrigido recolocando o *tab*; passamos a validar a indentação após cada edição do modelo.
+
+### Resultado
+
+**Dashboard 100% construído** — 6 páginas principais (Visão Geral, Clientes, Produtos, Fornecedores, Regiões, Vendas) + 2 de detalhe (Todos os Clientes, Todos os Produtos), fiéis ao design e com dados reais. **Próximo passo: publicação no Power BI Service / Fabric e *embed* de cada página no site.**
+
+---
+
 ### 2.4. Design e Desenvolvimento
 
 > _[Descrever as visualizações criadas e as decisões de design]_
