@@ -34,10 +34,18 @@ Dashboard interativo em Power BI para análise do cenário de vendas do comérci
 
 ```
 ia-vendas/
-├── data/          # Arquivos xlsx originais
-├── powerbi/       # Arquivo .pbip do relatório
-├── docs/          # Documentação do projeto (PA)
-├── web/           # Site frontend
+├── data/                   # Arquivos xlsx originais
+├── powerbi/
+│   ├── ia-vendas.pbip      # Arquivo principal do relatório
+│   ├── ia-vendas.Report/   # Definição PBIR das páginas
+│   ├── ia-vendas.SemanticModel/  # Modelo semântico (TMDL)
+│   ├── deneb-specs/        # Specs Vega-Lite/Vega versionados
+│   ├── deneb/              # Variantes mobile dos specs Deneb
+│   ├── html-viewer/        # HTMLs auxiliares usados no relatório
+│   └── tema/               # Arquivo de tema (.json)
+├── docs/                   # Documentação do projeto (PA)
+├── web/
+│   └── site/               # Site frontend (embed do Power BI)
 └── README.md
 ```
 
@@ -49,7 +57,11 @@ ia-vendas/
 - **Power Query (M)** — ETL e limpeza dos dados
 - **DAX** — medidas e KPIs
 - **Snowflake Schema** — modelagem dimensional
-- **Power BI Service** — publicação e compartilhamento
+- **Deneb (Vega-Lite / Vega)** — visuais customizados
+- **HTML Content** — cards de KPI e tabelas via DAX
+- **Azure Maps** — mapa de bolhas por estado
+- **Power BI Service / Fabric** — publicação e embed
+- **GitHub Actions** — CI/CD e notificações no Discord
 - **GitHub** — versionamento
 
 ---
@@ -305,9 +317,9 @@ git branch -a             # listar todas (local + remoto)
 
 ---
 
-## Prazo
+## Entrega
 
-Entrega: **23 de junho de 2026**
+Projeto entregue em **23 de junho de 2026**.
 
 ---
 

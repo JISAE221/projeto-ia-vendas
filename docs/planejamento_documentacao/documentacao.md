@@ -26,7 +26,7 @@ Com isso, é esperado que o grupo obtenha compreensão e vivência prática de A
 
 Este documento descreve os processos envolvidos na construção de um Dashboard em Power BI para o comércio IA Vendas, detalhando desde a configuração do ambiente de versionamento e exploração dos dados até a publicação e apresentação do dashboard ao público-alvo.
 
-O projeto foi desenvolvido pelo Grupo 4 da disciplina de Análise Exploratória de Dados da Biopark Edu, utilizando um conjunto de dados composto por 8 tabelas (1 tabela fato e 7 dimensões) com aproximadamente 35.762 registros de vendas.
+O projeto foi desenvolvido pelo Grupo 4 da disciplina de Análise Exploratória de Dados da Biopark Edu, utilizando um conjunto de dados composto por 9 tabelas (1 tabela fato e 8 dimensões) com aproximadamente 35.762 registros de vendas.
 
 Para garantir organização, rastreabilidade e colaboração entre os membros, o projeto adotou controle de versão com **Git e GitHub**, estratégia de branches com `main`, `develop` e `feature/*`, além de uma esteira de CI/CD com **GitHub Actions** para validação automática de PRs e notificações no Discord.
 
@@ -343,6 +343,8 @@ Rank Vendedor = RANKX(ALL(dVendedor[NOME]), [Total Receita], , DESC, DENSE)
 - Commit `feat: adiciona tabela _Medidas e medidas DAX base` na `main`
 - `develop` sincronizada com a `main`
 - Arquivo `_Medidas.tmdl` criado em `powerbi/ia-vendas.SemanticModel/definition/tables/`
+
+> **Nota:** o estado acima (7 relacionamentos, sem `dTempo`) reflete o modelo em 11/06. A dimensão `dTempo` foi reincorporada em 22/06 — ver seção 2.1 e tabela de relacionamentos em MODELAGEM DIMENSIONAL.
 
 ```dax
 -- Exemplo:

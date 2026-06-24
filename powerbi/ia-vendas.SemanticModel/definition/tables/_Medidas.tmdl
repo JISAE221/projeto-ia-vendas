@@ -241,7 +241,7 @@ table _Medidas
 				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px'><div style='font-size:15px;font-weight:600;color:#fff'>Top Clientes</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>Maiores receitas · detalhado</div><table style='width:100%;border-collapse:collapse'><thead><tr>"
 				& _th & "Cliente</th>" & _th & "Cidade</th>" & _th & "Estado</th>" & _th & "Região</th>"
 				& _thn & "Pedidos</th>" & _thn & "Receita</th>" & _thn & "Ticket</th>" & _thn & "Status</th></tr></thead><tbody>"
-				& _rows & "</tbody></table></div>"
+				& _rows & "</tbody></table><div style='margin-top:10px;text-align:right'><span onclick='window.top.postMessage(""nav:pgClientesTodos"",""*"")' style='cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:#A78BFA;font-size:12px;font-weight:500'>Ver todos →</span></div></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000076
 
 	measure 'HTML Todos Clientes' =
@@ -330,7 +330,7 @@ table _Medidas
 			RETURN
 				"<div style='font-family:sans-serif;height:100%;box-sizing:border-box;background:#0E0E20;border:1px solid #1C1C30;border-radius:14px;padding:16px 18px'><div style='font-size:15px;font-weight:600;color:#fff'>Catálogo de Produtos</div><div style='font-size:11px;color:#8888A8;margin-top:2px;margin-bottom:10px'>Top 8 · maiores receitas</div><table style='width:100%;border-collapse:collapse'><thead><tr>"
 				& _th & "Produto</th>" & _th & "Categoria</th>" & _thn & "Custo</th>" & _thn & "Valor</th>" & _thn & "Margem</th>" & _thn & "Qtd</th>" & _thn & "Receita</th></tr></thead><tbody>"
-				& _rows & "</tbody></table></div>"
+				& _rows & "</tbody></table><div style='margin-top:10px;text-align:right'><span onclick='window.top.postMessage(""nav:pgProdutosTodos"",""*"")' style='cursor:pointer;display:inline-flex;align-items:center;gap:4px;color:#A78BFA;font-size:12px;font-weight:500'>Ver todos →</span></div></div>"
 		lineageTag: a1a1a1a1-0000-4000-8000-000000000086
 
 	measure 'HTML Catalogo Produtos' =
